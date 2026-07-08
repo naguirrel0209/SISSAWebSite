@@ -1,0 +1,10 @@
+{
+  "name": "SIS S.A. / Corporación SIS",
+  "short_name": "SIS S.A.",
+  "description": "Sitio institucional de SIS S.A.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0b132b",
+  "theme_color": "#0b132b",
+  "icons": [{ "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml" }]
+}
