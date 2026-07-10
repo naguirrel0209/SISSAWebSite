@@ -22,12 +22,14 @@ import { Link } from 'react-router-dom';
 import Seo from '../components/layout/Seo.jsx';
 import PageHeader from '../components/sections/PageHeader.jsx';
 import CallToAction from '../components/sections/CallToAction.jsx';
-import AssetPlaceholder from '../components/ui/AssetPlaceholder.jsx';
+import AssetImage from '../components/ui/AssetImage.jsx';
 import { PAGE_META } from '../constants/site.js';
+import { institutionalImages, serviceImages } from '../data/media.js';
 
 const services = [
   {
     title: 'Custodio en Ruta',
+    image: serviceImages.custodioRuta,
     description:
       'Protección operativa para transporte de mercancías, rutas críticas y desplazamientos logísticos que requieren control, presencia y respuesta preventiva.',
     applications: ['Rutas de alto valor', 'Transporte de mercancías', 'Acompañamiento operativo', 'Supervisión en tránsito'],
@@ -35,6 +37,7 @@ const services = [
   },
   {
     title: 'Seguridad Ejecutiva',
+    image: serviceImages.seguridadEjecutiva,
     description:
       'Servicio especializado para protección de ejecutivos, directivos, visitantes y personas que requieren acompañamiento discreto, técnico y profesional.',
     applications: ['Protección personal', 'Acompañamiento ejecutivo', 'Traslados programados', 'Eventos corporativos'],
@@ -42,6 +45,7 @@ const services = [
   },
   {
     title: 'Seguridad Bancaria',
+    image: serviceImages.seguridadBancaria,
     description:
       'Presencia preventiva y control operativo para agencias, puntos de atención, áreas administrativas y entornos financieros.',
     applications: ['Agencias bancarias', 'Áreas de atención', 'Control de ingreso', 'Prevención de incidentes'],
@@ -49,6 +53,7 @@ const services = [
   },
   {
     title: 'Seguridad Residencial',
+    image: serviceImages.seguridadResidencial,
     description:
       'Protección para condominios, residenciales, edificios y comunidades privadas mediante presencia, control de accesos y supervisión constante.',
     applications: ['Condominios', 'Garitas de acceso', 'Residenciales privados', 'Supervisión perimetral'],
@@ -56,6 +61,7 @@ const services = [
   },
   {
     title: 'Seguridad Privada',
+    image: serviceImages.seguridadPrivada,
     description:
       'Personal capacitado para resguardar instalaciones, activos, colaboradores y visitantes bajo protocolos de prevención, control y respuesta.',
     applications: ['Empresas', 'Bodegas', 'Comercios', 'Instalaciones industriales'],
@@ -63,13 +69,15 @@ const services = [
   },
   {
     title: 'Monitoreo CCTV Inteligente',
+    image: serviceImages.monitoreoCctv,
     description:
       'Supervisión visual y apoyo operativo mediante sistemas de monitoreo, cámaras de seguridad y protocolos de alerta.',
-    applications: ['Monitoreo 24/7', 'Cámaras de vigilancia', 'Alertas operativas', 'Supervisión remota'],
+    applications: ['Supervisión continua', 'Cámaras de vigilancia', 'Alertas operativas', 'Supervisión remota'],
     icon: RadioTower,
   },
   {
     title: 'Logística Segura',
+    image: serviceImages.logisticaSegura,
     description:
       'Soluciones de seguridad para operaciones logísticas, movimiento de activos, traslados y procesos que requieren acompañamiento estratégico.',
     applications: ['Transporte operativo', 'Control de rutas', 'Custodia logística', 'Coordinación de movimientos'],
@@ -77,6 +85,7 @@ const services = [
   },
   {
     title: 'Capacitación',
+    image: serviceImages.capacitacion,
     description:
       'Formación técnica y operativa para fortalecer la disciplina, prevención, reacción y cultura de seguridad dentro de equipos institucionales.',
     applications: ['Protocolos de seguridad', 'Prevención de riesgos', 'Respuesta operativa', 'Cultura institucional'],
@@ -127,7 +136,15 @@ export default function Servicios() {
   return (
     <div className="w-full">
       <Seo {...PAGE_META.servicios} />
-      <PageHeader eyebrow="Unidades especializadas · SIS S.A." title="Soluciones de seguridad para operaciones críticas" description="SIS S.A. integra personal capacitado, protocolos operativos, monitoreo y presencia táctica para proteger personas, instalaciones, rutas y activos estratégicos." assetLabel="Fotografía operativa real pendiente" />
+      <PageHeader
+        eyebrow="Unidades especializadas · SIS S.A."
+        title="Soluciones de seguridad para operaciones críticas"
+        description="SIS S.A. integra personal capacitado, protocolos operativos, monitoreo y presencia táctica para proteger personas, instalaciones, rutas y activos estratégicos."
+        assetSrc={institutionalImages.oficinasAdministrativas.src}
+        assetAlt={institutionalImages.oficinasAdministrativas.alt}
+        assetObjectPosition={institutionalImages.oficinasAdministrativas.objectPosition}
+        assetCaption="Oficinas administrativas SIS S.A."
+      />
 
       <section className="section-shell py-14">
         <div className="grid gap-8 border-y border-border-cyber/55 py-10 md:grid-cols-[0.42fr_1fr] md:gap-12">
@@ -159,9 +176,15 @@ export default function Servicios() {
         </div>
 
         <div className="grid gap-5 md:grid-cols-2">
-          {services.map(({ title, description, applications, icon: Icon }) => (
+          {services.map(({ title, description, applications, icon: Icon, image }) => (
             <article key={title} className="glass-panel rounded-lg p-4 sm:p-5">
-              <AssetPlaceholder label={`${title}: fotografía real pendiente`} icon={Icon} size="compact" />
+              <AssetImage
+                src={image.src}
+                alt={image.alt}
+                objectPosition={image.objectPosition}
+                caption={title}
+                size="default"
+              />
               <div className="px-1 pb-1 pt-5">
                 <div className="flex items-center gap-3">
                   <span className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-md border border-primary-cyan/35 bg-primary-cyan/10 text-primary-cyan-bright">

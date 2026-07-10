@@ -14,8 +14,9 @@ import { useState } from 'react';
 import Seo from '../components/layout/Seo.jsx';
 import PageHeader from '../components/sections/PageHeader.jsx';
 import CallToAction from '../components/sections/CallToAction.jsx';
-import AssetPlaceholder from '../components/ui/AssetPlaceholder.jsx';
+import AssetImage from '../components/ui/AssetImage.jsx';
 import { PAGE_META, SITE } from '../constants/site.js';
+import { institutionalImages } from '../data/media.js';
 
 const contactMethods = [
   {
@@ -115,7 +116,15 @@ export default function Contact() {
   return (
     <div className="w-full">
       <Seo {...PAGE_META.contacto} />
-      <PageHeader eyebrow="Canal institucional · SIS S.A." title="Centro de Mando y Contacto" description="Nuestro equipo está preparado para atender requerimientos de seguridad, logística, monitoreo y protección especializada con criterio técnico, confidencialidad y respuesta profesional." assetLabel="Fotografía institucional real pendiente" />
+      <PageHeader
+        eyebrow="Canal institucional · SIS S.A."
+        title="Centro de Mando y Contacto"
+        description="Nuestro equipo está preparado para atender requerimientos de seguridad, logística, monitoreo y protección especializada con criterio técnico, confidencialidad y respuesta profesional."
+        assetSrc={institutionalImages.fachada.src}
+        assetAlt={institutionalImages.fachada.alt}
+        assetObjectPosition={institutionalImages.fachada.objectPosition}
+        assetCaption="Oficinas centrales SIS S.A."
+      />
 
       <section className="section-shell py-14">
         <div className="mb-8 max-w-3xl">
@@ -307,7 +316,13 @@ export default function Contact() {
           </div>
         </div>
         <div className="glass-panel rounded-lg p-4">
-          <AssetPlaceholder label="Mapa institucional pendiente de integración" icon={MapPin} />
+          <AssetImage
+            src={institutionalImages.fachada.src}
+            alt={institutionalImages.fachada.alt}
+            objectPosition={institutionalImages.fachada.objectPosition}
+            caption="Referencia institucional de ubicación"
+            size="default"
+          />
         </div>
       </section>
 

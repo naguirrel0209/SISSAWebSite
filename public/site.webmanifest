@@ -4,7 +4,7 @@
   "description": "Sitio institucional de SIS S.A.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#0b132b",
-  "theme_color": "#0b132b",
-  "icons": [{ "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml" }]
+  "background_color": "#efe7da",
+  "theme_color": "#121614",
+  "icons": [{ "src": "/images/brand/logo-sis.png", "sizes": "1024x1024", "type": "image/png" }]
 }

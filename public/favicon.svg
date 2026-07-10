@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="SIS S.A.">
-  <rect width="64" height="64" rx="12" fill="#0b132b"/>
-  <path d="M32 8 52 16v14c0 13-8.4 22.4-20 27C20.4 52.4 12 43 12 30V16l20-8Z" fill="#101b36" stroke="#7de2dc" stroke-width="3"/>
-  <path d="m22 32 7 7 14-16" fill="none" stroke="#7de2dc" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect width="64" height="64" rx="12" fill="#121614"/>
+  <path d="M32 8 52 16v14c0 13-8.4 22.4-20 27C20.4 52.4 12 43 12 30V16l20-8Z" fill="#2f5f4f" stroke="#b08a4a" stroke-width="3"/>
+  <path d="m22 32 7 7 14-16" fill="none" stroke="#f7f2e8" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>

@@ -15,6 +15,7 @@ export const NAV_ITEMS = [
   { label: 'Inicio', path: '/', end: true },
   { label: 'Nosotros', path: '/nosotros' },
   { label: 'Servicios', path: '/servicios' },
+  { label: 'Operaciones', path: '/operaciones' },
   { label: 'Contacto', path: '/contacto' },
 ];
 

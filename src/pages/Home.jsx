@@ -1,27 +1,24 @@
-import {
-  ArrowRight,
-  GraduationCap,
-  LockKeyhole,
-  RadioTower,
-  Route,
-  ShieldCheck,
-  Target,
-} from 'lucide-react';
+﻿import { ArrowRight, GraduationCap, LockKeyhole, RadioTower, Route } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import CallToAction from '../components/sections/CallToAction.jsx';
 import FeatureCard from '../components/cards/FeatureCard.jsx';
 import Seo from '../components/layout/Seo.jsx';
+import AssetImage from '../components/ui/AssetImage.jsx';
 import ButtonLink from '../components/ui/ButtonLink.jsx';
 import { PAGE_META } from '../constants/site.js';
+import { gallery } from '../data/operations.js';
+import { institutionalImages } from '../data/media.js';
 
 const solutions = [
   {
-    title: 'Monitoreo 24/7',
+    title: 'Control Operacional',
     description:
       'Supervisión continua, protocolos de respuesta y vigilancia estratégica para operaciones críticas.',
     icon: RadioTower,
   },
   {
-    title: 'Logistica Segura',
+    title: 'Logística Segura',
     description:
       'Protección y control operativo para rutas, traslados y movimientos de alto valor.',
     icon: Route,
@@ -48,53 +45,76 @@ const trustItems = [
   'Cobertura institucional',
 ];
 
+function HeroBanner() {
+  const [active, setActive] = useState(0);
+  const reduceMotion = useReducedMotion();
+  const current = gallery[active];
+
+  useEffect(() => {
+    if (reduceMotion) return undefined;
+    const timer = window.setInterval(() => {
+      setActive((currentIndex) => (currentIndex + 1) % gallery.length);
+    }, 5000);
+    return () => window.clearInterval(timer);
+  }, [reduceMotion]);
+
+  return (
+    <section
+      className="relative isolate flex min-h-[calc(100svh-5rem)] items-center overflow-hidden"
+      aria-labelledby="home-title"
+    >
+      <AnimatePresence mode="wait" initial={false}>
+        <motion.img
+          key={current.src}
+          src={current.src}
+          alt=""
+          className="absolute inset-0 h-full w-full object-cover"
+          style={{ objectPosition: current.objectPosition ?? 'center' }}
+          aria-hidden="true"
+          fetchPriority={active === 0 ? 'high' : undefined}
+          initial={reduceMotion ? false : { opacity: 0, scale: 1.08, x: 0 }}
+          animate={reduceMotion ? { opacity: 1 } : { opacity: 1, scale: 1.14, x: active % 2 === 0 ? -18 : 18 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 5, ease: 'linear' }}
+        />
+      </AnimatePresence>
+      <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(18,22,20,0.94)_0%,rgba(18,22,20,0.76)_44%,rgba(18,22,20,0.28)_100%)]" aria-hidden="true" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_42%,rgba(176,138,74,0.18),transparent_22rem)]" aria-hidden="true" />
+      <div className="section-shell relative z-10 py-20">
+        <motion.div
+          className="max-w-2xl"
+          initial={reduceMotion ? false : { opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.65, ease: 'easeOut' }}
+        >
+          <p className="eyebrow border-primary-cyan-bright/35 bg-primary-cyan/20 text-[#f8f5ee]">
+            Centro de mando institucional
+          </p>
+          <h1
+            id="home-title"
+            className="mt-5 text-4xl font-extrabold leading-[1.05] text-[#f8f5ee] sm:text-5xl lg:text-6xl"
+          >
+            Seguridad integral para proteger lo que más importa.
+          </h1>
+          <p className="mt-5 max-w-xl text-base leading-7 text-[#efe2c7] sm:text-lg">
+            SIS S.A. combina presencia operativa, logística segura y respuesta profesional.
+          </p>
+          <div className="mt-8">
+            <ButtonLink to="/contacto">
+              Contáctanos <ArrowRight size={17} aria-hidden="true" />
+            </ButtonLink>
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
 export default function Home() {
   return (
     <div className="w-full">
       <Seo {...PAGE_META.home} />
-      <section className="section-shell grid min-h-[calc(100vh-5rem)] items-center gap-10 py-10 md:grid-cols-[1.02fr_0.98fr] md:py-12">
-        <div className="max-w-3xl">
-          <p className="mb-5 inline-flex rounded-md border border-primary-cyan/30 bg-primary-cyan/10 px-3 py-2 text-xs font-bold uppercase tracking-[0.18em] text-primary-cyan-bright">
-            Centro de mando institucional
-          </p>
-          <h1 className="text-4xl font-extrabold leading-[1.08] text-text sm:text-5xl lg:text-[3.55rem]">
-            Vigilancia avanzada y precisión táctica para proteger lo que más importa.
-          </h1>
-          <p className="mt-6 max-w-2xl text-base leading-8 text-muted-text sm:text-lg">
-            SIS S.A. integra seguridad privada, monitoreo, logística segura y operaciones
-            especializadas con enfoque profesional, técnico e institucional.
-          </p>
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <ButtonLink to="/contacto">
-              Solicitar información <ArrowRight size={17} />
-            </ButtonLink>
-            <ButtonLink to="/servicios" variant="secondary">
-              Ver servicios
-            </ButtonLink>
-          </div>
-        </div>
-
-        <div className="glass-panel relative min-h-[24rem] overflow-hidden rounded-lg p-5">
-          <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(125,226,220,0.12),transparent_38%),radial-gradient(circle_at_72%_24%,rgba(47,184,178,0.22),transparent_16rem)]" />
-          <div className="relative flex h-full min-h-[21.5rem] flex-col justify-between rounded-md border border-dashed border-primary-cyan/35 bg-background/52 p-6">
-            <div className="flex items-center justify-between gap-4">
-              <span className="inline-flex h-12 w-12 items-center justify-center rounded-md border border-primary-cyan/35 bg-surface-high/75 text-primary-cyan-bright">
-                <ShieldCheck size={24} />
-              </span>
-              <span className="rounded-md border border-border-cyber/60 bg-surface/70 px-3 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-muted-text">
-                Activo real requerido
-              </span>
-            </div>
-            <div>
-              <p className="text-2xl font-bold text-text">Fotografía operativa real pendiente</p>
-              <p className="mt-3 max-w-md text-sm leading-6 text-muted-text">
-                Espacio reservado para fotografía institucional validada por SIS S.A. No se utiliza
-                imagen generada ni recurso simulado.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
+      <HeroBanner />
 
       <section className="section-shell py-14">
         <div className="mb-8 flex flex-col justify-between gap-4 md:flex-row md:items-end">
@@ -119,14 +139,13 @@ export default function Home() {
 
       <section className="section-shell py-14">
         <div className="glass-panel grid gap-8 rounded-lg p-6 md:grid-cols-[0.85fr_1.15fr] md:p-8">
-          <div className="flex min-h-56 items-center justify-center rounded-md border border-dashed border-primary-cyan/30 bg-background/50 p-6 text-center">
-            <div>
-              <Target className="mx-auto text-primary-cyan-bright" size={34} strokeWidth={1.7} />
-              <p className="mt-4 text-sm font-bold uppercase tracking-[0.18em] text-muted-text">
-                Imagen institucional pendiente de activo real
-              </p>
-            </div>
-          </div>
+          <AssetImage
+            src={institutionalImages.fachada.src}
+            alt={institutionalImages.fachada.alt}
+            objectPosition={institutionalImages.fachada.objectPosition}
+            caption="Fachada institucional SIS S.A."
+            size="default"
+          />
           <div className="flex flex-col justify-center">
             <p className="text-xs font-bold uppercase tracking-[0.18em] text-primary-cyan-bright">
               Corporación SIS
@@ -156,7 +175,12 @@ export default function Home() {
         </div>
       </section>
 
-      <CallToAction eyebrow="Contacto operativo" title="¿Necesita una solución de seguridad confiable, técnica y operativa?" description="Conecte con nuestro centro de mando y solicite información sobre los servicios especializados de SIS S.A." actions={[{ label: 'Contactar Centro de Mando', to: '/contacto' }]} />
+      <CallToAction
+        eyebrow="Contacto operativo"
+        title="¿Necesita una solución de seguridad confiable, técnica y operativa?"
+        description="Conecte con nuestro centro de mando y solicite información sobre los servicios especializados de SIS S.A."
+        actions={[{ label: 'Contactar Centro de Mando', to: '/contacto' }]}
+      />
     </div>
   );
 }
