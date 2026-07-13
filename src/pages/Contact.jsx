@@ -31,10 +31,10 @@ const contactMethods = [
   },
   {
     label: 'WhatsApp',
-    value: 'SITE.phone',
+    value: SITE.phone,
     description:
       'Canal de comunicación rápida para requerimientos iniciales y seguimiento de solicitudes.',
-    href: null,
+    href: 'https://wa.me/50223230303?text=Buen%20día,%20quiero%20información%20sobre%20servicios%20de%20seguridad.',
     icon: MessageCircleMore,
   },
   {
