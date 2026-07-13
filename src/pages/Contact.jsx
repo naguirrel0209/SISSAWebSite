@@ -2,6 +2,7 @@ import {
   CheckCircle2,
   ClipboardCheck,
   Clock3,
+  Loader2,
   Mail,
   MapPin,
   MessageCircleMore,
@@ -10,8 +11,9 @@ import {
   Send,
   ShieldCheck,
 } from 'lucide-react';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import Seo from '../components/layout/Seo.jsx';
+import { isEmailjsConfigured, sendContactEmail } from '../services/emailjs.js';
 import PageHeader from '../components/sections/PageHeader.jsx';
 import CallToAction from '../components/sections/CallToAction.jsx';
 import AssetImage from '../components/ui/AssetImage.jsx';
@@ -29,7 +31,7 @@ const contactMethods = [
   },
   {
     label: 'WhatsApp',
-    value: 'WhatsApp Encriptado',
+    value: 'SITE.phone',
     description:
       'Canal de comunicación rápida para requerimientos iniciales y seguimiento de solicitudes.',
     href: null,
@@ -106,11 +108,77 @@ function ContactCard({ method }) {
 }
 
 export default function Contact() {
-  const [submitted, setSubmitted] = useState(false);
+  const formRef = useRef(null);
+  const [status, setStatus] = useState('idle');
+  const [errorMessage, setErrorMessage] = useState('');
+  const [errors, setErrors] = useState({});
+  const configured = isEmailjsConfigured();
 
-  const handleSubmit = (event) => {
+  const validateField = (name, value) => {
+    if (value) {
+      setErrors((prev) => ({ ...prev, [name]: undefined }));
+    }
+  };
+
+  const validate = (formData) => {
+    const next = {};
+    const nombre = formData.get('nombre')?.trim();
+    const correo = formData.get('correo')?.trim();
+    const telefono = formData.get('telefono')?.trim();
+    const servicio = formData.get('servicio');
+    const mensaje = formData.get('mensaje')?.trim();
+
+    if (!nombre) next.nombre = 'Ingrese su nombre completo.';
+    if (!correo) {
+      next.correo = 'Ingrese un correo electrónico.';
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(correo)) {
+      next.correo = 'Ingrese un correo electrónico válido.';
+    }
+    if (!telefono) next.telefono = 'Ingrese un teléfono de contacto.';
+    if (!servicio) next.servicio = 'Seleccione un tipo de servicio.';
+    if (!mensaje) next.mensaje = 'Describa brevemente su requerimiento.';
+
+    setErrors(next);
+    return Object.keys(next).length === 0;
+  };
+
+  const handleChange = (event) => {
+    if (status !== 'idle') setStatus('idle');
+    if (errorMessage) setErrorMessage('');
+    validateField(event.target.name, event.target.value);
+  };
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    setSubmitted(true);
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+    const honeypot = formData.get('_gotcha');
+
+    if (honeypot) {
+      setStatus('success');
+      form.reset();
+      return;
+    }
+
+    if (!validate(formData)) {
+      setStatus('validation-error');
+      return;
+    }
+
+    setStatus('sending');
+    try {
+      await sendContactEmail(form);
+      setStatus('success');
+      setErrorMessage('');
+      form.reset();
+    } catch (err) {
+      setStatus('error');
+      setErrorMessage(
+        err?.text ||
+          err?.message ||
+          'No se pudo enviar el formulario. Intente nuevamente o contacte por teléfono.',
+      );
+    }
   };
 
   return (
@@ -159,13 +227,28 @@ export default function Contact() {
             <div className="mt-7 flex items-start gap-3 border-l border-primary-cyan/45 pl-4">
               <ShieldCheck className="mt-0.5 shrink-0 text-primary-cyan-bright" size={19} />
               <p className="text-xs leading-6 text-muted-text">
-                Formulario preparado como prototipo visual. La integración de envío se habilitará
-                mediante un canal oficial validado por SIS S.A.
+                {configured
+                  ? 'Su requerimiento será enviado directamente al equipo de SIS S.A. mediante un canal institucional validado.'
+                  : 'El envío de formulario está pendiente de configuración. Contacte por los canales disponibles.'}
               </p>
             </div>
           </div>
 
-          <form className="glass-panel rounded-lg p-5 sm:p-7" onSubmit={handleSubmit}>
+          <form
+            ref={formRef}
+            className="glass-panel rounded-lg p-5 sm:p-7"
+            onSubmit={handleSubmit}
+            noValidate
+          >
+            <input
+              type="text"
+              name="_gotcha"
+              value=""
+              tabIndex="-1"
+              autoComplete="off"
+              aria-hidden="true"
+              style={{ position: 'absolute', left: '-9999px', width: '1px', height: '1px', opacity: 0 }}
+            />
             <div className="grid gap-5 sm:grid-cols-2">
               <label className="text-xs font-bold uppercase tracking-[0.12em] text-muted-text">
                 Nombre completo
@@ -176,8 +259,14 @@ export default function Contact() {
                   autoComplete="name"
                   placeholder="Nombre y apellido"
                   className={fieldClass}
-                  onChange={() => setSubmitted(false)}
+                  onChange={handleChange}
+                  aria-invalid={errors.nombre ? 'true' : 'false'}
                 />
+                {errors.nombre ? (
+                  <span className="mt-1 block text-xs font-semibold text-red-600" role="alert">
+                    {errors.nombre}
+                  </span>
+                ) : null}
               </label>
               <label className="text-xs font-bold uppercase tracking-[0.12em] text-muted-text">
                 Empresa
@@ -187,7 +276,7 @@ export default function Contact() {
                   autoComplete="organization"
                   placeholder="Empresa o institución"
                   className={fieldClass}
-                  onChange={() => setSubmitted(false)}
+                  onChange={handleChange}
                 />
               </label>
               <label className="text-xs font-bold uppercase tracking-[0.12em] text-muted-text">
@@ -199,8 +288,14 @@ export default function Contact() {
                   autoComplete="email"
                   placeholder="correo@empresa.com"
                   className={fieldClass}
-                  onChange={() => setSubmitted(false)}
+                  onChange={handleChange}
+                  aria-invalid={errors.correo ? 'true' : 'false'}
                 />
+                {errors.correo ? (
+                  <span className="mt-1 block text-xs font-semibold text-red-600" role="alert">
+                    {errors.correo}
+                  </span>
+                ) : null}
               </label>
               <label className="text-xs font-bold uppercase tracking-[0.12em] text-muted-text">
                 Teléfono
@@ -211,8 +306,14 @@ export default function Contact() {
                   autoComplete="tel"
                   placeholder="Número de contacto"
                   className={fieldClass}
-                  onChange={() => setSubmitted(false)}
+                  onChange={handleChange}
+                  aria-invalid={errors.telefono ? 'true' : 'false'}
                 />
+                {errors.telefono ? (
+                  <span className="mt-1 block text-xs font-semibold text-red-600" role="alert">
+                    {errors.telefono}
+                  </span>
+                ) : null}
               </label>
               <label className="text-xs font-bold uppercase tracking-[0.12em] text-muted-text sm:col-span-2">
                 Tipo de servicio requerido
@@ -221,7 +322,8 @@ export default function Contact() {
                   name="servicio"
                   defaultValue=""
                   className={fieldClass}
-                  onChange={() => setSubmitted(false)}
+                  onChange={handleChange}
+                  aria-invalid={errors.servicio ? 'true' : 'false'}
                 >
                   <option value="" disabled>
                     Seleccione una unidad de servicio
@@ -232,6 +334,11 @@ export default function Contact() {
                     </option>
                   ))}
                 </select>
+                {errors.servicio ? (
+                  <span className="mt-1 block text-xs font-semibold text-red-600" role="alert">
+                    {errors.servicio}
+                  </span>
+                ) : null}
               </label>
               <label className="text-xs font-bold uppercase tracking-[0.12em] text-muted-text sm:col-span-2">
                 Mensaje o requerimiento
@@ -241,14 +348,35 @@ export default function Contact() {
                   rows="5"
                   placeholder="Describa brevemente la necesidad, ubicación o tipo de operación."
                   className={`${fieldClass} resize-y py-3`}
-                  onChange={() => setSubmitted(false)}
+                  onChange={handleChange}
+                  aria-invalid={errors.mensaje ? 'true' : 'false'}
                 />
+                {errors.mensaje ? (
+                  <span className="mt-1 block text-xs font-semibold text-red-600" role="alert">
+                    {errors.mensaje}
+                  </span>
+                ) : null}
               </label>
             </div>
 
             <div className="mt-6 flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between">
-              <button type="submit" className="btn-primary">
-                Enviar protocolo <Send size={16} />
+              <button
+                type="submit"
+                className="btn-primary"
+                disabled={status === 'sending'}
+                aria-busy={status === 'sending'}
+              >
+                {status === 'sending' ? (
+                  <>
+                    Enviando protocolo
+                    <Loader2 size={16} className="animate-spin" />
+                  </>
+                ) : (
+                  <>
+                    Enviar protocolo
+                    <Send size={16} />
+                  </>
+                )}
               </button>
               <p className="max-w-sm text-xs leading-5 text-muted-text">
                 Toda solicitud será tratada con confidencialidad, criterio técnico y atención
@@ -256,15 +384,26 @@ export default function Contact() {
               </p>
             </div>
 
-            {submitted ? (
+            {status === 'success' ? (
               <div
                 className="mt-5 flex items-start gap-3 rounded-md border border-primary-cyan/40 bg-primary-cyan/10 p-4 text-sm leading-6 text-text"
                 role="status"
                 aria-live="polite"
               >
                 <CheckCircle2 className="mt-0.5 shrink-0 text-primary-cyan-bright" size={18} />
-                Protocolo validado visualmente. El envío real se habilitará al integrar el canal
-                oficial de SIS S.A.
+                Su requerimiento fue enviado al equipo de SIS S.A. Recibirá seguimiento por
+                correo electrónico en breve.
+              </div>
+            ) : null}
+
+            {status === 'error' ? (
+              <div
+                className="mt-5 flex items-start gap-3 rounded-md border border-red-600/45 bg-red-600/10 p-4 text-sm leading-6 text-text"
+                role="alert"
+              >
+                <ShieldCheck className="mt-0.5 shrink-0 text-red-600" size={18} />
+                {errorMessage ||
+                  'No se pudo enviar el formulario. Intente nuevamente o contacte por teléfono.'}
               </div>
             ) : null}
           </form>
