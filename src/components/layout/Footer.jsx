@@ -6,7 +6,7 @@ import { brandLogo } from '../../data/media.js';
 const contactItems = [
   { label: SITE.phone, href: SITE.phoneHref, icon: Phone },
   { label: SITE.email, href: SITE.emailHref, icon: Mail },
-  { label: SITE.address, href: null, icon: MapPin },
+  { label: SITE.address, href:'https://maps.app.goo.gl/LA5t7bmB9mGh9bxU6', icon: MapPin },
 ];
 
 export default function Footer() {
