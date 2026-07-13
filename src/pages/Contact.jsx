@@ -1,4 +1,4 @@
-import {
+﻿import {
   CheckCircle2,
   ClipboardCheck,
   Clock3,
@@ -16,7 +16,6 @@ import Seo from '../components/layout/Seo.jsx';
 import { isEmailjsConfigured, sendContactEmail } from '../services/emailjs.js';
 import PageHeader from '../components/sections/PageHeader.jsx';
 import CallToAction from '../components/sections/CallToAction.jsx';
-import AssetImage from '../components/ui/AssetImage.jsx';
 import { PAGE_META, SITE } from '../constants/site.js';
 import { institutionalImages } from '../data/media.js';
 
@@ -50,7 +49,7 @@ const contactMethods = [
     value: SITE.address,
     description:
       'Oficinas centrales para atención administrativa, coordinación y gestión institucional.',
-    href: null,
+    href: 'https://maps.app.goo.gl/LA5t7bmB9mGh9bxU6',
     icon: MapPin,
   },
 ];
@@ -454,13 +453,14 @@ export default function Contact() {
             <span>{SITE.address}</span>
           </div>
         </div>
-        <div className="glass-panel rounded-lg p-4">
-          <AssetImage
-            src={institutionalImages.fachada.src}
-            alt={institutionalImages.fachada.alt}
-            objectPosition={institutionalImages.fachada.objectPosition}
-            caption="Referencia institucional de ubicación"
-            size="default"
+        <div className="glass-panel overflow-hidden rounded-lg p-3">
+          <iframe
+            title="Ubicación de SIS S.A. en Google Maps"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3861.23794571824!2d-90.59919632394042!3d14.58551287744398!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8589a113fddbbfc9%3A0xccc3be311fa8fc04!2sSIS%20S.A.!5e0!3m2!1ses-419!2sgt!4v1783964339807!5m2!1ses-419!2sgt"
+            className="h-[28rem] w-full rounded-md border-0"
+            allowFullScreen
+            loading="lazy"
+            referrerPolicy="strict-origin-when-cross-origin"
           />
         </div>
       </section>

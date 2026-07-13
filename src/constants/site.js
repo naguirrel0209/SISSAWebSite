@@ -1,4 +1,4 @@
-export const SITE = {
+﻿export const SITE = {
   name: 'SIS S.A.',
   legalName: 'Corporación SIS',
   title: 'SIS S.A. | Seguridad estratégica',
