@@ -18,6 +18,10 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: github-pages
+    env:
+      VITE_EMAILJS_SERVICE_ID: ${{ secrets.VITE_EMAILJS_SERVICE_ID || vars.VITE_EMAILJS_SERVICE_ID }}
+      VITE_EMAILJS_TEMPLATE_ID: ${{ secrets.VITE_EMAILJS_TEMPLATE_ID || vars.VITE_EMAILJS_TEMPLATE_ID }}
+      VITE_EMAILJS_PUBLIC_KEY: ${{ secrets.VITE_EMAILJS_PUBLIC_KEY || vars.VITE_EMAILJS_PUBLIC_KEY }}
 
     steps:
       - uses: actions/checkout@v4
@@ -29,11 +33,13 @@ jobs:
 
       - run: npm ci
 
+      - name: Verify EmailJS configuration
+        run: |
+          test -n "$VITE_EMAILJS_SERVICE_ID" || (echo "::error::Missing VITE_EMAILJS_SERVICE_ID" && exit 1)
+          test -n "$VITE_EMAILJS_TEMPLATE_ID" || (echo "::error::Missing VITE_EMAILJS_TEMPLATE_ID" && exit 1)
+          test -n "$VITE_EMAILJS_PUBLIC_KEY" || (echo "::error::Missing VITE_EMAILJS_PUBLIC_KEY" && exit 1)
+
       - run: npm run build
-        env:
-          VITE_EMAILJS_SERVICE_ID: ${{ secrets.VITE_EMAILJS_SERVICE_ID }}
-          VITE_EMAILJS_TEMPLATE_ID: ${{ secrets.VITE_EMAILJS_TEMPLATE_ID }}
-          VITE_EMAILJS_PUBLIC_KEY: ${{ secrets.VITE_EMAILJS_PUBLIC_KEY }}
 
       - uses: actions/configure-pages@v5
 
