@@ -24,7 +24,7 @@ export const coverageMap = {
 export const institutionalImages = {
   fachada: {
     src: sisFachada,
-    alt: 'Fachada oficial de SIS S.A. con personal institucional en el acceso principal.',
+    alt: 'Instalaciones de SIS S.A. con personal institucional en el acceso principal.',
     objectPosition: 'center 44%',
   },
   oficinasAdministrativas: {

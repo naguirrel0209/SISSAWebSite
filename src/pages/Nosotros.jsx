@@ -10,7 +10,7 @@
   UsersRound,
   X,
 } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import Seo from '../components/layout/Seo.jsx';
 import PageHeader from '../components/sections/PageHeader.jsx';
@@ -21,7 +21,7 @@ import { institutionalImages, uniforms as uniformPhotos } from '../data/media.js
 
 const infrastructure = [
   {
-    title: 'Fachada oficial',
+    title: 'Instalaciones',
     description:
       'Instalaciones corporativas diseñadas para la coordinación administrativa, operativa y atención institucional.',
     icon: Building2,
@@ -104,7 +104,7 @@ const values = [
 const institutionalCarousel = [
   {
     ...institutionalImages.fachada,
-    caption: 'Fachada oficial SIS S.A.',
+    caption: 'Instalaciones SIS S.A.',
   },
   {
     ...institutionalImages.oficinasAdministrativas,
@@ -174,7 +174,25 @@ function InstitutionalCarousel() {
 
 export default function Nosotros() {
   const [activeUniformIndex, setActiveUniformIndex] = useState(null);
+  const uniformHoverTimer = useRef(null);
   const activeUniform = activeUniformIndex === null ? null : uniforms[activeUniformIndex];
+
+  const clearUniformHoverTimer = () => {
+    if (uniformHoverTimer.current) {
+      window.clearTimeout(uniformHoverTimer.current);
+      uniformHoverTimer.current = null;
+    }
+  };
+
+  const scheduleUniformPreview = (index) => {
+    clearUniformHoverTimer();
+    uniformHoverTimer.current = window.setTimeout(() => {
+      setActiveUniformIndex(index);
+      uniformHoverTimer.current = null;
+    }, 3000);
+  };
+
+  useEffect(() => clearUniformHoverTimer, []);
 
   const showPreviousUniform = () => {
     setActiveUniformIndex((current) => (current === null ? uniforms.length - 1 : (current - 1 + uniforms.length) % uniforms.length));
@@ -340,7 +358,8 @@ export default function Nosotros() {
                 key={title}
                 className="glass-panel rounded-lg p-4 transition duration-200 hover:-translate-y-1 hover:border-primary-cyan/55 focus-visible:-translate-y-1"
                 tabIndex={0}
-                onMouseEnter={() => setActiveUniformIndex(index)}
+                onMouseEnter={() => scheduleUniformPreview(index)}
+                onMouseLeave={clearUniformHoverTimer}
                 onFocus={() => setActiveUniformIndex(index)}
               >
                 <AssetImage

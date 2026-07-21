@@ -121,14 +121,47 @@ function Gallery() {
   return (
     <section className="section-shell page-section" aria-labelledby="gallery-title">
       <SectionHeader eyebrow="Registro institucional" title="Galería Operacional" description="Recursos fotográficos reales de la capacidad humana, logística y física de SIS S.A." />
-      <div className="mt-8">
-        <div className="glass-panel relative min-h-[24rem] overflow-hidden rounded-lg sm:min-h-[32rem]">
+      <div className="mt-8 grid gap-4 lg:grid-cols-[minmax(0,1fr)_15rem]">
+        <div className="glass-panel relative min-h-[24rem] overflow-hidden rounded-lg sm:min-h-[32rem] lg:min-h-[34rem]">
           <AnimatePresence mode="wait" initial={false}>
             <motion.img key={item.src} src={item.src} alt={item.alt} className="absolute inset-0 h-full w-full object-cover" style={{ objectPosition: item.objectPosition ?? 'center' }} loading="lazy" initial={reduceMotion ? false : { opacity: 0, scale: 1.03 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.35 }} />
           </AnimatePresence>
           <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-background via-background/75 to-transparent p-6 pt-24">
-            <p className="text-xs font-bold uppercase tracking-[0.18em] text-primary-cyan-bright">{String(active + 1).padStart(2, '0')} / {String(gallery.length).padStart(2, '0')}</p>
+            <p className="text-xs font-bold uppercase tracking-[0.18em] text-accent-gold">{String(active + 1).padStart(2, '0')} / {String(gallery.length).padStart(2, '0')}</p>
             <h3 className="mt-2 text-2xl font-bold text-text">{item.category}</h3>
+          </div>
+        </div>
+        <div className="glass-panel rounded-lg p-3 lg:h-[34rem]">
+          <div className="grid h-full grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-1" aria-label="Indice de fotografias operacionales">
+            {gallery.map((galleryItem, index) => {
+              const isSelected = active === index;
+
+              return (
+                <button
+                  key={galleryItem.src}
+                  type="button"
+                  onClick={() => setActive(index)}
+                  className={`group flex min-h-16 items-center gap-3 rounded-md border px-3 py-2 text-left transition duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-gold ${
+                    isSelected
+                      ? 'border-accent-gold bg-accent-gold/15 shadow-soft'
+                      : 'border-border-cyber/55 bg-white/20 hover:border-accent-gold/70 hover:bg-accent-gold/10'
+                  }`}
+                  aria-current={isSelected ? 'true' : undefined}
+                  aria-label={`Ver fotografia ${index + 1}: ${galleryItem.category}`}
+                >
+                  <span className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-full border text-xs font-extrabold ${
+                    isSelected
+                      ? 'border-accent-gold bg-accent-gold text-background'
+                      : 'border-accent-gold/45 text-accent-gold'
+                  }`}>
+                    {String(index + 1).padStart(2, '0')}
+                  </span>
+                  <span className="min-w-0">
+                    <span className="block text-sm font-bold leading-snug text-text">{galleryItem.category}</span>
+                  </span>
+                </button>
+              );
+            })}
           </div>
         </div>
       </div>
