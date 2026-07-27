@@ -9,7 +9,6 @@ import {
   ClipboardCheck,
   Crosshair,
   Fingerprint,
-  Globe2,
   MapPinned,
   Network,
   RadioTower,
@@ -91,7 +90,6 @@ export const infrastructure = [
   { label: 'Coordinación Operacional', icon: Waypoints },
   { label: 'Protocolos Estandarizados', icon: ClipboardCheck },
   { label: 'Personal Certificado', icon: BadgeCheck },
-  { label: 'Cobertura Nacional', icon: Globe2 },
   { label: 'Tecnología Integrada', icon: Network },
 ];
 

@@ -3,7 +3,6 @@ import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { ArrowDown, ArrowRight, ChevronDown, ShieldCheck } from 'lucide-react';
 import ButtonLink from '../components/ui/ButtonLink.jsx';
 import SectionHeader from '../components/ui/SectionHeader.jsx';
-import { coverageMap } from '../data/media.js';
 import {
   commandChain,
   controlFunctions,
@@ -204,33 +203,6 @@ export default function Operations() {
             {commandChain.map(({ label, icon: Icon }, index) => <Reveal key={label} delay={index * 0.05}><div className="flex flex-col items-center"><div className="glass-panel flex w-full items-center gap-4 rounded-lg p-4"><span className="icon-frame shrink-0" aria-hidden="true"><Icon size={20} /></span><span className="font-bold text-text">{label}</span><span className="ml-auto text-xs font-bold text-primary-cyan-bright">{String(index + 1).padStart(2, '0')}</span></div>{index < commandChain.length - 1 ? <div className="h-8 w-px bg-primary-cyan/55" aria-hidden="true" /> : null}</div></Reveal>)}
           </div>
         </div>
-      </section>
-
-      <section className="section-shell page-section" aria-labelledby="coverage-title">
-        <Reveal className="grid gap-10 lg:grid-cols-[0.72fr_1.28fr] lg:items-center">
-          <div>
-            <p className="eyebrow">Despliegue territorial</p>
-            <h2 id="coverage-title" className="mt-4 text-3xl font-bold leading-tight text-text md:text-4xl">Cobertura Nacional</h2>
-            <p className="mt-5 text-base leading-8 text-muted-text">La coordinación operacional se estructura para atender requerimientos en el territorio nacional, de acuerdo con evaluación técnica, disponibilidad y condiciones del dispositivo.</p>
-          </div>
-          <div className="glass-panel relative overflow-hidden rounded-lg p-2 sm:p-3">
-            <img
-              src={coverageMap.src}
-              alt={coverageMap.alt}
-              className="mx-auto w-full rounded-md object-contain"
-              loading="lazy"
-              decoding="async"
-            />
-            <svg viewBox="0 0 720 460" className="hidden" role="img" aria-labelledby="map-title map-desc">
-              <title id="map-title">Mapa estilizado de Guatemala</title><desc id="map-desc">Representación vectorial institucional de la cobertura nacional de SIS S.A.</desc>
-              <defs><linearGradient id="mapFill" x1="0" y1="0" x2="1" y2="1"><stop stopColor="#1c2538"/><stop offset="1" stopColor="#253149"/></linearGradient><filter id="mapGlow"><feGaussianBlur stdDeviation="5" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
-              <path d="M182 62 418 51 470 103 546 98 588 154 664 184 641 239 683 281 620 319 604 379 509 370 438 411 376 356 280 378 233 314 158 288 184 227 127 181 205 121Z" fill="url(#mapFill)" stroke="#475569" strokeLinejoin="round" strokeWidth="3"/>
-              <path d="M205 121 324 198 428 142 505 207 589 195M184 259 303 232 364 333 462 247 588 306M280 378 321 300 438 411" fill="none" stroke="#3b82f6" strokeOpacity=".42" strokeWidth="2" strokeDasharray="8 8"/>
-              {[[325,183],[397,227],[548,220],[276,294],[431,318]].map(([cx,cy], index) => <g key={`${cx}-${cy}`} filter="url(#mapGlow)"><circle cx={cx} cy={cy} r="14" fill="#3b82f6" fillOpacity=".18"/><circle cx={cx} cy={cy} r="5" fill="#60a5fa"><animate attributeName="r" values="4;7;4" dur={`${2 + index * .2}s`} repeatCount="indefinite"/></circle></g>)}
-            </svg>
-            <div className="hidden">Presencia nacional</div>
-          </div>
-        </Reveal>
       </section>
 
       <section className="section-shell page-section" aria-label="Solicitar asesoría">

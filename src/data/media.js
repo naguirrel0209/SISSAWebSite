@@ -12,14 +12,8 @@ import oficinasAdministrativas from '../../Recursos/oficinas_administrativas.jpe
 import uniformeCasual from '../../Recursos/uniformecasual.jpeg';
 import uniformeFatiga from '../../Recursos/uniformefatiga.jpeg';
 import uniformeGala from '../../Recursos/uniformegala.jpeg';
-import mapaNuevo from '../../Recursos/mapa_nuevo.png';
 
 export const brandLogo = logoSinFondo;
-
-export const coverageMap = {
-  src: mapaNuevo,
-  alt: 'Mapa institucional de Guatemala con puntos de presencia nacional de SIS S.A.',
-};
 
 export const institutionalImages = {
   fachada: {
