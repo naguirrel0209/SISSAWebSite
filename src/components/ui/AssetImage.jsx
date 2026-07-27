@@ -18,7 +18,7 @@ export default function AssetImage({
 }) {
   return (
     <figure
-      className={`group relative overflow-hidden rounded-md border border-primary-cyan-bright/25 bg-surface-high/45 shadow-[0_16px_34px_rgba(18,22,20,0.12)] ${heights[size] ?? heights.default} ${className}`.trim()}
+      className={`group relative overflow-hidden rounded-md border border-white/8 bg-surface-high/45 shadow-[0_18px_42px_rgba(0,0,0,0.24)] ${heights[size] ?? heights.default} ${className}`.trim()}
     >
       <img
         src={src}
@@ -30,8 +30,8 @@ export default function AssetImage({
       />
       {caption ? (
         <>
-          <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[#121614]/90 via-[#121614]/45 to-transparent" aria-hidden="true" />
-          <figcaption className="absolute inset-x-0 bottom-0 p-4 text-xs font-bold uppercase tracking-[0.14em] text-[#f7f2e8]">
+          <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-background/95 via-background/45 to-transparent" aria-hidden="true" />
+          <figcaption className="absolute inset-x-0 bottom-0 p-4 text-xs font-bold uppercase tracking-[0.14em] text-slate-100">
             {caption}
           </figcaption>
         </>

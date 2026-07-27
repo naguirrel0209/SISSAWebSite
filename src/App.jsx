@@ -7,6 +7,7 @@ const Home = lazy(() => import('./pages/Home.jsx'));
 const Nosotros = lazy(() => import('./pages/Nosotros.jsx'));
 const Servicios = lazy(() => import('./pages/Servicios.jsx'));
 const Operations = lazy(() => import('./pages/Operations.jsx'));
+const Oportunidades = lazy(() => import('./pages/Oportunidades.jsx'));
 const Contact = lazy(() => import('./pages/Contact.jsx'));
 const NotFound = lazy(() => import('./pages/NotFound.jsx'));
 
@@ -19,6 +20,7 @@ export default function App() {
           <Route path="/nosotros" element={<Nosotros />} />
           <Route path="/servicios" element={<Servicios />} />
           <Route path="/operaciones" element={<Operations />} />
+          <Route path="/oportunidades" element={<Oportunidades />} />
           <Route path="/contacto" element={<Contact />} />
           <Route path="*" element={<NotFound />} />
         </Route>

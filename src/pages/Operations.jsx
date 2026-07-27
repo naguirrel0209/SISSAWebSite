@@ -8,12 +8,9 @@ import {
   commandChain,
   controlFunctions,
   gallery,
-  infrastructure,
-  operationalCapabilities,
   operationsHeroImage,
   operationsHeroPhoto,
   operationalProcess,
-  technologies,
 } from '../data/operations.js';
 
 const meta = {
@@ -88,13 +85,13 @@ function OperationsHero() {
         style={{ objectPosition: operationsHeroImage.objectPosition }}
         fetchPriority="high"
       />
-      <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(18,22,20,0.96)_0%,rgba(18,22,20,0.84)_48%,rgba(18,22,20,0.48)_100%)]" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_42%,rgba(176,138,74,0.16),transparent_22rem)]" aria-hidden="true" />
+      <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(11,18,32,0.98)_0%,rgba(11,18,32,0.86)_48%,rgba(11,18,32,0.50)_100%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_42%,rgba(59,130,246,0.18),transparent_24rem)]" aria-hidden="true" />
       <motion.div className="section-shell relative z-10 py-20" initial={reduceMotion ? false : { opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.65, ease: 'easeOut' }}>
         <div className="max-w-3xl">
-          <p className="eyebrow border-primary-cyan-bright/35 bg-primary-cyan/20 text-[#f8f5ee]">Centro de mando institucional</p>
-          <h1 id="operations-title" className="mt-5 text-4xl font-extrabold leading-[1.06] text-[#f8f5ee] sm:text-5xl lg:text-6xl">Operaciones Estratégicas</h1>
-          <p className="mt-6 max-w-2xl text-base leading-8 text-[#efe2c7] sm:text-lg">Coordinamos recursos humanos, tecnológicos y operacionales mediante protocolos estandarizados para garantizar la continuidad de la seguridad de nuestros clientes.</p>
+          <p className="eyebrow text-slate-50">Centro de mando institucional</p>
+          <h1 id="operations-title" className="mt-6 text-4xl font-bold leading-[1.05] text-slate-50 sm:text-5xl lg:text-6xl">Operaciones Estratégicas</h1>
+          <p className="mt-6 max-w-2xl text-base leading-8 text-slate-300 sm:text-lg">Coordinamos recursos humanos, tecnológicos y operacionales mediante protocolos estandarizados para garantizar la continuidad de la seguridad de nuestros clientes.</p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <ButtonLink to="/contacto">Solicitar Evaluación <ArrowRight size={17} aria-hidden="true" /></ButtonLink>
             <ButtonLink href="#capacidades" variant="secondary">Conocer Capacidades <ChevronDown size={17} aria-hidden="true" /></ButtonLink>
@@ -190,15 +187,6 @@ export default function Operations() {
         </Reveal>
       </section>
 
-      <section id="capacidades" className="border-y border-border-cyber/45 bg-surface/25 py-16 scroll-mt-24" aria-labelledby="capabilities-title">
-        <div className="section-shell">
-          <SectionHeader eyebrow="Dispositivos especializados" title="Capacidades Operacionales" description="Capacidades articuladas bajo criterios técnicos, protocolos institucionales y evaluación previa del riesgo." />
-          <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {operationalCapabilities.map(({ title, description, icon: Icon }, index) => <Reveal key={title} delay={(index % 4) * 0.05}><article className="glass-panel interactive-card h-full rounded-lg p-5"><span className="icon-frame" aria-hidden="true"><Icon size={21} /></span><h3 className="mt-5 text-lg font-bold leading-6 text-text">{title}</h3><p className="mt-3 text-sm leading-6 text-muted-text">{description}</p></article></Reveal>)}
-          </div>
-        </div>
-      </section>
-
       <section className="section-shell page-section" aria-labelledby="process-title">
         <SectionHeader eyebrow="Protocolo de despliegue" title="Proceso Operacional" description="Secuencia institucional aplicada desde la recepción del requerimiento hasta la mejora continua del dispositivo." />
         <div className="relative mt-10 grid gap-4 lg:grid-cols-6">
@@ -208,22 +196,6 @@ export default function Operations() {
       </section>
 
       <Gallery />
-
-      <section className="border-y border-border-cyber/45 bg-surface/25 py-16" aria-labelledby="infrastructure-title">
-        <div className="section-shell">
-          <SectionHeader eyebrow="Capacidad institucional" title="Infraestructura Operacional" description="Recursos organizacionales que sostienen la coordinación y continuidad de los dispositivos de seguridad." />
-          <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {infrastructure.map(({ label, icon: Icon }, index) => <Reveal key={label} delay={(index % 3) * 0.06}><article className="glass-panel flex min-h-32 items-center gap-5 rounded-lg p-5"><span className="icon-frame shrink-0" aria-hidden="true"><Icon size={22} /></span><div><p className="text-[10px] font-bold uppercase tracking-[0.16em] text-primary-cyan-bright">Capacidad verificada</p><h3 className="mt-2 text-lg font-bold text-text">{label}</h3></div></article></Reveal>)}
-          </div>
-        </div>
-      </section>
-
-      <section className="section-shell page-section" aria-labelledby="technology-title">
-        <SectionHeader eyebrow="Ecosistema técnico" title="Tecnología Integrada" description="Herramientas interoperables para observación, control, comunicación y soporte de decisiones operacionales." />
-        <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-4">
-          {technologies.map(({ label, icon: Icon }, index) => <Reveal key={label} delay={(index % 4) * 0.04}><div className="glass-panel interactive-card flex min-h-36 flex-col justify-between rounded-lg p-5"><Icon className="text-primary-cyan-bright" size={23} aria-hidden="true" /><span className="mt-5 text-sm font-bold leading-5 text-text">{label}</span></div></Reveal>)}
-        </div>
-      </section>
 
       <section className="border-y border-border-cyber/45 bg-surface/25 py-16" aria-labelledby="command-title">
         <div className="section-shell">
@@ -251,10 +223,10 @@ export default function Operations() {
             />
             <svg viewBox="0 0 720 460" className="hidden" role="img" aria-labelledby="map-title map-desc">
               <title id="map-title">Mapa estilizado de Guatemala</title><desc id="map-desc">Representación vectorial institucional de la cobertura nacional de SIS S.A.</desc>
-              <defs><linearGradient id="mapFill" x1="0" y1="0" x2="1" y2="1"><stop stopColor="#e5d8c5"/><stop offset="1" stopColor="#f7f2e8"/></linearGradient><filter id="mapGlow"><feGaussianBlur stdDeviation="5" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
-              <path d="M182 62 418 51 470 103 546 98 588 154 664 184 641 239 683 281 620 319 604 379 509 370 438 411 376 356 280 378 233 314 158 288 184 227 127 181 205 121Z" fill="url(#mapFill)" stroke="#b9ab98" strokeLinejoin="round" strokeWidth="3"/>
-              <path d="M205 121 324 198 428 142 505 207 589 195M184 259 303 232 364 333 462 247 588 306M280 378 321 300 438 411" fill="none" stroke="#2f5f4f" strokeOpacity=".42" strokeWidth="2" strokeDasharray="8 8"/>
-              {[[325,183],[397,227],[548,220],[276,294],[431,318]].map(([cx,cy], index) => <g key={`${cx}-${cy}`} filter="url(#mapGlow)"><circle cx={cx} cy={cy} r="14" fill="#2f5f4f" fillOpacity=".18"/><circle cx={cx} cy={cy} r="5" fill="#b08a4a"><animate attributeName="r" values="4;7;4" dur={`${2 + index * .2}s`} repeatCount="indefinite"/></circle></g>)}
+              <defs><linearGradient id="mapFill" x1="0" y1="0" x2="1" y2="1"><stop stopColor="#1c2538"/><stop offset="1" stopColor="#253149"/></linearGradient><filter id="mapGlow"><feGaussianBlur stdDeviation="5" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+              <path d="M182 62 418 51 470 103 546 98 588 154 664 184 641 239 683 281 620 319 604 379 509 370 438 411 376 356 280 378 233 314 158 288 184 227 127 181 205 121Z" fill="url(#mapFill)" stroke="#475569" strokeLinejoin="round" strokeWidth="3"/>
+              <path d="M205 121 324 198 428 142 505 207 589 195M184 259 303 232 364 333 462 247 588 306M280 378 321 300 438 411" fill="none" stroke="#3b82f6" strokeOpacity=".42" strokeWidth="2" strokeDasharray="8 8"/>
+              {[[325,183],[397,227],[548,220],[276,294],[431,318]].map(([cx,cy], index) => <g key={`${cx}-${cy}`} filter="url(#mapGlow)"><circle cx={cx} cy={cy} r="14" fill="#3b82f6" fillOpacity=".18"/><circle cx={cx} cy={cy} r="5" fill="#60a5fa"><animate attributeName="r" values="4;7;4" dur={`${2 + index * .2}s`} repeatCount="indefinite"/></circle></g>)}
             </svg>
             <div className="hidden">Presencia nacional</div>
           </div>
@@ -263,7 +235,7 @@ export default function Operations() {
 
       <section className="section-shell page-section" aria-label="Solicitar asesoría">
         <Reveal className="glass-panel relative overflow-hidden rounded-lg p-7 text-center sm:p-10">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(47,125,109,0.14),transparent_24rem)]" aria-hidden="true" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(59,130,246,0.14),transparent_24rem)]" aria-hidden="true" />
           <div className="relative"><ShieldCheck className="mx-auto text-primary-cyan-bright" size={34} aria-hidden="true" /><p className="eyebrow mt-5">Evaluación estratégica</p><h2 className="mx-auto mt-4 max-w-3xl text-3xl font-bold leading-tight text-text md:text-4xl">La seguridad comienza con una estrategia.</h2><p className="mx-auto mt-5 max-w-2xl text-sm leading-7 text-muted-text">Nuestro equipo diseña soluciones integrales basadas en análisis de riesgo, tecnología y capacidad operativa.</p><div className="mt-8"><ButtonLink to="/contacto">Solicitar Asesoría <ArrowRight size={17} aria-hidden="true" /></ButtonLink></div></div>
         </Reveal>
       </section>

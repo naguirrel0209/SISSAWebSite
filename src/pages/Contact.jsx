@@ -63,6 +63,7 @@ const serviceOptions = [
   'Monitoreo CCTV',
   'Logística Segura',
   'Capacitación',
+  'Oportunidades laborales',
   'Otro requerimiento',
 ];
 
@@ -262,7 +263,7 @@ export default function Contact() {
                   aria-invalid={errors.nombre ? 'true' : 'false'}
                 />
                 {errors.nombre ? (
-                  <span className="mt-1 block text-xs font-semibold text-red-600" role="alert">
+                  <span className="mt-1 block text-xs font-semibold text-danger" role="alert">
                     {errors.nombre}
                   </span>
                 ) : null}
@@ -291,7 +292,7 @@ export default function Contact() {
                   aria-invalid={errors.correo ? 'true' : 'false'}
                 />
                 {errors.correo ? (
-                  <span className="mt-1 block text-xs font-semibold text-red-600" role="alert">
+                  <span className="mt-1 block text-xs font-semibold text-danger" role="alert">
                     {errors.correo}
                   </span>
                 ) : null}
@@ -309,7 +310,7 @@ export default function Contact() {
                   aria-invalid={errors.telefono ? 'true' : 'false'}
                 />
                 {errors.telefono ? (
-                  <span className="mt-1 block text-xs font-semibold text-red-600" role="alert">
+                  <span className="mt-1 block text-xs font-semibold text-danger" role="alert">
                     {errors.telefono}
                   </span>
                 ) : null}
@@ -334,7 +335,7 @@ export default function Contact() {
                   ))}
                 </select>
                 {errors.servicio ? (
-                  <span className="mt-1 block text-xs font-semibold text-red-600" role="alert">
+                  <span className="mt-1 block text-xs font-semibold text-danger" role="alert">
                     {errors.servicio}
                   </span>
                 ) : null}
@@ -351,7 +352,7 @@ export default function Contact() {
                   aria-invalid={errors.mensaje ? 'true' : 'false'}
                 />
                 {errors.mensaje ? (
-                  <span className="mt-1 block text-xs font-semibold text-red-600" role="alert">
+                  <span className="mt-1 block text-xs font-semibold text-danger" role="alert">
                     {errors.mensaje}
                   </span>
                 ) : null}
@@ -385,11 +386,11 @@ export default function Contact() {
 
             {status === 'success' ? (
               <div
-                className="mt-5 flex items-start gap-3 rounded-md border border-primary-cyan/40 bg-primary-cyan/10 p-4 text-sm leading-6 text-text"
+                className="mt-5 flex items-start gap-3 rounded-md border border-success/40 bg-success/10 p-4 text-sm leading-6 text-text"
                 role="status"
                 aria-live="polite"
               >
-                <CheckCircle2 className="mt-0.5 shrink-0 text-primary-cyan-bright" size={18} />
+                <CheckCircle2 className="mt-0.5 shrink-0 text-success" size={18} />
                 Su requerimiento fue enviado al equipo de SIS S.A. Recibirá seguimiento por
                 correo electrónico en breve.
               </div>
@@ -397,10 +398,10 @@ export default function Contact() {
 
             {status === 'error' ? (
               <div
-                className="mt-5 flex items-start gap-3 rounded-md border border-red-600/45 bg-red-600/10 p-4 text-sm leading-6 text-text"
+                className="mt-5 flex items-start gap-3 rounded-md border border-danger/45 bg-danger/10 p-4 text-sm leading-6 text-text"
                 role="alert"
               >
-                <ShieldCheck className="mt-0.5 shrink-0 text-red-600" size={18} />
+                <ShieldCheck className="mt-0.5 shrink-0 text-danger" size={18} />
                 {errorMessage ||
                   'No se pudo enviar el formulario. Intente nuevamente o contacte por teléfono.'}
               </div>

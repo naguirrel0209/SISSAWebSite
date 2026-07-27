@@ -1,12 +1,13 @@
 ﻿import {
   Building2,
   CarFront,
-  CheckCircle2,
+  BadgeCheck,
   ChevronLeft,
   ChevronRight,
-  Medal,
+  Handshake,
   RadioTower,
-  Sparkles,
+  Scale,
+  ShieldCheck,
   UsersRound,
   X,
 } from 'lucide-react';
@@ -79,25 +80,32 @@ const uniforms = [
 
 const values = [
   {
-    title: 'Disciplina',
+    title: 'Respeto',
     description:
-      'El cumplimiento de protocolos, órdenes y procedimientos asegura una operación confiable y profesional.',
-    icon: CheckCircle2,
+      'Apreciamos las capacidades propias y las de los demás, obedecemos órdenes y leyes, y respetamos la propiedad ajena.',
+    icon: Handshake,
     code: '01',
   },
   {
-    title: 'Lealtad',
+    title: 'Confianza',
     description:
-      'El compromiso con nuestros clientes, colaboradores e institución fortalece la confianza en cada servicio.',
-    icon: Medal,
+      'Cumplimos con puntualidad y responsabilidad cada deber, asumiendo las tareas encomendadas con compromiso.',
+    icon: BadgeCheck,
     code: '02',
   },
   {
-    title: 'Innovación',
+    title: 'Honestidad',
     description:
-      'La incorporación de tecnología, procesos y mejora continua permite responder a nuevos desafíos de seguridad.',
-    icon: Sparkles,
+      'Actuamos con verdad, sinceridad y transparencia, aceptando la responsabilidad de nuestras acciones.',
+    icon: ShieldCheck,
     code: '03',
+  },
+  {
+    title: 'Principios',
+    description:
+      'Tratamos a las personas de forma igualitaria, apoyamos a quienes necesitan ayuda y guiamos nuestra conducta mediante convicciones firmes.',
+    icon: Scale,
+    code: '04',
   },
 ];
 
@@ -124,7 +132,7 @@ const missionVision = [
   {
     title: 'Misión',
     description:
-      'Satisfacer las necesidades de nuestros clientes de manera eficiente y oportuna, con recurso humano profesional y tecnología avanzada, para la tranquilidad de su familia y sus bienes.',
+      'Satisfacer las necesidades de nuestros clientes de manera eficiente y oportuna, con recurso humano profesional y tecnología de punta, para la tranquilidad de su familia y sus bienes.',
   },
   {
     title: 'Visión',
@@ -164,7 +172,7 @@ function InstitutionalCarousel() {
             transition={{ duration: 0.7, ease: 'easeOut' }}
           />
         </AnimatePresence>
-        <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#121614]/85 via-[#121614]/45 to-transparent p-4 pt-20 text-xs font-bold uppercase tracking-[0.14em] text-[#f7f2e8]">
+        <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-background/95 via-background/45 to-transparent p-4 pt-20 text-xs font-bold uppercase tracking-[0.14em] text-slate-100">
           {current.caption}
         </figcaption>
       </figure>
@@ -216,15 +224,17 @@ export default function Nosotros() {
         <div className="grid gap-8 border-y border-border-cyber/55 py-10 md:grid-cols-[0.42fr_1fr] md:gap-12">
           <div>
             <p className="text-xs font-bold uppercase tracking-[0.18em] text-primary-cyan-bright">
-              Quiénes somos
+              Historia institucional
             </p>
-            <h2 className="mt-3 text-3xl font-bold text-text">Presencia, prevención y respuesta</h2>
+            <h2 className="mt-3 text-3xl font-bold text-text">Más de tres décadas protegiendo Guatemala</h2>
           </div>
           <p className="text-base leading-8 text-muted-text md:text-lg">
-            SIS S.A. es una corporación guatemalteca dedicada a brindar servicios de seguridad
-            privada, monitoreo, logística segura y protección especializada. Su operación se
-            fundamenta en disciplina, prevención, control y respuesta profesional, integrando
-            personal capacitado, protocolos operativos y tecnología aplicada a la seguridad.
+            SIS S.A. nace el 10 de noviembre de 1992 como una empresa de seguridad totalmente
+            guatemalteca, creada para planificar, coordinar, controlar y ejecutar políticas de
+            seguridad adaptadas a las necesidades de sus clientes. Está registrada mediante el
+            Acuerdo Gubernativo No. 003-98 y, tras cumplir los requisitos de la Ley que Regula los
+            Servicios de Seguridad Privada, Decreto No. 52-2010, recibió sus licencias de
+            operaciones de la DIGESSP el 20 de noviembre de 2018.
           </p>
         </div>
         <div className="grid gap-5 pb-10 md:grid-cols-2">
@@ -389,7 +399,7 @@ export default function Nosotros() {
           <h2 className="mt-3 text-3xl font-bold text-text">Valores que guían nuestra operación</h2>
         </div>
 
-        <div className="grid gap-5 md:grid-cols-3">
+        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
           {values.map(({ title, description, icon: Icon, code }) => (
             <article
               key={title}

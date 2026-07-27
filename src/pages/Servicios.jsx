@@ -1,95 +1,161 @@
 import {
-  ArrowRight,
-  Banknote,
+  ArrowDown,
   Building2,
+  Camera,
   Check,
-  CircleGauge,
   ClipboardCheck,
-  GraduationCap,
+  Fingerprint,
   Hotel,
   House,
-  LockKeyhole,
-  MapPinned,
   RadioTower,
-  Route,
   ShieldCheck,
   ShoppingBag,
   Truck,
-  UserRoundCheck,
+  UsersRound,
   Warehouse,
 } from 'lucide-react';
-import { Link } from 'react-router-dom';
 import Seo from '../components/layout/Seo.jsx';
 import PageHeader from '../components/sections/PageHeader.jsx';
 import CallToAction from '../components/sections/CallToAction.jsx';
 import AssetImage from '../components/ui/AssetImage.jsx';
 import { PAGE_META } from '../constants/site.js';
-import { institutionalImages, serviceImages } from '../data/media.js';
+import { institutionalImages } from '../data/media.js';
 
-const services = [
+const integralMeans = [
   {
-    title: 'Custodio en Ruta',
-    image: serviceImages.custodioRuta,
+    id: 'medios-humanos',
+    code: '01',
+    title: 'Medios humanos',
+    summary:
+      'Guardias, vigilantes, custodios y patrullas preparados para prevenir, disuadir y responder.',
     description:
-      'Protección operativa para transporte de mercancías, rutas críticas y desplazamientos logísticos que requieren control, presencia y respuesta preventiva.',
-    applications: ['Rutas de alto valor', 'Transporte de mercancías', 'Acompañamiento operativo', 'Supervisión en tránsito'],
-    icon: MapPinned,
+      'El recurso humano es el elemento que evalúa cada incidencia y reacciona conforme a las funciones, protocolos y condiciones definidas para el puesto.',
+    icon: UsersRound,
+    image: institutionalImages.guardiasCasual,
+    details: [
+      {
+        title: 'Guardias o vigilantes de seguridad',
+        items: [
+          'Seguridad y vigilancia operativa.',
+          'Prevención, disuasión y respuesta.',
+          'Gestión y cumplimiento de normas.',
+        ],
+      },
+      {
+        title: 'Custodios y patrullas',
+        items: [
+          'Escolta de mercancías y acompañamiento de rutas.',
+          'Disuasión antes y durante el traslado.',
+          'Geolocalización activa y resguardo ante fallas mecánicas.',
+        ],
+      },
+      {
+        title: 'Uniformes, armamento y capacitación',
+        items: [
+          'Uniformes institucionales registrados ante la DIGESSP.',
+          'Armamento asignado según el puesto, el riesgo y la normativa aplicable.',
+          'Formación legal en Seguridad y Salud en el Trabajo, junto con políticas y lineamientos internos.',
+        ],
+      },
+      {
+        title: 'Jornadas de servicio',
+        items: [
+          'Turnos rotativos de 24 horas de trabajo por 24 horas de descanso.',
+          'Jornadas continuas o discontinuas de 12 horas.',
+          'Esquemas específicos establecidos en el Plan de Trabajo anual.',
+        ],
+      },
+    ],
   },
   {
-    title: 'Seguridad Ejecutiva',
-    image: serviceImages.seguridadEjecutiva,
+    id: 'medios-tecnicos-activos',
+    code: '02',
+    title: 'Medios técnicos activos',
+    summary:
+      'Tecnología capaz de detectar, analizar y emitir alertas ante una amenaza o situación de peligro.',
     description:
-      'Servicio especializado para protección de ejecutivos, directivos, visitantes y personas que requieren acompañamiento discreto, técnico y profesional.',
-    applications: ['Protección personal', 'Acompañamiento ejecutivo', 'Traslados programados', 'Eventos corporativos'],
-    icon: UserRoundCheck,
+      'Estos recursos fortalecen la observación y el control operativo, facilitando la detección temprana y el seguimiento de eventos.',
+    icon: Camera,
+    image: institutionalImages.tecnologia,
+    details: [
+      {
+        title: 'Cámaras inteligentes',
+        items: [
+          'Venta e instalación de videovigilancia para hogares, comercios y empresas.',
+          'Configuración de acuerdo con las condiciones y necesidades del entorno.',
+        ],
+      },
+      {
+        title: 'Sistemas de alarma',
+        items: [
+          'Alarmas de última tecnología para comercios y residencias.',
+          'Diseño de soluciones ajustadas a las necesidades de seguridad.',
+        ],
+      },
+      {
+        title: 'GPS',
+        items: [
+          'Venta, instalación y monitoreo de sistemas de rastreo.',
+          'Ubicación en tiempo real para vehículos particulares y flotas comerciales.',
+        ],
+      },
+    ],
   },
   {
-    title: 'Seguridad Bancaria',
-    image: serviceImages.seguridadBancaria,
+    id: 'medios-tecnicos-pasivos',
+    code: '03',
+    title: 'Medios técnicos pasivos',
+    summary:
+      'Elementos físicos orientados a disuadir, retardar, detener o canalizar el avance de una amenaza.',
     description:
-      'Presencia preventiva y control operativo para agencias, puntos de atención, áreas administrativas y entornos financieros.',
-    applications: ['Agencias bancarias', 'Áreas de atención', 'Control de ingreso', 'Prevención de incidentes'],
-    icon: Banknote,
+      'Las medidas pasivas refuerzan el perímetro y organizan el ingreso para reducir vulnerabilidades antes de que ocurra un incidente.',
+    icon: Fingerprint,
+    image: institutionalImages.fachada,
+    details: [
+      {
+        title: 'Control de accesos',
+        items: [
+          'Organización del ingreso y salida de personas, vehículos y proveedores.',
+          'Medidas adaptadas al flujo y nivel de exposición de cada instalación.',
+        ],
+      },
+      {
+        title: 'Protección perimetral',
+        items: [
+          'Suministro e instalación de alambre de púas en postes de concreto, madera o estructuras metálicas.',
+          'Barreras orientadas a disuadir y retardar accesos no autorizados.',
+        ],
+      },
+    ],
   },
   {
-    title: 'Seguridad Residencial',
-    image: serviceImages.seguridadResidencial,
+    id: 'medios-organizativos',
+    code: '04',
+    title: 'Medios organizativos',
+    summary:
+      'Planes y procedimientos que indican al personal cómo actuar y convierten los recursos en una solución coordinada.',
     description:
-      'Protección para condominios, residenciales, edificios y comunidades privadas mediante presencia, control de accesos y supervisión constante.',
-    applications: ['Condominios', 'Garitas de acceso', 'Residenciales privados', 'Supervisión perimetral'],
-    icon: House,
-  },
-  {
-    title: 'Seguridad Privada',
-    image: serviceImages.seguridadPrivada,
-    description:
-      'Personal capacitado para resguardar instalaciones, activos, colaboradores y visitantes bajo protocolos de prevención, control y respuesta.',
-    applications: ['Empresas', 'Bodegas', 'Comercios', 'Instalaciones industriales'],
-    icon: LockKeyhole,
-  },
-  {
-    title: 'Monitoreo CCTV Inteligente',
-    image: serviceImages.monitoreoCctv,
-    description:
-      'Supervisión visual y apoyo operativo mediante sistemas de monitoreo, cámaras de seguridad y protocolos de alerta.',
-    applications: ['Supervisión continua', 'Cámaras de vigilancia', 'Alertas operativas', 'Supervisión remota'],
-    icon: RadioTower,
-  },
-  {
-    title: 'Logística Segura',
-    image: serviceImages.logisticaSegura,
-    description:
-      'Soluciones de seguridad para operaciones logísticas, movimiento de activos, traslados y procesos que requieren acompañamiento estratégico.',
-    applications: ['Transporte operativo', 'Control de rutas', 'Custodia logística', 'Coordinación de movimientos'],
-    icon: Route,
-  },
-  {
-    title: 'Capacitación',
-    image: serviceImages.capacitacion,
-    description:
-      'Formación técnica y operativa para fortalecer la disciplina, prevención, reacción y cultura de seguridad dentro de equipos institucionales.',
-    applications: ['Protocolos de seguridad', 'Prevención de riesgos', 'Respuesta operativa', 'Cultura institucional'],
-    icon: GraduationCap,
+      'La organización define las responsabilidades, acciones y respuestas necesarias para que la inversión en seguridad produzca resultados y reduzca pérdidas.',
+    icon: ClipboardCheck,
+    image: institutionalImages.oficinasAdministrativas,
+    details: [
+      {
+        title: 'Planificación integral',
+        items: [
+          'Planes de seguridad integral.',
+          'Análisis de riesgo.',
+          'Planes de contingencia.',
+        ],
+      },
+      {
+        title: 'Control y seguimiento',
+        items: [
+          'Procedimientos de acceso.',
+          'Auditorías de seguridad.',
+          'Actualización de medidas según las condiciones de la operación.',
+        ],
+      },
+    ],
   },
 ];
 
@@ -100,36 +166,27 @@ const methodology = [
   },
   {
     title: 'Planificación',
-    description: 'Diseño de protocolo operativo, asignación de recursos y definición de cobertura.',
+    description: 'Integración de medios humanos, técnicos y organizativos en un dispositivo coordinado.',
   },
   {
     title: 'Ejecución',
-    description: 'Implementación del servicio con personal capacitado, supervisión y control operativo.',
+    description: 'Implementación del servicio con funciones, recursos y protocolos claramente definidos.',
   },
   {
     title: 'Supervisión',
-    description: 'Seguimiento, reportes, monitoreo y ajustes para mantener la efectividad del servicio.',
+    description: 'Seguimiento, reportes y ajustes para mantener la efectividad del sistema.',
   },
 ];
 
 const sectors = [
   { name: 'Corporativo', icon: Building2 },
   { name: 'Residencial', icon: House },
-  { name: 'Bancario', icon: Banknote },
+  { name: 'Bancario', icon: ShieldCheck },
   { name: 'Industrial', icon: Warehouse },
   { name: 'Logístico', icon: Truck },
   { name: 'Hotelero', icon: Hotel },
   { name: 'Comercial', icon: ShoppingBag },
-  { name: 'Institucional', icon: ShieldCheck },
-];
-
-const trustSignals = [
-  'Protocolos operativos',
-  'Supervisión constante',
-  'Personal capacitado',
-  'Respuesta profesional',
-  'Monitoreo estratégico',
-  'Presencia preventiva',
+  { name: 'Institucional', icon: RadioTower },
 ];
 
 export default function Servicios() {
@@ -137,102 +194,120 @@ export default function Servicios() {
     <div className="w-full">
       <Seo {...PAGE_META.servicios} />
       <PageHeader
-        eyebrow="Unidades especializadas · SIS S.A."
-        title="Soluciones de seguridad para operaciones críticas"
-        description="SIS S.A. integra personal capacitado, protocolos operativos, monitoreo y presencia táctica para proteger personas, instalaciones, rutas y activos estratégicos."
+        eyebrow="Sistema Integral de Seguridad · SIS S.A."
+        title="Personas, tecnología y procedimientos en una sola estrategia"
+        description="SIS S.A. integra medios humanos, técnicos y organizativos debidamente coordinados para proteger personas, bienes, instalaciones y procesos productivos con el nivel de seguridad que cada operación necesita."
         assetSrc={institutionalImages.oficinasAdministrativas.src}
         assetAlt={institutionalImages.oficinasAdministrativas.alt}
         assetObjectPosition={institutionalImages.oficinasAdministrativas.objectPosition}
-        assetCaption="Oficinas administrativas SIS S.A."
+        assetCaption="Coordinación integral SIS S.A."
       />
 
-      <section className="section-shell py-14">
-        <div className="grid gap-8 border-y border-border-cyber/55 py-10 md:grid-cols-[0.42fr_1fr] md:gap-12">
+      <section className="section-shell py-14" aria-labelledby="system-index-title">
+        <div className="grid gap-8 border-y border-border-cyber/55 py-10 lg:grid-cols-[0.55fr_1fr] lg:gap-12">
           <div>
             <p className="text-xs font-bold uppercase tracking-[0.18em] text-primary-cyan-bright">
-              Enfoque de servicio
+              Índice del sistema
             </p>
-            <h2 className="mt-3 text-3xl font-bold text-text">Cobertura según su nivel de riesgo</h2>
+            <h2 id="system-index-title" className="mt-3 text-3xl font-bold text-text">
+              Sistema Integral de Seguridad
+            </h2>
+            <p className="mt-4 text-sm leading-7 text-muted-text">
+              Seleccione un componente para conocer sus funciones, recursos y alcance dentro de la
+              solución.
+            </p>
           </div>
-          <p className="text-base leading-8 text-muted-text md:text-lg">
-            Nuestros servicios están diseñados para responder a diferentes niveles de riesgo,
-            operación y exposición. Cada solución se estructura con base en prevención, control,
-            supervisión y respuesta profesional, adaptándose a las necesidades de clientes
-            corporativos, residenciales, bancarios, logísticos e institucionales.
-          </p>
+          <nav className="grid gap-3 sm:grid-cols-2" aria-label="Componentes del Sistema Integral de Seguridad">
+            {integralMeans.map(({ id, code, title, summary, icon: Icon }) => (
+              <a
+                key={id}
+                href={`#${id}`}
+                className="glass-panel interactive-card group flex min-h-40 flex-col rounded-lg p-5"
+              >
+                <div className="flex items-start justify-between gap-4">
+                  <span className="icon-frame" aria-hidden="true">
+                    <Icon size={21} />
+                  </span>
+                  <span className="text-xs font-extrabold text-primary-cyan-bright">{code}</span>
+                </div>
+                <h3 className="mt-5 text-lg font-bold text-text">{title}</h3>
+                <p className="mt-2 text-xs leading-5 text-muted-text">{summary}</p>
+                <span className="mt-auto flex items-center gap-2 pt-4 text-xs font-bold text-primary-cyan-bright">
+                  Ir al apartado
+                  <ArrowDown size={14} className="transition-transform group-hover:translate-y-1" />
+                </span>
+              </a>
+            ))}
+          </nav>
         </div>
       </section>
 
-      <section id="operaciones" className="section-shell scroll-mt-24 py-14">
-        <div className="mb-8 max-w-3xl">
-          <p className="text-xs font-bold uppercase tracking-[0.18em] text-primary-cyan-bright">
-            Portafolio operativo
-          </p>
-          <h2 className="mt-3 text-3xl font-bold text-text">Servicios especializados</h2>
-          <p className="mt-4 text-sm leading-7 text-muted-text">
-            Unidades configurables de acuerdo con el entorno, la cobertura requerida y los
-            protocolos definidos para cada operación.
-          </p>
-        </div>
-
-        <div className="grid gap-5 md:grid-cols-2">
-          {services.map(({ title, description, applications, icon: Icon, image }) => (
-            <article key={title} className="glass-panel rounded-lg p-4 sm:p-5">
-              <AssetImage
-                src={image.src}
-                alt={image.alt}
-                objectPosition={image.objectPosition}
-                caption={title}
-                size="default"
-              />
-              <div className="px-1 pb-1 pt-5">
-                <div className="flex items-center gap-3">
-                  <span className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-md border border-primary-cyan/35 bg-primary-cyan/10 text-primary-cyan-bright">
-                    <Icon size={20} strokeWidth={1.8} />
-                  </span>
-                  <h3 className="text-xl font-bold text-text">{title}</h3>
+      <section className="border-y border-border-cyber/45 bg-surface/25 py-14" aria-label="Componentes del sistema integral">
+        <div className="section-shell space-y-8">
+          {integralMeans.map(({ id, code, title, description, details, icon: Icon, image }, index) => (
+            <article
+              key={id}
+              id={id}
+              className="glass-panel scroll-mt-24 overflow-hidden rounded-lg p-4 sm:p-6"
+            >
+              <div className={`grid gap-7 lg:grid-cols-[0.8fr_1.2fr] lg:items-start ${index % 2 ? 'lg:[&>*:first-child]:order-2' : ''}`}>
+                <AssetImage
+                  src={image.src}
+                  alt={image.alt}
+                  objectPosition={image.objectPosition}
+                  caption={title}
+                  size="tall"
+                />
+                <div className="p-1 lg:p-3">
+                  <div className="flex items-start justify-between gap-4">
+                    <span className="icon-frame" aria-hidden="true">
+                      <Icon size={21} />
+                    </span>
+                    <span className="text-sm font-extrabold text-primary-cyan-bright">{code}</span>
+                  </div>
+                  <h2 className="mt-5 text-3xl font-bold text-text">{title}</h2>
+                  <p className="mt-4 text-sm leading-7 text-muted-text">{description}</p>
+                  <div className="mt-7 grid gap-4 md:grid-cols-2">
+                    {details.map((detail) => (
+                      <section key={detail.title} className="rounded-md border border-border-cyber/55 bg-background/45 p-4">
+                        <h3 className="text-sm font-bold text-text">{detail.title}</h3>
+                        <ul className="mt-3 space-y-2">
+                          {detail.items.map((item) => (
+                            <li key={item} className="flex items-start gap-2 text-xs leading-5 text-muted-text">
+                              <Check className="mt-0.5 shrink-0 text-primary-cyan-bright" size={14} strokeWidth={2.2} />
+                              <span>{item}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </section>
+                    ))}
+                  </div>
                 </div>
-                <p className="mt-4 text-sm leading-7 text-muted-text">{description}</p>
-                <div className="mt-5 grid gap-2 sm:grid-cols-2">
-                  {applications.map((application) => (
-                    <div key={application} className="flex items-start gap-2 text-xs leading-5 text-muted-text">
-                      <Check className="mt-0.5 shrink-0 text-primary-cyan-bright" size={14} strokeWidth={2.2} />
-                      <span>{application}</span>
-                    </div>
-                  ))}
-                </div>
-                <Link
-                  to="/contacto"
-                  className="mt-6 inline-flex items-center gap-2 text-sm font-bold text-primary-cyan-bright transition-colors hover:text-text"
-                >
-                  Solicitar información <ArrowRight size={16} />
-                </Link>
               </div>
             </article>
           ))}
         </div>
       </section>
 
-      <section className="border-y border-border-cyber/45 bg-surface/25 py-14">
-        <div className="section-shell">
-          <div className="mb-8 max-w-3xl">
-            <p className="text-xs font-bold uppercase tracking-[0.18em] text-primary-cyan-bright">
-              Proceso técnico
-            </p>
-            <h2 className="mt-3 text-3xl font-bold text-text">Metodología de operación</h2>
-          </div>
-
-          <div className="grid gap-4 md:grid-cols-4">
-            {methodology.map(({ title, description }, index) => (
-              <article key={title} className="relative border-l border-primary-cyan/45 px-5 py-3">
-                <span className="text-xs font-bold uppercase tracking-[0.16em] text-primary-cyan-bright">
-                  Fase {String(index + 1).padStart(2, '0')}
-                </span>
-                <h3 className="mt-3 text-lg font-bold text-text">{title}</h3>
-                <p className="mt-3 text-sm leading-6 text-muted-text">{description}</p>
-              </article>
-            ))}
-          </div>
+      <section className="section-shell py-14" aria-labelledby="methodology-title">
+        <div className="mb-8 max-w-3xl">
+          <p className="text-xs font-bold uppercase tracking-[0.18em] text-primary-cyan-bright">
+            Aplicación del sistema
+          </p>
+          <h2 id="methodology-title" className="mt-3 text-3xl font-bold text-text">
+            De la evaluación a la mejora continua
+          </h2>
+        </div>
+        <div className="grid gap-4 md:grid-cols-4">
+          {methodology.map(({ title, description }, index) => (
+            <article key={title} className="relative border-l border-primary-cyan/45 px-5 py-3">
+              <span className="text-xs font-bold uppercase tracking-[0.16em] text-primary-cyan-bright">
+                Fase {String(index + 1).padStart(2, '0')}
+              </span>
+              <h3 className="mt-3 text-lg font-bold text-text">{title}</h3>
+              <p className="mt-3 text-sm leading-6 text-muted-text">{description}</p>
+            </article>
+          ))}
         </div>
       </section>
 
@@ -244,7 +319,7 @@ export default function Servicios() {
             </p>
             <h2 className="mt-3 text-3xl font-bold text-text">Sectores que protegemos</h2>
             <p className="mt-4 text-sm leading-7 text-muted-text">
-              Soluciones ajustadas al flujo, exposición y dinámica operativa de cada entorno.
+              El sistema se adapta al flujo, exposición y dinámica operativa de cada entorno.
             </p>
           </div>
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
@@ -261,18 +336,16 @@ export default function Servicios() {
         </div>
       </section>
 
-      <section className="section-shell py-8">
-        <div className="glass-panel grid gap-3 rounded-lg p-5 sm:grid-cols-2 lg:grid-cols-3">
-          {trustSignals.map((signal) => (
-            <div key={signal} className="flex items-center gap-3 border-b border-border-cyber/35 px-2 py-4">
-              <CircleGauge size={18} className="shrink-0 text-primary-cyan-bright" strokeWidth={1.8} />
-              <span className="text-sm font-bold text-text">{signal}</span>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <CallToAction icon={ClipboardCheck} eyebrow="Evaluación operativa" title="Solicite una solución de seguridad adaptada a su operación" description="Conecte con nuestro centro de mando para evaluar sus necesidades y definir el servicio adecuado para su empresa, residencia, ruta o instalación." actions={[{ label: 'Contactar Centro de Mando', to: '/contacto' }, { label: 'Ver Nosotros', to: '/nosotros', variant: 'secondary' }]} />
+      <CallToAction
+        icon={ClipboardCheck}
+        eyebrow="Evaluación integral"
+        title="Diseñemos el sistema de seguridad adecuado para su operación"
+        description="Nuestro equipo puede evaluar el entorno y coordinar los medios humanos, técnicos y organizativos que requiere su empresa, residencia, ruta o instalación."
+        actions={[
+          { label: 'Solicitar evaluación', to: '/contacto' },
+          { label: 'Conocer nuestras operaciones', to: '/operaciones', variant: 'secondary' },
+        ]}
+      />
     </div>
   );
 }

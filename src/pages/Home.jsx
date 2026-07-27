@@ -1,5 +1,6 @@
 ﻿import { ArrowRight, GraduationCap, LockKeyhole, RadioTower, Route } from 'lucide-react';
 import { useEffect, useState } from 'react';
+import { Camera, ClipboardCheck, Fingerprint, UsersRound } from 'lucide-react';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import CallToAction from '../components/sections/CallToAction.jsx';
 import FeatureCard from '../components/cards/FeatureCard.jsx';
@@ -12,28 +13,28 @@ import { institutionalImages } from '../data/media.js';
 
 const solutions = [
   {
-    title: 'Control Operacional',
+    title: 'Medios Humanos',
     description:
-      'Supervisión continua, protocolos de respuesta y vigilancia estratégica para operaciones críticas.',
-    icon: RadioTower,
+      'Guardias, custodios y patrullas preparados para prevenir, disuadir y responder.',
+    icon: UsersRound,
   },
   {
-    title: 'Logística Segura',
+    title: 'Medios Técnicos Activos',
     description:
-      'Protección y control operativo para rutas, traslados y movimientos de alto valor.',
-    icon: Route,
+      'Cámaras, alarmas y GPS para detectar, alertar y dar seguimiento a eventos.',
+    icon: Camera,
   },
   {
-    title: 'Seguridad Privada',
+    title: 'Medios Técnicos Pasivos',
     description:
-      'Personal capacitado para resguardar instalaciones, activos, colaboradores y visitantes.',
-    icon: LockKeyhole,
+      'Controles de acceso y protección perimetral para reducir vulnerabilidades.',
+    icon: Fingerprint,
   },
   {
-    title: 'Capacitación',
+    title: 'Medios Organizativos',
     description:
-      'Formación técnica y operativa para fortalecer la prevención, reacción y disciplina institucional.',
-    icon: GraduationCap,
+      'Planes, análisis y procedimientos que coordinan todos los recursos de seguridad.',
+    icon: ClipboardCheck,
   },
 ];
 
@@ -78,8 +79,8 @@ function HeroBanner() {
           transition={{ duration: 5, ease: 'linear' }}
         />
       </AnimatePresence>
-      <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(18,22,20,0.94)_0%,rgba(18,22,20,0.76)_44%,rgba(18,22,20,0.28)_100%)]" aria-hidden="true" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_42%,rgba(176,138,74,0.18),transparent_22rem)]" aria-hidden="true" />
+      <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(11,18,32,0.98)_0%,rgba(11,18,32,0.84)_46%,rgba(11,18,32,0.38)_100%)]" aria-hidden="true" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_42%,rgba(59,130,246,0.20),transparent_24rem)]" aria-hidden="true" />
       <div className="section-shell relative z-10 py-20">
         <motion.div
           className="max-w-2xl"
@@ -87,16 +88,16 @@ function HeroBanner() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.65, ease: 'easeOut' }}
         >
-          <p className="eyebrow border-primary-cyan-bright/35 bg-primary-cyan/20 text-[#f8f5ee]">
+          <p className="eyebrow text-slate-50">
             Centro de mando institucional
           </p>
           <h1
             id="home-title"
-            className="mt-5 text-4xl font-extrabold leading-[1.05] text-[#f8f5ee] sm:text-5xl lg:text-6xl"
+            className="mt-6 text-4xl font-bold leading-[1.04] text-slate-50 sm:text-5xl lg:text-6xl"
           >
             Seguridad integral para proteger lo que más importa.
           </h1>
-          <p className="mt-5 max-w-xl text-base leading-7 text-[#efe2c7] sm:text-lg">
+          <p className="mt-6 max-w-xl text-base leading-8 text-slate-300 sm:text-lg">
             SIS S.A. combina presencia operativa, logística segura y respuesta profesional.
           </p>
           <div className="mt-8">
@@ -125,8 +126,8 @@ export default function Home() {
             <h2 className="mt-3 text-3xl font-bold text-text">Operación táctica integrada</h2>
           </div>
           <p className="max-w-xl text-sm leading-7 text-muted-text">
-            Servicios estructurados para proteger instalaciones, movimientos, personas y operaciones
-            críticas con supervisión profesional.
+            Un sistema que coordina personas, tecnología, barreras físicas y procedimientos para
+            proteger cada operación.
           </p>
         </div>
 

@@ -16,6 +16,7 @@ export const NAV_ITEMS = [
   { label: 'Nosotros', path: '/nosotros' },
   { label: 'Servicios', path: '/servicios' },
   { label: 'Operaciones', path: '/operaciones' },
+  { label: 'Oportunidades', path: '/oportunidades' },
   { label: 'Contacto', path: '/contacto' },
 ];
 
@@ -35,6 +36,10 @@ export const PAGE_META = {
   contacto: {
     title: `Contacto | ${SITE.name}`,
     description: 'Consulte los canales institucionales de atención de SIS S.A.',
+  },
+  oportunidades: {
+    title: `Oportunidades laborales | ${SITE.name}`,
+    description: 'Conozca los beneficios y canales para consultar oportunidades laborales en SIS S.A.',
   },
   notFound: {
     title: `Página no encontrada | ${SITE.name}`,

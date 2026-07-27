@@ -10,7 +10,7 @@ const primaryNavItems = NAV_ITEMS.filter((item) => !['/', '/contacto'].includes(
 
 const navLinkClass = ({ isActive }) =>
   [
-    'nav-premium-link rounded-md px-3 py-2 text-sm font-semibold !text-[#f7f2e8] transition-colors duration-200 hover:!text-[#f3d9a2] focus-visible:!text-white',
+    'nav-premium-link px-3 py-2 text-sm font-semibold transition-colors duration-200',
     isActive ? 'nav-premium-link--active' : '',
   ].join(' ');
 
@@ -44,7 +44,7 @@ export default function Navbar() {
 
   return (
     <motion.header
-      className={`nav-premium-header fixed inset-x-0 top-0 z-50 border-b border-primary-cyan-bright/25 bg-[#4f3b25]/94 shadow-command backdrop-blur-xl transition-all duration-300 ${isScrolled ? 'bg-[#44321f]/96' : ''}`}
+      className="nav-premium-header fixed inset-x-0 top-0 z-50 border-b transition-all duration-300"
       initial={reduceMotion ? false : { y: -24, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.35, ease: 'easeOut' }}
@@ -56,12 +56,12 @@ export default function Navbar() {
           onClick={() => setIsOpen(false)}
           aria-label="Ir al inicio de SIS S.A."
         >
-          <span className={`flex items-center justify-center overflow-hidden rounded-md border border-primary-cyan-bright/35 bg-[#f7f2e8]/92 p-0.5 shadow-cyan-soft transition-all duration-300 ${isScrolled ? 'h-11 w-11' : 'h-14 w-14 sm:h-16 sm:w-16'}`}>
+          <span className={`flex items-center justify-center overflow-hidden rounded-md border border-white/10 bg-white/95 p-0.5 shadow-cyan-soft transition-all duration-300 ${isScrolled ? 'h-11 w-11' : 'h-14 w-14 sm:h-16 sm:w-16'}`}>
             <img src={brandLogo} alt="" className="h-full w-full object-contain" width="64" height="64" />
           </span>
           <span className="flex flex-col leading-none">
             <span className="nav-premium-brand-title text-sm font-bold tracking-wide !text-white">SIS S.A.</span>
-            <span className="nav-premium-brand-subtitle mt-1 hidden text-[10px] font-semibold uppercase tracking-[0.18em] !text-[#f3d9a2] sm:block">
+            <span className="nav-premium-brand-subtitle mt-1 hidden text-[10px] font-semibold uppercase tracking-[0.18em] sm:block">
               Sistema Integral de Seguridad
             </span>
           </span>
@@ -86,7 +86,7 @@ export default function Navbar() {
         <button
           ref={menuButtonRef}
           type="button"
-          className="inline-flex h-10 w-10 items-center justify-center rounded-md border border-[#b08a4a]/60 bg-[#f7f2e8]/8 text-[#f7f2e8] transition-colors duration-200 hover:border-[#f3d9a2] hover:text-[#f3d9a2] lg:hidden"
+          className="inline-flex h-11 w-11 items-center justify-center rounded-md border border-white/10 bg-white/5 text-slate-100 transition-colors duration-200 hover:border-primary-cyan-bright/40 hover:bg-primary-cyan/10 hover:text-white lg:hidden"
           aria-label={isOpen ? 'Cerrar navegación' : 'Abrir navegación'}
           aria-expanded={isOpen}
           aria-controls={menuId}
@@ -100,7 +100,7 @@ export default function Navbar() {
       {isOpen ? (
         <motion.div
           id={menuId}
-          className="border-t border-primary-cyan-bright/25 bg-[#44321f]/97 px-5 py-3 backdrop-blur-xl lg:hidden"
+          className="border-t border-white/8 bg-background/95 px-5 py-4 backdrop-blur-xl lg:hidden"
           initial={reduceMotion ? { opacity: 0 } : { height: 0, opacity: 0 }}
           animate={{ height: 'auto', opacity: 1 }}
           exit={{ height: 0, opacity: 0 }}
