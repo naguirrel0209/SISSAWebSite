@@ -15,7 +15,6 @@ export const NAV_ITEMS = [
   { label: 'Inicio', path: '/', end: true },
   { label: 'Nosotros', path: '/nosotros' },
   { label: 'Servicios', path: '/servicios' },
-  { label: 'Operaciones', path: '/operaciones' },
   { label: 'Oportunidades', path: '/oportunidades' },
   { label: 'Contacto', path: '/contacto' },
 ];
@@ -31,7 +30,8 @@ export const PAGE_META = {
   },
   servicios: {
     title: `Servicios | ${SITE.name}`,
-    description: 'Explore las soluciones de seguridad y protección especializada de SIS S.A.',
+    description:
+      'Explore el Sistema Integral de Seguridad de SIS S.A. y sus medios humanos, técnicos y organizativos.',
   },
   contacto: {
     title: `Contacto | ${SITE.name}`,

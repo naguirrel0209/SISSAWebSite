@@ -1,350 +1,276 @@
-import {
-  ArrowDown,
-  Building2,
-  Camera,
-  Check,
-  ClipboardCheck,
-  Fingerprint,
-  Hotel,
-  House,
-  RadioTower,
-  ShieldCheck,
-  ShoppingBag,
-  Truck,
-  UsersRound,
-  Warehouse,
-} from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { ArrowDown, ArrowRight, ChevronDown, ClipboardCheck } from 'lucide-react';
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import Seo from '../components/layout/Seo.jsx';
-import PageHeader from '../components/sections/PageHeader.jsx';
 import CallToAction from '../components/sections/CallToAction.jsx';
-import AssetImage from '../components/ui/AssetImage.jsx';
+import ButtonLink from '../components/ui/ButtonLink.jsx';
+import SectionHeader from '../components/ui/SectionHeader.jsx';
 import { PAGE_META } from '../constants/site.js';
-import { institutionalImages } from '../data/media.js';
+import { gallery, operationalProcess, operationsHeroImage, operationsHeroPhoto } from '../data/operations.js';
+import { securityMeans } from '../data/securityMeans.js';
 
-const integralMeans = [
-  {
-    id: 'medios-humanos',
-    code: '01',
-    title: 'Medios humanos',
-    summary:
-      'Guardias, vigilantes, custodios y patrullas preparados para prevenir, disuadir y responder.',
-    description:
-      'El recurso humano es el elemento que evalúa cada incidencia y reacciona conforme a las funciones, protocolos y condiciones definidas para el puesto.',
-    icon: UsersRound,
-    image: institutionalImages.guardiasCasual,
-    details: [
-      {
-        title: 'Guardias o vigilantes de seguridad',
-        items: [
-          'Seguridad y vigilancia operativa.',
-          'Prevención, disuasión y respuesta.',
-          'Gestión y cumplimiento de normas.',
-        ],
-      },
-      {
-        title: 'Custodios y patrullas',
-        items: [
-          'Escolta de mercancías y acompañamiento de rutas.',
-          'Disuasión antes y durante el traslado.',
-          'Geolocalización activa y resguardo ante fallas mecánicas.',
-        ],
-      },
-      {
-        title: 'Uniformes, armamento y capacitación',
-        items: [
-          'Uniformes institucionales registrados ante la DIGESSP.',
-          'Armamento asignado según el puesto, el riesgo y la normativa aplicable.',
-          'Formación legal en Seguridad y Salud en el Trabajo, junto con políticas y lineamientos internos.',
-        ],
-      },
-      {
-        title: 'Jornadas de servicio',
-        items: [
-          'Turnos rotativos de 24 horas de trabajo por 24 horas de descanso.',
-          'Jornadas continuas o discontinuas de 12 horas.',
-          'Esquemas específicos establecidos en el Plan de Trabajo anual.',
-        ],
-      },
-    ],
-  },
-  {
-    id: 'medios-tecnicos-activos',
-    code: '02',
-    title: 'Medios técnicos activos',
-    summary:
-      'Tecnología capaz de detectar, analizar y emitir alertas ante una amenaza o situación de peligro.',
-    description:
-      'Estos recursos fortalecen la observación y el control operativo, facilitando la detección temprana y el seguimiento de eventos.',
-    icon: Camera,
-    image: institutionalImages.tecnologia,
-    details: [
-      {
-        title: 'Cámaras inteligentes',
-        items: [
-          'Venta e instalación de videovigilancia para hogares, comercios y empresas.',
-          'Configuración de acuerdo con las condiciones y necesidades del entorno.',
-        ],
-      },
-      {
-        title: 'Sistemas de alarma',
-        items: [
-          'Alarmas de última tecnología para comercios y residencias.',
-          'Diseño de soluciones ajustadas a las necesidades de seguridad.',
-        ],
-      },
-      {
-        title: 'GPS',
-        items: [
-          'Venta, instalación y monitoreo de sistemas de rastreo.',
-          'Ubicación en tiempo real para vehículos particulares y flotas comerciales.',
-        ],
-      },
-    ],
-  },
-  {
-    id: 'medios-tecnicos-pasivos',
-    code: '03',
-    title: 'Medios técnicos pasivos',
-    summary:
-      'Elementos físicos orientados a disuadir, retardar, detener o canalizar el avance de una amenaza.',
-    description:
-      'Las medidas pasivas refuerzan el perímetro y organizan el ingreso para reducir vulnerabilidades antes de que ocurra un incidente.',
-    icon: Fingerprint,
-    image: institutionalImages.fachada,
-    details: [
-      {
-        title: 'Control de accesos',
-        items: [
-          'Organización del ingreso y salida de personas, vehículos y proveedores.',
-          'Medidas adaptadas al flujo y nivel de exposición de cada instalación.',
-        ],
-      },
-      {
-        title: 'Protección perimetral',
-        items: [
-          'Suministro e instalación de alambre de púas en postes de concreto, madera o estructuras metálicas.',
-          'Barreras orientadas a disuadir y retardar accesos no autorizados.',
-        ],
-      },
-    ],
-  },
-  {
-    id: 'medios-organizativos',
-    code: '04',
-    title: 'Medios organizativos',
-    summary:
-      'Planes y procedimientos que indican al personal cómo actuar y convierten los recursos en una solución coordinada.',
-    description:
-      'La organización define las responsabilidades, acciones y respuestas necesarias para que la inversión en seguridad produzca resultados y reduzca pérdidas.',
-    icon: ClipboardCheck,
-    image: institutionalImages.oficinasAdministrativas,
-    details: [
-      {
-        title: 'Planificación integral',
-        items: [
-          'Planes de seguridad integral.',
-          'Análisis de riesgo.',
-          'Planes de contingencia.',
-        ],
-      },
-      {
-        title: 'Control y seguimiento',
-        items: [
-          'Procedimientos de acceso.',
-          'Auditorías de seguridad.',
-          'Actualización de medidas según las condiciones de la operación.',
-        ],
-      },
-    ],
-  },
-];
+function ServicesHero() {
+  const reduceMotion = useReducedMotion();
 
-const methodology = [
-  {
-    title: 'Diagnóstico',
-    description: 'Evaluación inicial del entorno, nivel de riesgo y necesidades específicas del cliente.',
-  },
-  {
-    title: 'Planificación',
-    description: 'Integración de medios humanos, técnicos y organizativos en un dispositivo coordinado.',
-  },
-  {
-    title: 'Ejecución',
-    description: 'Implementación del servicio con funciones, recursos y protocolos claramente definidos.',
-  },
-  {
-    title: 'Supervisión',
-    description: 'Seguimiento, reportes y ajustes para mantener la efectividad del sistema.',
-  },
-];
+  return (
+    <section
+      className="relative isolate flex min-h-[calc(100svh-5rem)] items-center overflow-hidden"
+      aria-labelledby="services-title"
+    >
+      <img
+        src={operationsHeroPhoto}
+        alt={operationsHeroImage.alt}
+        className="absolute inset-0 h-full w-full object-cover"
+        style={{ objectPosition: operationsHeroImage.objectPosition }}
+        fetchPriority="high"
+      />
+      <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(11,18,32,0.98)_0%,rgba(11,18,32,0.86)_48%,rgba(11,18,32,0.50)_100%)]" />
+      <div
+        className="absolute inset-0 bg-[radial-gradient(circle_at_18%_42%,rgba(59,130,246,0.18),transparent_24rem)]"
+        aria-hidden="true"
+      />
+      <motion.div
+        className="section-shell relative z-10 py-20"
+        initial={reduceMotion ? false : { opacity: 0, x: -30 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.65, ease: 'easeOut' }}
+      >
+        <div className="max-w-3xl">
+          <p className="eyebrow text-slate-50">Sistema integral de seguridad</p>
+          <h1
+            id="services-title"
+            className="mt-6 text-4xl font-bold leading-[1.05] text-slate-50 sm:text-5xl lg:text-6xl"
+          >
+            Servicios estratégicos de seguridad
+          </h1>
+          <p className="mt-6 max-w-2xl text-base leading-8 text-slate-300 sm:text-lg">
+            Integramos medios humanos, técnicos activos, técnicos pasivos y organizativos para
+            proteger personas, bienes, instalaciones y operaciones con coordinación profesional.
+          </p>
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <ButtonLink to="/contacto">
+              Solicitar evaluación <ArrowRight size={17} aria-hidden="true" />
+            </ButtonLink>
+            <ButtonLink href="#sistema-integral" variant="secondary">
+              Ver medios <ChevronDown size={17} aria-hidden="true" />
+            </ButtonLink>
+          </div>
+        </div>
+      </motion.div>
+    </section>
+  );
+}
 
-const sectors = [
-  { name: 'Corporativo', icon: Building2 },
-  { name: 'Residencial', icon: House },
-  { name: 'Bancario', icon: ShieldCheck },
-  { name: 'Industrial', icon: Warehouse },
-  { name: 'Logístico', icon: Truck },
-  { name: 'Hotelero', icon: Hotel },
-  { name: 'Comercial', icon: ShoppingBag },
-  { name: 'Institucional', icon: RadioTower },
-];
+function Reveal({ children, className = '', delay = 0 }) {
+  const reduceMotion = useReducedMotion();
+
+  return (
+    <motion.div
+      className={className}
+      initial={reduceMotion ? false : { opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.15 }}
+      transition={{ duration: 0.5, delay, ease: 'easeOut' }}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
+function MeansIndex() {
+  return (
+    <section
+      id="sistema-integral"
+      className="section-shell page-section scroll-mt-24"
+      aria-labelledby="system-index-title"
+    >
+      <div className="mb-8 max-w-3xl">
+        <p className="text-xs font-bold uppercase tracking-[0.18em] text-primary-cyan-bright">
+          Componentes del servicio
+        </p>
+        <h2 id="system-index-title" className="mt-3 text-3xl font-bold text-text">
+          Cuatro medios, una sola estrategia
+        </h2>
+        <p className="mt-4 text-sm leading-7 text-muted-text">
+          Cada medio puede consultarse por separado para ver su alcance, recursos y función dentro
+          del Sistema Integral de Seguridad.
+        </p>
+      </div>
+
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {securityMeans.map(({ id, path, code, title, shortTitle, summary, icon: Icon }) => (
+          <ButtonLink
+            key={id}
+            to={path}
+            variant="secondary"
+            className="group min-h-44 items-stretch justify-start rounded-lg p-0 text-left"
+            aria-label={`Ver ${title}`}
+          >
+            <article className="flex h-full w-full flex-col p-5">
+              <div className="flex items-start justify-between gap-4">
+                <span className="icon-frame" aria-hidden="true">
+                  <Icon size={20} />
+                </span>
+                <span className="text-xs font-extrabold text-primary-cyan-bright">{code}</span>
+              </div>
+              <h3 className="mt-5 text-base font-bold leading-6 text-text">{shortTitle}</h3>
+              <p className="mt-2 text-xs leading-5 text-muted-text">{summary}</p>
+              <span className="mt-auto flex items-center gap-2 pt-4 text-xs font-bold text-primary-cyan-bright">
+                Abrir detalle
+                <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" />
+              </span>
+            </article>
+          </ButtonLink>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function OperationalProcess() {
+  const reduceMotion = useReducedMotion();
+
+  return (
+    <section className="border-y border-border-cyber/45 bg-surface/25 py-16" aria-labelledby="process-title">
+      <div className="section-shell">
+        <SectionHeader
+          eyebrow="Protocolo de despliegue"
+          title="Proceso Operacional"
+          description="Secuencia institucional aplicada desde la recepción del requerimiento hasta la mejora continua del dispositivo."
+        />
+        <div className="relative mt-10 grid gap-4 lg:grid-cols-6">
+          <motion.div
+            className="absolute left-8 right-8 top-7 hidden h-px origin-left bg-primary-cyan-bright/55 lg:block"
+            aria-hidden="true"
+            initial={reduceMotion ? false : { scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            viewport={{ once: true, amount: 0.45 }}
+            transition={{ duration: 0.8, ease: 'easeOut' }}
+          />
+          {operationalProcess.map((step, index) => (
+            <Reveal key={step} delay={index * 0.06}>
+              <article className="relative flex h-full items-start gap-4 rounded-lg border border-border-cyber/55 bg-surface/60 p-5 lg:block lg:pt-16">
+                <span className="z-10 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-primary-cyan/65 bg-background text-xs font-bold text-primary-cyan-bright lg:absolute lg:left-5 lg:top-4">
+                  {index + 1}
+                </span>
+                <div className="min-w-0">
+                  <h3 className="text-sm font-bold leading-6 text-text">{step}</h3>
+                  {index < operationalProcess.length - 1 ? (
+                    <ArrowDown
+                      className="mt-4 text-primary-cyan-bright lg:hidden"
+                      size={17}
+                      aria-hidden="true"
+                    />
+                  ) : null}
+                </div>
+              </article>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function OperationalGallery() {
+  const [active, setActive] = useState(0);
+  const reduceMotion = useReducedMotion();
+  const item = gallery[active];
+
+  useEffect(() => {
+    if (reduceMotion) return undefined;
+    const timer = window.setInterval(() => {
+      setActive((currentIndex) => (currentIndex + 1) % gallery.length);
+    }, 5000);
+    return () => window.clearInterval(timer);
+  }, [reduceMotion]);
+
+  return (
+    <section className="section-shell page-section" aria-labelledby="gallery-title">
+      <SectionHeader
+        eyebrow="Registro institucional"
+        title="Galería Operacional"
+        description="Recursos fotográficos reales de la capacidad humana, logística y física de SIS S.A."
+      />
+      <div className="mt-8 grid gap-4 lg:grid-cols-[minmax(0,1fr)_15rem]">
+        <div className="glass-panel relative min-h-[24rem] overflow-hidden rounded-lg sm:min-h-[32rem] lg:min-h-[34rem]">
+          <AnimatePresence mode="wait" initial={false}>
+            <motion.img
+              key={item.src}
+              src={item.src}
+              alt={item.alt}
+              className="absolute inset-0 h-full w-full object-cover"
+              style={{ objectPosition: item.objectPosition ?? 'center' }}
+              loading="lazy"
+              initial={reduceMotion ? false : { opacity: 0, scale: 1.03 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.35 }}
+            />
+          </AnimatePresence>
+          <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-background via-background/75 to-transparent p-6 pt-24">
+            <p className="text-xs font-bold uppercase tracking-[0.18em] text-accent-gold">
+              {String(active + 1).padStart(2, '0')} / {String(gallery.length).padStart(2, '0')}
+            </p>
+            <h3 className="mt-2 text-2xl font-bold text-text">{item.category}</h3>
+          </div>
+        </div>
+        <div className="glass-panel rounded-lg p-3 lg:h-[34rem]">
+          <div className="grid h-full grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-1" aria-label="Índice de fotografías operacionales">
+            {gallery.map((galleryItem, index) => {
+              const isSelected = active === index;
+
+              return (
+                <button
+                  key={galleryItem.src}
+                  type="button"
+                  onClick={() => setActive(index)}
+                  className={`group flex min-h-16 items-center gap-3 rounded-md border px-3 py-2 text-left transition duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-gold ${
+                    isSelected
+                      ? 'border-accent-gold bg-accent-gold/15 shadow-soft'
+                      : 'border-border-cyber/55 bg-white/20 hover:border-accent-gold/70 hover:bg-accent-gold/10'
+                  }`}
+                  aria-current={isSelected ? 'true' : undefined}
+                  aria-label={`Ver fotografía ${index + 1}: ${galleryItem.category}`}
+                >
+                  <span
+                    className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-full border text-xs font-extrabold ${
+                      isSelected
+                        ? 'border-accent-gold bg-accent-gold text-background'
+                        : 'border-accent-gold/45 text-accent-gold'
+                    }`}
+                  >
+                    {String(index + 1).padStart(2, '0')}
+                  </span>
+                  <span className="min-w-0">
+                    <span className="block text-sm font-bold leading-snug text-text">
+                      {galleryItem.category}
+                    </span>
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
 
 export default function Servicios() {
   return (
     <div className="w-full">
       <Seo {...PAGE_META.servicios} />
-      <PageHeader
-        eyebrow="Sistema Integral de Seguridad · SIS S.A."
-        title="Personas, tecnología y procedimientos en una sola estrategia"
-        description="SIS S.A. integra medios humanos, técnicos y organizativos debidamente coordinados para proteger personas, bienes, instalaciones y procesos productivos con el nivel de seguridad que cada operación necesita."
-        assetSrc={institutionalImages.oficinasAdministrativas.src}
-        assetAlt={institutionalImages.oficinasAdministrativas.alt}
-        assetObjectPosition={institutionalImages.oficinasAdministrativas.objectPosition}
-        assetCaption="Coordinación integral SIS S.A."
-      />
-
-      <section className="section-shell py-14" aria-labelledby="system-index-title">
-        <div className="grid gap-8 border-y border-border-cyber/55 py-10 lg:grid-cols-[0.55fr_1fr] lg:gap-12">
-          <div>
-            <p className="text-xs font-bold uppercase tracking-[0.18em] text-primary-cyan-bright">
-              Índice del sistema
-            </p>
-            <h2 id="system-index-title" className="mt-3 text-3xl font-bold text-text">
-              Sistema Integral de Seguridad
-            </h2>
-            <p className="mt-4 text-sm leading-7 text-muted-text">
-              Seleccione un componente para conocer sus funciones, recursos y alcance dentro de la
-              solución.
-            </p>
-          </div>
-          <nav className="grid gap-3 sm:grid-cols-2" aria-label="Componentes del Sistema Integral de Seguridad">
-            {integralMeans.map(({ id, code, title, summary, icon: Icon }) => (
-              <a
-                key={id}
-                href={`#${id}`}
-                className="glass-panel interactive-card group flex min-h-40 flex-col rounded-lg p-5"
-              >
-                <div className="flex items-start justify-between gap-4">
-                  <span className="icon-frame" aria-hidden="true">
-                    <Icon size={21} />
-                  </span>
-                  <span className="text-xs font-extrabold text-primary-cyan-bright">{code}</span>
-                </div>
-                <h3 className="mt-5 text-lg font-bold text-text">{title}</h3>
-                <p className="mt-2 text-xs leading-5 text-muted-text">{summary}</p>
-                <span className="mt-auto flex items-center gap-2 pt-4 text-xs font-bold text-primary-cyan-bright">
-                  Ir al apartado
-                  <ArrowDown size={14} className="transition-transform group-hover:translate-y-1" />
-                </span>
-              </a>
-            ))}
-          </nav>
-        </div>
-      </section>
-
-      <section className="border-y border-border-cyber/45 bg-surface/25 py-14" aria-label="Componentes del sistema integral">
-        <div className="section-shell space-y-8">
-          {integralMeans.map(({ id, code, title, description, details, icon: Icon, image }, index) => (
-            <article
-              key={id}
-              id={id}
-              className="glass-panel scroll-mt-24 overflow-hidden rounded-lg p-4 sm:p-6"
-            >
-              <div className={`grid gap-7 lg:grid-cols-[0.8fr_1.2fr] lg:items-start ${index % 2 ? 'lg:[&>*:first-child]:order-2' : ''}`}>
-                <AssetImage
-                  src={image.src}
-                  alt={image.alt}
-                  objectPosition={image.objectPosition}
-                  caption={title}
-                  size="tall"
-                />
-                <div className="p-1 lg:p-3">
-                  <div className="flex items-start justify-between gap-4">
-                    <span className="icon-frame" aria-hidden="true">
-                      <Icon size={21} />
-                    </span>
-                    <span className="text-sm font-extrabold text-primary-cyan-bright">{code}</span>
-                  </div>
-                  <h2 className="mt-5 text-3xl font-bold text-text">{title}</h2>
-                  <p className="mt-4 text-sm leading-7 text-muted-text">{description}</p>
-                  <div className="mt-7 grid gap-4 md:grid-cols-2">
-                    {details.map((detail) => (
-                      <section key={detail.title} className="rounded-md border border-border-cyber/55 bg-background/45 p-4">
-                        <h3 className="text-sm font-bold text-text">{detail.title}</h3>
-                        <ul className="mt-3 space-y-2">
-                          {detail.items.map((item) => (
-                            <li key={item} className="flex items-start gap-2 text-xs leading-5 text-muted-text">
-                              <Check className="mt-0.5 shrink-0 text-primary-cyan-bright" size={14} strokeWidth={2.2} />
-                              <span>{item}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </section>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className="section-shell py-14" aria-labelledby="methodology-title">
-        <div className="mb-8 max-w-3xl">
-          <p className="text-xs font-bold uppercase tracking-[0.18em] text-primary-cyan-bright">
-            Aplicación del sistema
-          </p>
-          <h2 id="methodology-title" className="mt-3 text-3xl font-bold text-text">
-            De la evaluación a la mejora continua
-          </h2>
-        </div>
-        <div className="grid gap-4 md:grid-cols-4">
-          {methodology.map(({ title, description }, index) => (
-            <article key={title} className="relative border-l border-primary-cyan/45 px-5 py-3">
-              <span className="text-xs font-bold uppercase tracking-[0.16em] text-primary-cyan-bright">
-                Fase {String(index + 1).padStart(2, '0')}
-              </span>
-              <h3 className="mt-3 text-lg font-bold text-text">{title}</h3>
-              <p className="mt-3 text-sm leading-6 text-muted-text">{description}</p>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className="section-shell py-14">
-        <div className="grid gap-8 lg:grid-cols-[0.7fr_1.3fr] lg:items-end">
-          <div>
-            <p className="text-xs font-bold uppercase tracking-[0.18em] text-primary-cyan-bright">
-              Ámbitos de cobertura
-            </p>
-            <h2 className="mt-3 text-3xl font-bold text-text">Sectores que protegemos</h2>
-            <p className="mt-4 text-sm leading-7 text-muted-text">
-              El sistema se adapta al flujo, exposición y dinámica operativa de cada entorno.
-            </p>
-          </div>
-          <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-            {sectors.map(({ name, icon: Icon }) => (
-              <div
-                key={name}
-                className="flex min-h-24 flex-col justify-between rounded-lg border border-border-cyber/55 bg-surface/48 p-4 backdrop-blur"
-              >
-                <Icon size={19} className="text-primary-cyan-bright" strokeWidth={1.8} />
-                <span className="mt-4 text-sm font-bold text-text">{name}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
+      <ServicesHero />
+      <MeansIndex />
+      <OperationalProcess />
+      <OperationalGallery />
       <CallToAction
         icon={ClipboardCheck}
         eyebrow="Evaluación integral"
         title="Diseñemos el sistema de seguridad adecuado para su operación"
         description="Nuestro equipo puede evaluar el entorno y coordinar los medios humanos, técnicos y organizativos que requiere su empresa, residencia, ruta o instalación."
-        actions={[
-          { label: 'Solicitar evaluación', to: '/contacto' },
-          { label: 'Conocer nuestras operaciones', to: '/operaciones', variant: 'secondary' },
-        ]}
+        actions={[{ label: 'Solicitar evaluación', to: '/contacto' }]}
       />
     </div>
   );

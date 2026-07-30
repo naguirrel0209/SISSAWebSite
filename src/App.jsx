@@ -1,12 +1,12 @@
 import { lazy, Suspense } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import Layout from './components/layout/Layout.jsx';
 import RouteLoader from './components/ui/RouteLoader.jsx';
 
 const Home = lazy(() => import('./pages/Home.jsx'));
 const Nosotros = lazy(() => import('./pages/Nosotros.jsx'));
 const Servicios = lazy(() => import('./pages/Servicios.jsx'));
-const Operations = lazy(() => import('./pages/Operations.jsx'));
+const MedioDetalle = lazy(() => import('./pages/MedioDetalle.jsx'));
 const Oportunidades = lazy(() => import('./pages/Oportunidades.jsx'));
 const Contact = lazy(() => import('./pages/Contact.jsx'));
 const NotFound = lazy(() => import('./pages/NotFound.jsx'));
@@ -19,7 +19,8 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route path="/nosotros" element={<Nosotros />} />
           <Route path="/servicios" element={<Servicios />} />
-          <Route path="/operaciones" element={<Operations />} />
+          <Route path="/servicios/:medioId" element={<MedioDetalle />} />
+          <Route path="/operaciones" element={<Navigate to="/servicios" replace />} />
           <Route path="/oportunidades" element={<Oportunidades />} />
           <Route path="/contacto" element={<Contact />} />
           <Route path="*" element={<NotFound />} />

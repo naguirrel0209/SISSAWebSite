@@ -104,7 +104,8 @@ sis-sa-prototipo/
     │   └── site.js              # Datos institucionales, NAV_ITEMS, PAGE_META
     ├── data/
     │   ├── media.js             # Imports de imágenes desde Recursos/ + export
-    │   └── operations.js       # Datos de la página /operaciones
+    │   ├── operations.js       # Datos operacionales reutilizados en /servicios
+    │   └── securityMeans.js    # Datos de los cuatro medios del sistema integral
     ├── styles/
     │   └── global.css           # Tailwind v4 + @theme tokens + CSS custom
     ├── components/
@@ -118,7 +119,7 @@ sis-sa-prototipo/
         ├── Home.jsx             # /
         ├── Nosotros.jsx         # /nosotros
         ├── Servicios.jsx        # /servicios
-        ├── Operations.jsx       # /operaciones
+        ├── MedioDetalle.jsx     # /servicios/:medioId
         ├── Contact.jsx         # /contacto
         └── NotFound.jsx         # *
 ```
@@ -129,8 +130,8 @@ sis-sa-prototipo/
 | --- | --- | --- |
 | `/` | `Home` | Hero, soluciones, disciplina operativa, trust strip, CTA |
 | `/nosotros` | `Nosotros` | Perfil, infraestructura, uniformes, valores |
-| `/servicios` | `Servicios` | Servicios especializados, metodología, sectores, trust signals |
-| `/operaciones` | `Operations` | Capacidad operativa con fotos reales |
+| `/servicios` | `Servicios` | Sistema integral, proceso operacional y galería operacional |
+| `/servicios/:medioId` | `MedioDetalle` | Detalle de medios humanos, técnicos activos, técnicos pasivos u organizativos |
 | `/contacto` | `Contact` | Canales directos, formulario, disponibilidad, ubicación |
 | `*` | `NotFound` | 404 personalizado |
 
@@ -183,7 +184,8 @@ El contenido vive en dos lugares:
 1. **`src/constants/site.js`** — datos institucionales globales y navegación.
 2. **`src/data/`** — datos estructurados consumidos por las páginas:
    - `media.js` — centraliza los imports de imágenes y construye objetos con `src`, `alt` y `objectPosition` para `AssetImage`. Toda imagen del sitio debe pasar por aquí para reutilización y manejo de alt text accesible.
-   - `operations.js` — datos de la página `/operaciones`.
+   - `operations.js` — datos operacionales reutilizados dentro de `/servicios`.
+   - `securityMeans.js` — datos de los cuatro medios del Sistema Integral de Seguridad.
 
 > **Trabajo pendiente**: extraer a `src/data/` la lista de servicios, sectores, infraestructura, uniformes, valores y opciones del formulario. Actualmente varios arrays están duplicados entre `Home.jsx` y `Servicios.jsx` con copys distintos (ver [Roadmap](#roadmap-pendiente)).
 
