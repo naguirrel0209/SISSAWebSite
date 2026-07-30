@@ -1,16 +1,20 @@
 import {
-  ArrowRight,
   CalendarClock,
   Check,
+  CheckCircle2,
   Coins,
   GraduationCap,
   Handshake,
+  Loader2,
+  Send,
   ShieldCheck,
   UsersRound,
 } from 'lucide-react';
+import { useState } from 'react';
 import Seo from '../components/layout/Seo.jsx';
 import PageHeader from '../components/sections/PageHeader.jsx';
 import CallToAction from '../components/sections/CallToAction.jsx';
+import { isEmailjsConfigured, sendContactEmail } from '../services/emailjs.js';
 import { PAGE_META, SITE } from '../constants/site.js';
 import { institutionalImages } from '../data/media.js';
 
@@ -39,12 +43,12 @@ const benefits = [
 
 const process = [
   {
-    title: 'Comuníquese con SIS S.A.',
-    description: 'Utilice nuestros canales institucionales para consultar las oportunidades disponibles.',
+    title: 'Complete el formulario',
+    description: 'Comparta sus datos de contacto y el requerimiento laboral directamente desde esta página.',
   },
   {
-    title: 'Comparta su información',
-    description: 'Indique su experiencia, disponibilidad y un número de teléfono para recibir seguimiento.',
+    title: 'Indique su experiencia',
+    description: 'Describa brevemente su experiencia, disponibilidad, ubicación y el tipo de plaza que busca.',
   },
   {
     title: 'Espere la evaluación',
@@ -59,7 +63,82 @@ const profiles = [
   'Personal para atención y control de accesos',
 ];
 
+const fieldClass =
+  'mt-2 min-h-12 w-full rounded-md border border-border-cyber/65 bg-background/65 px-4 text-sm text-text outline-none transition placeholder:text-muted-text/55 focus:border-primary-cyan/75 focus:ring-2 focus:ring-primary-cyan/10';
+
 export default function Oportunidades() {
+  const [status, setStatus] = useState('idle');
+  const [errorMessage, setErrorMessage] = useState('');
+  const [errors, setErrors] = useState({});
+  const configured = isEmailjsConfigured();
+
+  const validateField = (name, value) => {
+    if (value) {
+      setErrors((prev) => ({ ...prev, [name]: undefined }));
+    }
+  };
+
+  const validate = (formData) => {
+    const next = {};
+    const nombre = formData.get('nombre')?.trim();
+    const apellido = formData.get('apellido')?.trim();
+    const correo = formData.get('correo')?.trim();
+    const telefono = formData.get('telefono')?.trim();
+    const mensaje = formData.get('mensaje')?.trim();
+
+    if (!nombre) next.nombre = 'Ingrese su nombre.';
+    if (!apellido) next.apellido = 'Ingrese su apellido.';
+    if (!correo) {
+      next.correo = 'Ingrese un correo electrónico.';
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(correo)) {
+      next.correo = 'Ingrese un correo electrónico válido.';
+    }
+    if (!telefono) next.telefono = 'Ingrese un teléfono de contacto.';
+    if (!mensaje) next.mensaje = 'Describa brevemente su requerimiento laboral.';
+
+    setErrors(next);
+    return Object.keys(next).length === 0;
+  };
+
+  const handleChange = (event) => {
+    if (status !== 'idle') setStatus('idle');
+    if (errorMessage) setErrorMessage('');
+    validateField(event.target.name, event.target.value);
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+    const honeypot = formData.get('_gotcha');
+
+    if (honeypot) {
+      setStatus('success');
+      form.reset();
+      return;
+    }
+
+    if (!validate(formData)) {
+      setStatus('validation-error');
+      return;
+    }
+
+    setStatus('sending');
+    try {
+      await sendContactEmail(form);
+      setStatus('success');
+      setErrorMessage('');
+      form.reset();
+    } catch (err) {
+      setStatus('error');
+      setErrorMessage(
+        err?.text ||
+          err?.message ||
+          'No se pudo enviar la postulación. Intente nuevamente o contacte por teléfono.',
+      );
+    }
+  };
+
   return (
     <div className="w-full">
       <Seo {...PAGE_META.oportunidades} />
@@ -132,22 +211,206 @@ export default function Oportunidades() {
               <UsersRound size={22} />
             </span>
             <p className="mt-5 text-xs font-bold uppercase tracking-[0.18em] text-primary-cyan-bright">
-              Proceso de contacto
+              Postulación directa
             </p>
             <h2 id="application-title" className="mt-3 text-3xl font-bold text-text">
-              ¿Cómo postularse?
+              Envíe su información laboral
             </h2>
             <p className="mt-4 text-sm leading-7 text-muted-text">
-              Inicie el proceso por nuestros canales oficiales. La disponibilidad de plazas y el
-              seguimiento se confirmarán directamente por SIS S.A.
+              Complete sus datos y describa su requerimiento. El equipo de SIS S.A. recibirá la
+              solicitud como una postulación laboral, sin que tenga que pasar por el formulario de
+              contacto general.
             </p>
-            <a
-              href={SITE.phoneHref}
-              className="mt-6 inline-flex items-center gap-2 text-sm font-bold text-primary-cyan-bright transition-colors hover:text-text"
-            >
-              Llamar al {SITE.phone}
-              <ArrowRight size={16} />
-            </a>
+            <div className="mt-7 flex items-start gap-3 border-l border-primary-cyan/45 pl-4">
+              <ShieldCheck className="mt-0.5 shrink-0 text-primary-cyan-bright" size={19} />
+              <p className="text-xs leading-6 text-muted-text">
+                {configured
+                  ? 'Su información será enviada directamente al equipo de SIS S.A. por el canal institucional configurado.'
+                  : 'El envío de formulario está pendiente de configuración. También puede llamar por los canales disponibles.'}
+              </p>
+            </div>
+            <p className="mt-5 text-xs leading-6 text-muted-text">
+              Puede indicar su experiencia, disponibilidad, ubicación y cualquier dato laboral
+              relevante dentro del mensaje.
+            </p>
+          </div>
+          <form
+            className="glass-panel rounded-lg p-5 sm:p-7"
+            onSubmit={handleSubmit}
+            noValidate
+          >
+            <input type="hidden" name="servicio" value="Oportunidades laborales" />
+            <input type="hidden" name="empresa" value="Postulación laboral" />
+            <input type="hidden" name="tipo_solicitud" value="Contratación" />
+            <input
+              type="text"
+              name="_gotcha"
+              value=""
+              tabIndex="-1"
+              autoComplete="off"
+              aria-hidden="true"
+              style={{
+                position: 'absolute',
+                left: '-9999px',
+                width: '1px',
+                height: '1px',
+                opacity: 0,
+              }}
+            />
+            <div className="grid gap-5 sm:grid-cols-2">
+              <label className="text-xs font-bold uppercase tracking-[0.12em] text-muted-text">
+                Nombre
+                <input
+                  required
+                  name="nombre"
+                  type="text"
+                  autoComplete="given-name"
+                  placeholder="Nombre"
+                  className={fieldClass}
+                  onChange={handleChange}
+                  aria-invalid={errors.nombre ? 'true' : 'false'}
+                />
+                {errors.nombre ? (
+                  <span className="mt-1 block text-xs font-semibold text-danger" role="alert">
+                    {errors.nombre}
+                  </span>
+                ) : null}
+              </label>
+              <label className="text-xs font-bold uppercase tracking-[0.12em] text-muted-text">
+                Apellido
+                <input
+                  required
+                  name="apellido"
+                  type="text"
+                  autoComplete="family-name"
+                  placeholder="Apellido"
+                  className={fieldClass}
+                  onChange={handleChange}
+                  aria-invalid={errors.apellido ? 'true' : 'false'}
+                />
+                {errors.apellido ? (
+                  <span className="mt-1 block text-xs font-semibold text-danger" role="alert">
+                    {errors.apellido}
+                  </span>
+                ) : null}
+              </label>
+              <label className="text-xs font-bold uppercase tracking-[0.12em] text-muted-text">
+                Correo electrónico
+                <input
+                  required
+                  name="correo"
+                  type="email"
+                  autoComplete="email"
+                  placeholder="correo@ejemplo.com"
+                  className={fieldClass}
+                  onChange={handleChange}
+                  aria-invalid={errors.correo ? 'true' : 'false'}
+                />
+                {errors.correo ? (
+                  <span className="mt-1 block text-xs font-semibold text-danger" role="alert">
+                    {errors.correo}
+                  </span>
+                ) : null}
+              </label>
+              <label className="text-xs font-bold uppercase tracking-[0.12em] text-muted-text">
+                Teléfono
+                <input
+                  required
+                  name="telefono"
+                  type="tel"
+                  autoComplete="tel"
+                  placeholder="Número de contacto"
+                  className={fieldClass}
+                  onChange={handleChange}
+                  aria-invalid={errors.telefono ? 'true' : 'false'}
+                />
+                {errors.telefono ? (
+                  <span className="mt-1 block text-xs font-semibold text-danger" role="alert">
+                    {errors.telefono}
+                  </span>
+                ) : null}
+              </label>
+              <label className="text-xs font-bold uppercase tracking-[0.12em] text-muted-text sm:col-span-2">
+                Mensaje o requerimiento
+                <textarea
+                  required
+                  name="mensaje"
+                  rows="5"
+                  placeholder="Indique su experiencia, disponibilidad, ubicación y el puesto de interés."
+                  className={`${fieldClass} resize-y py-3`}
+                  onChange={handleChange}
+                  aria-invalid={errors.mensaje ? 'true' : 'false'}
+                />
+                {errors.mensaje ? (
+                  <span className="mt-1 block text-xs font-semibold text-danger" role="alert">
+                    {errors.mensaje}
+                  </span>
+                ) : null}
+              </label>
+            </div>
+
+            <div className="mt-6 flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between">
+              <button
+                type="submit"
+                className="btn-primary"
+                disabled={status === 'sending'}
+                aria-busy={status === 'sending'}
+              >
+                {status === 'sending' ? (
+                  <>
+                    Enviando postulación
+                    <Loader2 size={16} className="animate-spin" />
+                  </>
+                ) : (
+                  <>
+                    Enviar postulación
+                    <Send size={16} />
+                  </>
+                )}
+              </button>
+              <p className="max-w-sm text-xs leading-5 text-muted-text">
+                La participación dependerá de la existencia de plazas y de la evaluación
+                correspondiente.
+              </p>
+            </div>
+
+            {status === 'success' ? (
+              <div
+                className="mt-5 flex items-start gap-3 rounded-md border border-success/40 bg-success/10 p-4 text-sm leading-6 text-text"
+                role="status"
+                aria-live="polite"
+              >
+                <CheckCircle2 className="mt-0.5 shrink-0 text-success" size={18} />
+                Su postulación fue enviada al equipo de SIS S.A. Recibirá seguimiento por los datos
+                compartidos.
+              </div>
+            ) : null}
+
+            {status === 'error' ? (
+              <div
+                className="mt-5 flex items-start gap-3 rounded-md border border-danger/45 bg-danger/10 p-4 text-sm leading-6 text-text"
+                role="alert"
+              >
+                <ShieldCheck className="mt-0.5 shrink-0 text-danger" size={18} />
+                {errorMessage ||
+                  'No se pudo enviar la postulación. Intente nuevamente o contacte por teléfono.'}
+              </div>
+            ) : null}
+          </form>
+        </div>
+      </section>
+
+      <section className="border-y border-border-cyber/45 bg-surface/25 py-14">
+        <div className="section-shell grid gap-8 lg:grid-cols-[0.58fr_1fr] lg:gap-12">
+          <div>
+            <p className="text-xs font-bold uppercase tracking-[0.18em] text-primary-cyan-bright">
+              Proceso de seguimiento
+            </p>
+            <h2 className="mt-3 text-3xl font-bold text-text">¿Qué sucede después?</h2>
+            <p className="mt-4 text-sm leading-7 text-muted-text">
+              SIS S.A. revisará la información recibida y dará seguimiento según la disponibilidad
+              de plazas, el perfil requerido y las necesidades operativas vigentes.
+            </p>
           </div>
           <ol className="space-y-4">
             {process.map(({ title, description }, index) => (
@@ -180,10 +443,9 @@ export default function Oportunidades() {
         icon={UsersRound}
         eyebrow="Sea parte de SIS S.A."
         title="Dé el primer paso para integrarse a nuestro equipo"
-        description="Envíe sus datos por el formulario institucional y seleccione “Oportunidades laborales” para que su consulta sea identificada correctamente."
+        description="Complete el formulario de postulación o comuníquese por teléfono para consultar oportunidades disponibles."
         actions={[
-          { label: 'Enviar mis datos', to: '/contacto' },
-          { label: 'Llamar a SIS S.A.', href: SITE.phoneHref, variant: 'secondary' },
+          { label: 'Llamar a SIS S.A.', href: SITE.phoneHref },
         ]}
       />
     </div>
