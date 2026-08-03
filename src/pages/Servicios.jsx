@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { ArrowDown, ArrowRight, ChevronDown, ClipboardCheck } from 'lucide-react';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import Seo from '../components/layout/Seo.jsx';
 import CallToAction from '../components/sections/CallToAction.jsx';
 import ButtonLink from '../components/ui/ButtonLink.jsx';
@@ -97,30 +98,38 @@ function MeansIndex() {
         </p>
       </div>
 
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        {securityMeans.map(({ id, path, code, title, shortTitle, summary, icon: Icon }) => (
-          <ButtonLink
+      <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        {securityMeans.map(({ id, path, code, title, shortTitle, summary, image }) => (
+          <Link
             key={id}
             to={path}
-            variant="secondary"
-            className="group min-h-44 items-stretch justify-start rounded-lg p-0 text-left"
+            className="group relative min-h-[22rem] overflow-hidden rounded-lg border border-border-cyber/65 bg-surface shadow-soft transition duration-300 hover:-translate-y-1 hover:border-primary-cyan/45 hover:shadow-command focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary-cyan-bright"
             aria-label={`Ver ${title}`}
           >
-            <article className="flex h-full w-full flex-col p-5">
-              <div className="flex items-start justify-between gap-4">
-                <span className="icon-frame" aria-hidden="true">
-                  <Icon size={20} />
+            <img
+              src={image.src}
+              alt=""
+              className="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-105"
+              style={{ objectPosition: image.objectPosition ?? 'center' }}
+              loading="lazy"
+              aria-hidden="true"
+            />
+            <span className="absolute inset-0 bg-[linear-gradient(180deg,rgba(11,18,32,0.12)_0%,rgba(11,18,32,0.72)_48%,rgba(11,18,32,0.96)_100%)]" />
+            <span className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(59,130,246,0.22),transparent_18rem)] opacity-75 transition-opacity duration-300 group-hover:opacity-100" />
+            <article className="relative flex h-full min-h-[22rem] flex-col justify-end p-5">
+              <div className="mb-auto flex items-start justify-between gap-4">
+                <span className="rounded-full border border-white/18 bg-background/55 px-3 py-1 text-[10px] font-extrabold uppercase tracking-[0.14em] text-slate-100 backdrop-blur">
+                  Medio {code}
                 </span>
-                <span className="text-xs font-extrabold text-primary-cyan-bright">{code}</span>
               </div>
-              <h3 className="mt-5 text-base font-bold leading-6 text-text">{shortTitle}</h3>
-              <p className="mt-2 text-xs leading-5 text-muted-text">{summary}</p>
-              <span className="mt-auto flex items-center gap-2 pt-4 text-xs font-bold text-primary-cyan-bright">
+              <h3 className="text-2xl font-bold leading-tight text-text">{shortTitle}</h3>
+              <p className="mt-3 text-sm leading-6 text-slate-300">{summary}</p>
+              <span className="mt-5 flex items-center gap-2 text-xs font-bold uppercase tracking-[0.14em] text-primary-cyan-bright">
                 Abrir detalle
                 <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" />
               </span>
             </article>
-          </ButtonLink>
+          </Link>
         ))}
       </div>
     </section>

@@ -1,18 +1,82 @@
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
-import { Menu, X } from 'lucide-react';
+import { ChevronDown, Menu, X } from 'lucide-react';
 import { useEffect, useId, useRef, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { NAV_ITEMS } from '../../constants/site.js';
 import { brandLogo } from '../../data/media.js';
+import { securityMeans } from '../../data/securityMeans.js';
 
 const contactItem = NAV_ITEMS.find((item) => item.path === '/contacto');
 const primaryNavItems = NAV_ITEMS.filter((item) => !['/', '/contacto'].includes(item.path));
+const servicesItem = NAV_ITEMS.find((item) => item.path === '/servicios');
 
 const navLinkClass = ({ isActive }) =>
   [
     'nav-premium-link px-3 py-2 text-sm font-semibold transition-colors duration-200',
     isActive ? 'nav-premium-link--active' : '',
   ].join(' ');
+
+function ServicesDropdown() {
+  return (
+    <div className="group relative">
+      <NavLink
+        to={servicesItem.path}
+        className={({ isActive }) =>
+          [
+            'nav-premium-link inline-flex items-center gap-1.5 px-3 py-2 text-sm font-semibold transition-colors duration-200',
+            isActive ? 'nav-premium-link--active' : '',
+          ].join(' ')
+        }
+      >
+        {servicesItem.label}
+        <ChevronDown
+          size={14}
+          className="transition-transform duration-200 group-hover:rotate-180 group-focus-within:rotate-180"
+          aria-hidden="true"
+        />
+      </NavLink>
+      <div className="invisible absolute left-0 top-full z-50 w-64 translate-y-2 pt-2 opacity-0 transition duration-200 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100">
+        <div className="rounded-lg border border-border-cyber/70 bg-background/96 p-2 shadow-command backdrop-blur-xl">
+          <NavLink
+            to="/servicios"
+            className={({ isActive }) =>
+              [
+                'block rounded-md px-3 py-3 text-sm font-bold transition-colors duration-200',
+                isActive
+                  ? 'bg-primary-cyan/14 text-text'
+                  : 'text-muted-text hover:bg-white/5 hover:text-text',
+              ].join(' ')
+            }
+          >
+            Ver todos los servicios
+          </NavLink>
+          <div className="my-2 h-px bg-border-cyber" />
+          {securityMeans.map((mean) => (
+            <NavLink
+              key={mean.id}
+              to={mean.path}
+              className={({ isActive }) =>
+                [
+                  'grid grid-cols-[2rem_1fr] items-center gap-3 rounded-md px-3 py-2.5 transition-colors duration-200',
+                  isActive
+                    ? 'bg-primary-cyan/14 text-text'
+                    : 'text-muted-text hover:bg-white/5 hover:text-text',
+                ].join(' ')
+              }
+            >
+              <span className="flex h-8 w-8 items-center justify-center rounded-md border border-primary-cyan/25 bg-primary-cyan/10 text-[10px] font-extrabold text-primary-cyan-bright">
+                {mean.code}
+              </span>
+              <span className="min-w-0 text-sm font-bold leading-5">
+                {mean.title}
+              </span>
+            </NavLink>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -69,11 +133,15 @@ export default function Navbar() {
 
         <div className="hidden items-center gap-2 lg:flex">
           <div className="flex items-center gap-1">
-            {primaryNavItems.map((item) => (
-              <NavLink key={item.path} to={item.path} className={navLinkClass}>
-                {item.label}
-              </NavLink>
-            ))}
+            {primaryNavItems.map((item) =>
+              item.path === '/servicios' ? (
+                <ServicesDropdown key={item.path} />
+              ) : (
+                <NavLink key={item.path} to={item.path} className={navLinkClass}>
+                  {item.label}
+                </NavLink>
+              ),
+            )}
           </div>
           <NavLink
             to={contactItem.path}
@@ -97,37 +165,73 @@ export default function Navbar() {
       </nav>
 
       <AnimatePresence initial={false}>
-      {isOpen ? (
-        <motion.div
-          id={menuId}
-          className="border-t border-white/8 bg-background/95 px-5 py-4 backdrop-blur-xl lg:hidden"
-          initial={reduceMotion ? { opacity: 0 } : { height: 0, opacity: 0 }}
-          animate={{ height: 'auto', opacity: 1 }}
-          exit={{ height: 0, opacity: 0 }}
-          transition={{ duration: 0.2, ease: 'easeOut' }}
-        >
-          <div className="mx-auto flex max-w-6xl flex-col gap-1">
-            {[NAV_ITEMS[0], ...primaryNavItems].map((item, index) => (
+        {isOpen ? (
+          <motion.div
+            id={menuId}
+            className="border-t border-white/8 bg-background/95 px-5 py-4 backdrop-blur-xl lg:hidden"
+            initial={reduceMotion ? { opacity: 0 } : { height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.2, ease: 'easeOut' }}
+          >
+            <div className="mx-auto flex max-w-6xl flex-col gap-1">
+              {[NAV_ITEMS[0], ...primaryNavItems].map((item, index) => {
+                if (item.path === '/servicios') {
+                  return (
+                    <div key={item.path} className="rounded-lg border border-border-cyber/45 bg-white/[0.025] p-2">
+                      <NavLink
+                        ref={index === 0 ? firstMobileLinkRef : undefined}
+                        to={item.path}
+                        className={navLinkClass}
+                        onClick={() => setIsOpen(false)}
+                      >
+                        {item.label}
+                      </NavLink>
+                      <div className="mt-2 grid gap-1 border-t border-border-cyber/45 pt-2">
+                        {securityMeans.map((mean) => (
+                          <NavLink
+                            key={mean.id}
+                            to={mean.path}
+                            className={({ isActive }) =>
+                              [
+                                'rounded-md px-4 py-2 text-sm font-semibold transition-colors duration-200',
+                                isActive
+                                  ? 'bg-primary-cyan/14 text-text'
+                                  : 'text-muted-text hover:bg-white/5 hover:text-text',
+                              ].join(' ')
+                            }
+                            onClick={() => setIsOpen(false)}
+                          >
+                            {mean.title}
+                          </NavLink>
+                        ))}
+                      </div>
+                    </div>
+                  );
+                }
+
+                return (
+                  <NavLink
+                    ref={index === 0 ? firstMobileLinkRef : undefined}
+                    key={item.path}
+                    to={item.path}
+                    className={navLinkClass}
+                    onClick={() => setIsOpen(false)}
+                  >
+                    {item.label}
+                  </NavLink>
+                );
+              })}
               <NavLink
-                ref={index === 0 ? firstMobileLinkRef : undefined}
-                key={item.path}
-                to={item.path}
-                className={navLinkClass}
+                to={contactItem.path}
+                className="nav-premium-cta mt-2 inline-flex h-10 items-center justify-center rounded-md border px-4 text-sm font-bold !text-white"
                 onClick={() => setIsOpen(false)}
               >
-                {item.label}
+                Contáctanos
               </NavLink>
-            ))}
-            <NavLink
-              to={contactItem.path}
-              className="nav-premium-cta mt-2 inline-flex h-10 items-center justify-center rounded-md border px-4 text-sm font-bold !text-white"
-              onClick={() => setIsOpen(false)}
-            >
-              Contáctanos
-            </NavLink>
-          </div>
-        </motion.div>
-      ) : null}
+            </div>
+          </motion.div>
+        ) : null}
       </AnimatePresence>
     </motion.header>
   );
