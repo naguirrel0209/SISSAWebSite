@@ -19,15 +19,17 @@ const trustItems = [
   'Cobertura institucional',
 ];
 
+const homeHeroGallery = [gallery[1], gallery[0], ...gallery.slice(2)];
+
 function HeroBanner() {
   const [active, setActive] = useState(0);
   const reduceMotion = useReducedMotion();
-  const current = gallery[active];
+  const current = homeHeroGallery[active];
 
   useEffect(() => {
     if (reduceMotion) return undefined;
     const timer = window.setInterval(() => {
-      setActive((currentIndex) => (currentIndex + 1) % gallery.length);
+      setActive((currentIndex) => (currentIndex + 1) % homeHeroGallery.length);
     }, 5000);
     return () => window.clearInterval(timer);
   }, [reduceMotion]);
