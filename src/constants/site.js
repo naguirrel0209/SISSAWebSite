@@ -4,6 +4,8 @@ export const SITE = {
   title: 'Corporación SIS | Seguridad estratégica',
   description:
     'Corporación SIS brinda soluciones institucionales de seguridad, monitoreo y protección especializada.',
+  url: 'https://naguirrel0209.github.io/SISSAWebSite/',
+  logoUrl: 'https://naguirrel0209.github.io/SISSAWebSite/images/brand/logo-sis.png',
   phone: '2323-0303',
   phoneHref: 'tel:23230303',
   email: 'recepcion@corporacionsis.com',
@@ -21,7 +23,7 @@ export const NAV_ITEMS = [
 
 export const PAGE_META = {
   home: {
-    title: SITE.title,
+    title: `Inicio | ${SITE.name}`,
     description: SITE.description,
   },
   nosotros: {

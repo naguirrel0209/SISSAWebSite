@@ -481,7 +481,7 @@ export default function Oportunidades() {
                 <a
                   href={laborWhatsappHref}
                   target="_blank"
-                  rel="noreferrer"
+                  rel="noopener noreferrer"
                   className="inline-flex min-h-12 items-center justify-center gap-2 rounded-md border border-[#22c55e]/70 bg-[#25d366] px-4 text-sm font-bold text-[#04130a] shadow-[0_0_24px_rgba(34,197,94,0.34)] transition duration-200 hover:-translate-y-0.5 hover:bg-[#4ade80] hover:shadow-[0_0_32px_rgba(34,197,94,0.48)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#4ade80]"
                 >
                   Hablar por WhatsApp

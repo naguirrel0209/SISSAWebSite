@@ -457,7 +457,7 @@ export default function Contact() {
         <div className="glass-panel overflow-hidden rounded-lg p-3">
           <iframe
             title="Ubicación de Corporación SIS en Google Maps"
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3861.23794571824!2d-90.59919632394042!3d14.58551287744398!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8589a113fddbbfc9%3A0xccc3be311fa8fc04!2sSIS%20S.A.!5e0!3m2!1ses-419!2sgt!4v1783964339807!5m2!1ses-419!2sgt"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3861.23794571824!2d-90.59919632394042!3d14.58551287744398!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8589a113fddbbfc9%3A0xccc3be311fa8fc04!2sCorporaci%C3%B3n%20SIS!5e0!3m2!1ses-419!2sgt!4v1783964339807!5m2!1ses-419!2sgt"
             className="h-[28rem] w-full rounded-md border-0"
             allowFullScreen
             loading="lazy"
