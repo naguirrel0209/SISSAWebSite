@@ -199,7 +199,7 @@ function OperationalGallery() {
       <SectionHeader
         eyebrow="Registro institucional"
         title="Galería Operacional"
-        description="Recursos fotográficos reales de la capacidad humana, logística y física de SIS S.A."
+        description="Recursos fotográficos reales de la capacidad humana, logística y física de Corporación SIS"
       />
       <div className="mt-8 grid gap-4 lg:grid-cols-[minmax(0,1fr)_15rem]">
         <div className="glass-panel relative min-h-[24rem] overflow-hidden rounded-lg sm:min-h-[32rem] lg:min-h-[34rem]">

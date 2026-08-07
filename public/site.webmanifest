@@ -1,10 +1,10 @@
 {
-  "name": "SIS S.A. / Corporación SIS",
-  "short_name": "SIS S.A.",
-  "description": "Sitio institucional de SIS S.A.",
-  "start_url": "/",
+  "name": "Corporación SIS",
+  "short_name": "Corporación SIS",
+  "description": "Sitio institucional de Corporación SIS",
+  "start_url": ".",
   "display": "standalone",
   "background_color": "#efe7da",
   "theme_color": "#121614",
-  "icons": [{ "src": "/images/brand/logo-sis.png", "sizes": "1024x1024", "type": "image/png" }]
+  "icons": [{ "src": "images/brand/logo-sis.png", "sizes": "1024x1024", "type": "image/png" }]
 }

@@ -118,13 +118,13 @@ export default function Navbar() {
           to="/"
           className="nav-premium-brand group flex items-center gap-3 !text-white transition-colors duration-200"
           onClick={() => setIsOpen(false)}
-          aria-label="Ir al inicio de SIS S.A."
+          aria-label="Ir al inicio de Corporación SIS"
         >
           <span className={`flex items-center justify-center overflow-hidden rounded-md border border-white/10 bg-white/95 p-0.5 shadow-cyan-soft transition-all duration-300 ${isScrolled ? 'h-11 w-11' : 'h-14 w-14 sm:h-16 sm:w-16'}`}>
             <img src={brandLogo} alt="" className="h-full w-full object-contain" width="64" height="64" />
           </span>
           <span className="flex flex-col leading-none">
-            <span className="nav-premium-brand-title text-sm font-bold tracking-wide !text-white">SIS S.A.</span>
+            <span className="nav-premium-brand-title text-sm font-bold tracking-wide !text-white">Corporación SIS</span>
             <span className="nav-premium-brand-subtitle mt-1 hidden text-[10px] font-semibold uppercase tracking-[0.18em] sm:block">
               Sistema Integral de Seguridad
             </span>

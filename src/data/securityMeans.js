@@ -43,7 +43,7 @@ export const securityMeans = [
       {
         title: 'Uniformes, armamento y capacitación',
         description:
-          'La presentación, equipo y preparación del personal se alinean con los requisitos legales, la naturaleza del puesto y las políticas institucionales de SIS S.A.',
+          'La presentación, equipo y preparación del personal se alinean con los requisitos legales, la naturaleza del puesto y las políticas institucionales de Corporación SIS',
         items: [
           'Uniformes institucionales registrados ante la DIGESSP.',
           'Armamento asignado según el puesto, el riesgo y la normativa aplicable.',

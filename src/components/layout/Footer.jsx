@@ -19,7 +19,7 @@ export default function Footer() {
               <img src={brandLogo} alt="" className="h-full w-full object-contain" width="40" height="40" loading="lazy" />
             </span>
             <div>
-              <p className="text-sm font-bold text-slate-50">SIS S.A. / Corporación SIS</p>
+              <p className="text-sm font-bold text-slate-50">Corporación SIS</p>
               <p className="mt-1 text-xs uppercase tracking-[0.18em] text-slate-400">
                 Seguridad técnica institucional
               </p>
@@ -64,7 +64,7 @@ export default function Footer() {
             );
           })}
           <p className="text-xs text-slate-500 sm:col-span-2">
-            © 2026 SIS S.A. / Corporación SIS. Todos los derechos reservados.
+            © 2026 Corporación SIS. Todos los derechos reservados.
           </p>
         </div>
       </div>

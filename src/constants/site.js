@@ -1,9 +1,9 @@
-﻿export const SITE = {
-  name: 'SIS S.A.',
+export const SITE = {
+  name: 'Corporación SIS',
   legalName: 'Corporación SIS',
-  title: 'SIS S.A. | Seguridad estratégica',
+  title: 'Corporación SIS | Seguridad estratégica',
   description:
-    'SIS S.A. brinda soluciones institucionales de seguridad, monitoreo y protección especializada.',
+    'Corporación SIS brinda soluciones institucionales de seguridad, monitoreo y protección especializada.',
   phone: '2323-0303',
   phoneHref: 'tel:23230303',
   email: 'recepcion@corporacionsis.com',
@@ -26,20 +26,20 @@ export const PAGE_META = {
   },
   nosotros: {
     title: `Nosotros | ${SITE.name}`,
-    description: 'Conozca el perfil institucional y la capacidad operativa de SIS S.A.',
+    description: 'Conozca el perfil institucional y la capacidad operativa de Corporación SIS',
   },
   servicios: {
     title: `Servicios | ${SITE.name}`,
     description:
-      'Explore el Sistema Integral de Seguridad de SIS S.A. y sus medios humanos, técnicos y organizativos.',
+      'Explore el Sistema Integral de Seguridad de Corporación SIS y sus medios humanos, técnicos y organizativos.',
   },
   contacto: {
     title: `Contacto | ${SITE.name}`,
-    description: 'Consulte los canales institucionales de atención de SIS S.A.',
+    description: 'Consulte los canales institucionales de atención de Corporación SIS',
   },
   oportunidades: {
     title: `Oportunidades laborales | ${SITE.name}`,
-    description: 'Conozca los beneficios y canales para consultar oportunidades laborales en SIS S.A.',
+    description: 'Conozca los beneficios y canales para consultar oportunidades laborales en Corporación SIS',
   },
   notFound: {
     title: `Página no encontrada | ${SITE.name}`,

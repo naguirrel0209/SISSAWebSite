@@ -105,7 +105,7 @@ function OpportunitiesHero() {
       />
       <div className="section-shell relative z-10 py-20">
         <div className="max-w-3xl">
-          <p className="eyebrow text-slate-50">Oportunidades laborales · SIS S.A.</p>
+          <p className="eyebrow text-slate-50">Oportunidades laborales · Corporación SIS</p>
           <h1
             id="opportunities-title"
             className="mt-6 text-4xl font-bold leading-[1.05] text-slate-50 sm:text-5xl lg:text-6xl"
@@ -118,7 +118,7 @@ function OpportunitiesHero() {
             operaciones.
           </p>
           <p className="mt-8 inline-flex rounded-full border border-white/18 bg-background/55 px-4 py-2 text-xs font-bold uppercase tracking-[0.16em] text-primary-cyan-bright backdrop-blur">
-            Equipo operativo SIS S.A.
+            Equipo operativo Corporación SIS
           </p>
         </div>
       </div>
@@ -270,7 +270,7 @@ export default function Oportunidades() {
             Respaldo para su desarrollo laboral
           </h2>
           <p className="mt-4 text-sm leading-7 text-muted-text">
-            En SIS S.A. valoramos el compromiso de nuestro personal y ofrecemos condiciones
+            En Corporación SIS valoramos el compromiso de nuestro personal y ofrecemos condiciones
             orientadas a la estabilidad, el cumplimiento y el crecimiento.
           </p>
         </div>
@@ -326,7 +326,7 @@ export default function Oportunidades() {
               Envíe su información laboral
             </h2>
             <p className="mt-4 text-sm leading-7 text-muted-text">
-              Complete sus datos y describa su requerimiento. El equipo de SIS S.A. recibirá la
+              Complete sus datos y describa su requerimiento. El equipo de Corporación SIS recibirá la
               solicitud como una postulación laboral, sin que tenga que pasar por el formulario de
               contacto general.
             </p>
@@ -334,7 +334,7 @@ export default function Oportunidades() {
               <ShieldCheck className="mt-0.5 shrink-0 text-primary-cyan-bright" size={19} />
               <p className="text-xs leading-6 text-muted-text">
                 {configured
-                  ? 'Su información será enviada directamente al equipo de SIS S.A. por el canal institucional configurado.'
+                  ? 'Su información será enviada directamente al equipo de Corporación SIS por el canal institucional configurado.'
                   : 'El envío de formulario está pendiente de configuración. También puede llamar por los canales disponibles.'}
               </p>
             </div>
@@ -501,7 +501,7 @@ export default function Oportunidades() {
                 aria-live="polite"
               >
                 <CheckCircle2 className="mt-0.5 shrink-0 text-success" size={18} />
-                Su postulación fue enviada al equipo de SIS S.A. Recibirá seguimiento por los datos
+                Su postulación fue enviada al equipo de Corporación SIS Recibirá seguimiento por los datos
                 compartidos.
               </div>
             ) : null}
@@ -528,7 +528,7 @@ export default function Oportunidades() {
             </p>
             <h2 className="mt-3 text-3xl font-bold text-text">¿Qué sucede después?</h2>
             <p className="mt-4 text-sm leading-7 text-muted-text">
-              SIS S.A. revisará la información recibida y dará seguimiento según la disponibilidad
+              Corporación SIS revisará la información recibida y dará seguimiento según la disponibilidad
               de plazas, el perfil requerido y las necesidades operativas vigentes.
             </p>
           </div>
@@ -552,7 +552,7 @@ export default function Oportunidades() {
         <div className="flex items-start gap-4 border-y border-border-cyber/55 py-8">
           <Handshake className="mt-1 shrink-0 text-primary-cyan-bright" size={24} />
           <p className="max-w-4xl text-sm leading-7 text-muted-text">
-            SIS S.A. recibe consultas laborales únicamente por sus canales institucionales. La
+            Corporación SIS recibe consultas laborales únicamente por sus canales institucionales. La
             participación en un proceso dependerá de la existencia de plazas y de la evaluación
             correspondiente.
           </p>
@@ -561,11 +561,11 @@ export default function Oportunidades() {
 
       <CallToAction
         icon={UsersRound}
-        eyebrow="Sea parte de SIS S.A."
+        eyebrow="Sea parte de Corporación SIS"
         title="Dé el primer paso para integrarse a nuestro equipo"
         description="Complete el formulario de postulación o comuníquese por teléfono para consultar oportunidades disponibles."
         actions={[
-          { label: 'Llamar a SIS S.A.', href: SITE.phoneHref },
+          { label: 'Llamar a Corporación SIS', href: SITE.phoneHref },
         ]}
       />
     </div>

@@ -1,6 +1,6 @@
-# SIS S.A. — Sitio institucional
+# Corporación SIS — Sitio institucional
 
-Prototipo del sitio institucional de **SIS S.A. / Corporación SIS**, empresa de seguridad privada con presencia en Guatemala. El sitio presenta la oferta de servicios, la capacidad operativa, el perfil institucional y los canales de contacto.
+Prototipo del sitio institucional de **Corporación SIS**, empresa de seguridad privada con presencia en Guatemala. El sitio presenta la oferta de servicios, la capacidad operativa, el perfil institucional y los canales de contacto.
 
 > Estado: **Prototipo en desarrollo**. El formulario de contacto aún no realiza envíos reales y la integración con Google Maps está pendiente.
 
@@ -161,9 +161,9 @@ Editar `src/constants/site.js`:
 
 ```js
 export const SITE = {
-  name: 'SIS S.A.',
+  name: 'Corporación SIS',
   legalName: 'Corporación SIS',
-  title: 'SIS S.A. | Seguridad estratégica',
+  title: 'Corporación SIS | Seguridad estratégica',
   description: '...',
   phone: '2323-0303',
   phoneHref: 'tel:23230303',
@@ -352,4 +352,4 @@ Lista priorizada de trabajo pendiente, alineada con una auditoría técnica del 
 
 ## Licencia
 
-Código del prototipo: titularidad de **SIS S.A. / Corporación SIS**. Uso interno. Sin licencia open-source aplicada por ahora.
+Código del prototipo: titularidad de **Corporación SIS**. Uso interno. Sin licencia open-source aplicada por ahora.

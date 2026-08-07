@@ -1,4 +1,4 @@
-﻿import {
+import {
   Building2,
   CarFront,
   BadgeCheck,
@@ -112,7 +112,7 @@ const values = [
 const institutionalCarousel = [
   {
     ...institutionalImages.fachada,
-    caption: 'Instalaciones SIS S.A.',
+    caption: 'Instalaciones Corporación SIS',
   },
   {
     ...institutionalImages.oficinasAdministrativas,
@@ -216,7 +216,7 @@ export default function Nosotros() {
       <PageHeader
         eyebrow="Corporación SIS · Perfil institucional"
         title="Seguridad estratégica con disciplina operativa"
-        description="SIS S.A. desarrolla soluciones integrales de seguridad con enfoque técnico, presencia institucional y capacidad operativa para proteger personas, instalaciones y operaciones críticas."
+        description="Corporación SIS desarrolla soluciones integrales de seguridad con enfoque técnico, presencia institucional y capacidad operativa para proteger personas, instalaciones y operaciones críticas."
         visual={<InstitutionalCarousel />}
       />
 
@@ -229,7 +229,7 @@ export default function Nosotros() {
             <h2 className="mt-3 text-3xl font-bold text-text">Más de tres décadas protegiendo Guatemala</h2>
           </div>
           <p className="text-base leading-8 text-muted-text md:text-lg">
-            SIS S.A. nace el 10 de noviembre de 1992 como una empresa de seguridad totalmente
+            Corporación SIS nace el 10 de noviembre de 1992 como una empresa de seguridad totalmente
             guatemalteca, creada para planificar, coordinar, controlar y ejecutar políticas de
             seguridad adaptadas a las necesidades de sus clientes. Está registrada mediante el
             Acuerdo Gubernativo No. 003-98 y, tras cumplir los requisitos de la Ley que Regula los
@@ -296,7 +296,7 @@ export default function Nosotros() {
             <h2 className="mt-3 text-3xl font-bold text-text">Uniformes institucionales</h2>
             <p className="mt-4 text-sm leading-7 text-muted-text">
               Categorías preparadas para incorporar únicamente el catálogo fotográfico oficial de
-              SIS S.A.
+              Corporación SIS
             </p>
           </div>
           <div className="relative">
@@ -418,7 +418,7 @@ export default function Nosotros() {
         </div>
       </section>
 
-      <CallToAction eyebrow="Compromiso SIS S.A." title="Una institución preparada para proteger" description="Nuestra labor se desarrolla con visión estratégica, criterio técnico y vocación de servicio, manteniendo el compromiso de proteger con responsabilidad, presencia y profesionalismo." actions={[{ label: 'Conocer servicios', to: '/servicios' }]} />
+      <CallToAction eyebrow="Compromiso Corporación SIS" title="Una institución preparada para proteger" description="Nuestra labor se desarrolla con visión estratégica, criterio técnico y vocación de servicio, manteniendo el compromiso de proteger con responsabilidad, presencia y profesionalismo." actions={[{ label: 'Conocer servicios', to: '/servicios' }]} />
     </div>
   );
 }

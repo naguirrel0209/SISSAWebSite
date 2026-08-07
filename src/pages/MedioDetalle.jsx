@@ -21,7 +21,7 @@ export default function MedioDetalle() {
     <div className="w-full">
       <Seo
         title={`${title} | ${SITE.name}`}
-        description={`${title} dentro del Sistema Integral de Seguridad de SIS S.A.`}
+        description={`${title} dentro del Sistema Integral de Seguridad de Corporación SIS`}
       />
       <PageHeader
         eyebrow="Sistema Integral de Seguridad"
@@ -126,7 +126,7 @@ export default function MedioDetalle() {
         icon={ClipboardCheck}
         eyebrow="Evaluación integral"
         title="Integre este medio dentro de una estrategia completa"
-        description="SIS S.A. puede evaluar el entorno y coordinar medios humanos, técnicos y organizativos según la necesidad real de la operación."
+        description="Corporación SIS puede evaluar el entorno y coordinar medios humanos, técnicos y organizativos según la necesidad real de la operación."
         actions={[{ label: 'Solicitar evaluación', to: '/contacto' }]}
       />
     </div>

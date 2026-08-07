@@ -19,7 +19,7 @@ const trustItems = [
   'Cobertura institucional',
 ];
 
-const homeHeroGallery = [gallery[1], gallery[0], ...gallery.slice(2)];
+const homeHeroGallery = [gallery[2], gallery[3], gallery[1], gallery[0], ...gallery.slice(4)];
 
 function HeroBanner() {
   const [active, setActive] = useState(0);
@@ -81,7 +81,7 @@ function HeroBanner() {
             Seguridad integral para proteger lo que más importa.
           </h1>
           <p className="mt-6 max-w-xl text-base leading-8 text-slate-300 sm:text-lg">
-            SIS S.A. combina presencia operativa, logística segura y respuesta profesional.
+            Corporación SIS combina presencia operativa, logística segura y respuesta profesional.
           </p>
           <div className="mt-8">
             <ButtonLink to="/contacto">
@@ -237,7 +237,7 @@ export default function Home() {
             src={institutionalImages.fachada.src}
             alt={institutionalImages.fachada.alt}
             objectPosition={institutionalImages.fachada.objectPosition}
-            caption="Fachada institucional SIS S.A."
+            caption="Fachada institucional Corporación SIS"
             size="default"
           />
           <div className="flex flex-col justify-center">
@@ -248,7 +248,7 @@ export default function Home() {
               Disciplina operativa y atención institucional
             </h2>
             <p className="mt-5 text-base leading-8 text-muted-text">
-              SIS S.A. desarrolla soluciones integrales de seguridad con enfoque técnico,
+              Corporación SIS desarrolla soluciones integrales de seguridad con enfoque técnico,
               disciplina operativa y atención institucional. Nuestro modelo combina presencia,
               prevención, monitoreo y respuesta para proteger personas, instalaciones y
               operaciones estratégicas.
@@ -274,7 +274,7 @@ export default function Home() {
       <CallToAction
         eyebrow="Contacto operativo"
         title="¿Necesita una solución de seguridad confiable, técnica y operativa?"
-        description="Conecte con nuestro centro de mando y solicite información sobre los servicios especializados de SIS S.A."
+        description="Conecte con nuestro centro de mando y solicite información sobre los servicios especializados de Corporación SIS"
         actions={[{ label: 'Contactar Centro de Mando', to: '/contacto' }]}
       />
     </div>

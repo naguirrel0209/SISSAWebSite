@@ -1,4 +1,4 @@
-﻿import {
+import {
   CheckCircle2,
   ClipboardCheck,
   Clock3,
@@ -185,13 +185,13 @@ export default function Contact() {
     <div className="w-full">
       <Seo {...PAGE_META.contacto} />
       <PageHeader
-        eyebrow="Canal institucional · SIS S.A."
+        eyebrow="Canal institucional · Corporación SIS"
         title="Centro de Mando y Contacto"
         description="Nuestro equipo está preparado para atender requerimientos de seguridad, logística, monitoreo y protección especializada con criterio técnico, confidencialidad y respuesta profesional."
         assetSrc={institutionalImages.fachada.src}
         assetAlt={institutionalImages.fachada.alt}
         assetObjectPosition={institutionalImages.fachada.objectPosition}
-        assetCaption="Oficinas centrales SIS S.A."
+        assetCaption="Oficinas centrales Corporación SIS"
       />
 
       <section className="section-shell py-14">
@@ -228,7 +228,7 @@ export default function Contact() {
               <ShieldCheck className="mt-0.5 shrink-0 text-primary-cyan-bright" size={19} />
               <p className="text-xs leading-6 text-muted-text">
                 {configured
-                  ? 'Su requerimiento será enviado directamente al equipo de SIS S.A. mediante un canal institucional validado.'
+                  ? 'Su requerimiento será enviado directamente al equipo de Corporación SIS mediante un canal institucional validado.'
                   : 'El envío de formulario está pendiente de configuración. Contacte por los canales disponibles.'}
               </p>
             </div>
@@ -391,7 +391,7 @@ export default function Contact() {
                 aria-live="polite"
               >
                 <CheckCircle2 className="mt-0.5 shrink-0 text-success" size={18} />
-                Su requerimiento fue enviado al equipo de SIS S.A. Recibirá seguimiento por
+                Su requerimiento fue enviado al equipo de Corporación SIS Recibirá seguimiento por
                 correo electrónico en breve.
               </div>
             ) : null}
@@ -418,7 +418,7 @@ export default function Contact() {
             </p>
             <h2 className="mt-3 text-3xl font-bold text-text">Disponibilidad operativa</h2>
             <p className="mt-5 text-sm leading-7 text-muted-text">
-              SIS S.A. mantiene canales de atención para coordinar servicios, evaluar requerimientos
+              Corporación SIS mantiene canales de atención para coordinar servicios, evaluar requerimientos
               y dar seguimiento a operaciones de seguridad conforme a la naturaleza de cada
               solicitud.
             </p>
@@ -456,7 +456,7 @@ export default function Contact() {
         </div>
         <div className="glass-panel overflow-hidden rounded-lg p-3">
           <iframe
-            title="Ubicación de SIS S.A. en Google Maps"
+            title="Ubicación de Corporación SIS en Google Maps"
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3861.23794571824!2d-90.59919632394042!3d14.58551287744398!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8589a113fddbbfc9%3A0xccc3be311fa8fc04!2sSIS%20S.A.!5e0!3m2!1ses-419!2sgt!4v1783964339807!5m2!1ses-419!2sgt"
             className="h-[28rem] w-full rounded-md border-0"
             allowFullScreen
@@ -474,7 +474,7 @@ export default function Contact() {
           <div>
             <h2 className="text-2xl font-bold text-text">Confidencialidad en cada solicitud</h2>
             <p className="mt-4 max-w-4xl text-sm leading-7 text-muted-text">
-              Los requerimientos recibidos por SIS S.A. serán gestionados con reserva, atención
+              Los requerimientos recibidos por Corporación SIS serán gestionados con reserva, atención
               profesional y criterio técnico, priorizando la seguridad de la información y la
               naturaleza operativa de cada caso.
             </p>
@@ -482,7 +482,7 @@ export default function Contact() {
         </div>
       </section>
 
-      <CallToAction icon={ClipboardCheck} eyebrow="Atención institucional" title="Conecte con SIS S.A." description="Solicite información sobre nuestros servicios especializados y permita que nuestro equipo evalúe la solución adecuada para su operación, empresa, ruta, residencia o instalación." actions={[{ label: 'Llamar al Centro de Mando', href: SITE.phoneHref }, { label: 'Ver Servicios', to: '/servicios', variant: 'secondary' }]} />
+      <CallToAction icon={ClipboardCheck} eyebrow="Atención institucional" title="Conecte con Corporación SIS" description="Solicite información sobre nuestros servicios especializados y permita que nuestro equipo evalúe la solución adecuada para su operación, empresa, ruta, residencia o instalación." actions={[{ label: 'Llamar al Centro de Mando', href: SITE.phoneHref }, { label: 'Ver Servicios', to: '/servicios', variant: 'secondary' }]} />
     </div>
   );
 }
