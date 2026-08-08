@@ -76,10 +76,34 @@ jobs:
           test -n "$VITE_EMAILJS_TEMPLATE_ID" || (echo "::error::Missing VITE_EMAILJS_TEMPLATE_ID" && exit 1)
           test -n "$VITE_EMAILJS_PUBLIC_KEY" || (echo "::error::Missing VITE_EMAILJS_PUBLIC_KEY" && exit 1)
 
+      - name: Resolve Supabase configuration
+        env:
+          SUPABASE_URL_VAR: ${{ vars.VITE_SUPABASE_URL }}
+          SUPABASE_ANON_KEY_VAR: ${{ vars.VITE_SUPABASE_ANON_KEY }}
+          SUPABASE_URL_SECRET: ${{ secrets.VITE_SUPABASE_URL }}
+          SUPABASE_ANON_KEY_SECRET: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
+        run: |
+          SUPABASE_URL="${SUPABASE_URL_VAR:-$SUPABASE_URL_SECRET}"
+          SUPABASE_ANON_KEY="${SUPABASE_ANON_KEY_VAR:-$SUPABASE_ANON_KEY_SECRET}"
+
+          if [ -z "$SUPABASE_URL" ]; then
+            echo "::warning::VITE_SUPABASE_URL was not found in vars or secrets. Survey portal will show a configuration message."
+          fi
+
+          if [ -z "$SUPABASE_ANON_KEY" ]; then
+            echo "::warning::VITE_SUPABASE_ANON_KEY was not found in vars or secrets. Survey portal will show a configuration message."
+          fi
+
+          echo "VITE_SUPABASE_URL=$SUPABASE_URL" >> "$GITHUB_ENV"
+          echo "VITE_SUPABASE_ANON_KEY=$SUPABASE_ANON_KEY" >> "$GITHUB_ENV"
+
       - run: npm run build
 
       - name: Add single-page application fallback
-        run: cp dist/index.html dist/404.html
+        run: |
+          if [ ! -f dist/404.html ]; then
+            cp dist/index.html dist/404.html
+          fi
 
       - uses: actions/configure-pages@v5
 

@@ -25,9 +25,10 @@ https://naguirrel0209.github.io/SISSAWebSite/
 | Animaciones | Framer Motion |
 | Iconografía | Lucide React |
 | Formularios | EmailJS |
+| Encuestas privadas | Supabase |
 | Hosting objetivo | GitHub Pages |
 
-El proyecto es una SPA client-side servida como archivos estáticos. No utiliza backend propio.
+El proyecto es una SPA client-side servida como archivos estaticos. El sitio institucional no utiliza backend propio; el Portal de Experiencia del Cliente usa Supabase como backend administrado.
 
 ---
 
@@ -65,6 +66,23 @@ Si Vite asigna otro puerto, usar la URL que imprime la terminal.
 | `npm run preview` | Sirve localmente el build generado |
 
 No hay script de lint o test configurado actualmente.
+
+## Portal de Experiencia del Cliente
+
+El proyecto incluye un modulo privado de encuestas de satisfaccion dentro del mismo React/Vite:
+
+- `/encuesta/:token`
+- `/encuestas-admin/login`
+- `/encuestas-admin`
+- `/encuestas-admin/clientes`
+- `/encuestas-admin/campanas`
+- `/encuestas-admin/resultados`
+
+Este modulo no aparece en la navegacion publica. La documentacion completa esta en:
+
+```text
+docs/surveys.md
+```
 
 ---
 
@@ -153,7 +171,7 @@ No cambiar esta base a `/` salvo que el proyecto deje de publicarse en GitHub Pa
 <BrowserRouter basename="/SISSAWebSite">
 ```
 
-La workflow de GitHub Pages copia `dist/index.html` como `dist/404.html` para permitir refresh directo en rutas internas de la SPA.
+La workflow de GitHub Pages conserva `public/404.html` como fallback de rutas internas. Si ese archivo no existe, copia `dist/index.html` como respaldo.
 
 ### EmailJS
 

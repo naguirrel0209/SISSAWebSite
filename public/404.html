@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="es-GT">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Corporacion SIS</title>
+    <script>
+      (function () {
+        var base = '/SISSAWebSite';
+        var path = window.location.pathname;
+        var search = window.location.search || '';
+        var hash = window.location.hash || '';
+
+        if (path.indexOf(base + '/') === 0) {
+          var route = path.slice(base.length);
+          window.location.replace(base + '/?' + route + search + hash);
+          return;
+        }
+
+        window.location.replace(base + '/');
+      })();
+    </script>
+  </head>
+  <body>
+    <p>Redirigiendo...</p>
+  </body>
+</html>
