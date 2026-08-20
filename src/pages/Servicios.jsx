@@ -111,17 +111,17 @@ function MeansIndex() {
               loading="lazy"
               aria-hidden="true"
             />
-            <span className="absolute inset-0 bg-[linear-gradient(180deg,rgba(11,18,32,0.12)_0%,rgba(11,18,32,0.72)_48%,rgba(11,18,32,0.96)_100%)]" />
+            <span className="absolute inset-0 bg-[linear-gradient(180deg,rgba(6,16,28,0.18)_0%,rgba(6,16,28,0.74)_42%,rgba(6,16,28,0.97)_100%)]" />
             <span className="absolute inset-0 ink-grid opacity-20 transition-opacity duration-300 group-hover:opacity-30" />
             <article className="relative flex h-full min-h-[22rem] flex-col justify-end p-5">
               <div className="mb-auto flex items-start justify-between gap-4">
-                <span className="rounded-full border border-white/18 bg-background/55 px-3 py-1 text-[10px] font-extrabold uppercase tracking-[0.14em] text-slate-100 backdrop-blur">
+                <span className="rounded-full border border-white/30 bg-white/18 px-3 py-1 text-[10px] font-extrabold uppercase tracking-[0.14em] text-white backdrop-blur">
                   Medio {code}
                 </span>
               </div>
-              <h3 className="text-2xl font-bold leading-tight text-text">{shortTitle}</h3>
-              <p className="mt-3 text-sm leading-6 text-slate-300">{summary}</p>
-              <span className="mt-5 flex items-center gap-2 text-xs font-bold uppercase tracking-[0.14em] text-primary-cyan-bright">
+              <h3 className="text-2xl font-bold leading-tight text-white [text-shadow:0_1px_3px_rgba(0,0,0,0.65)]">{shortTitle}</h3>
+              <p className="mt-3 text-sm font-medium leading-6 text-slate-100">{summary}</p>
+              <span className="mt-5 flex items-center gap-2 text-xs font-bold uppercase tracking-[0.14em] text-[#79d0c9]">
                 Abrir detalle
                 <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" />
               </span>
@@ -214,11 +214,11 @@ function OperationalGallery() {
               transition={{ duration: 0.35 }}
             />
           </AnimatePresence>
-          <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-background via-background/75 to-transparent p-6 pt-24">
-            <p className="text-xs font-bold uppercase tracking-[0.18em] text-accent-gold">
+          <div className="absolute inset-x-0 bottom-0 bg-[linear-gradient(180deg,transparent_0%,rgba(6,16,28,0.48)_38%,rgba(6,16,28,0.94)_100%)] p-6 pt-24">
+            <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#79d0c9]">
               {String(active + 1).padStart(2, '0')} / {String(gallery.length).padStart(2, '0')}
             </p>
-            <h3 className="mt-2 text-2xl font-bold text-text">{item.category}</h3>
+            <h3 className="mt-2 text-2xl font-bold text-white [text-shadow:0_1px_3px_rgba(0,0,0,0.65)]">{item.category}</h3>
           </div>
         </div>
         <div className="glass-panel rounded-lg p-3 lg:h-[34rem]">

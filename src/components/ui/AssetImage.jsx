@@ -30,8 +30,11 @@ export default function AssetImage({
       />
       {caption ? (
         <>
-          <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-background/95 via-background/45 to-transparent" aria-hidden="true" />
-          <figcaption className="absolute inset-x-0 bottom-0 p-4 text-xs font-bold uppercase tracking-[0.14em] text-slate-100">
+          <div
+            className="absolute inset-x-0 bottom-0 h-36 bg-[linear-gradient(180deg,transparent_0%,rgba(6,16,28,0.44)_42%,rgba(6,16,28,0.90)_100%)]"
+            aria-hidden="true"
+          />
+          <figcaption className="absolute inset-x-0 bottom-0 p-4 text-xs font-extrabold uppercase tracking-[0.14em] text-white [text-shadow:0_1px_3px_rgba(0,0,0,0.75)]">
             {caption}
           </figcaption>
         </>

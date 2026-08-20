@@ -172,7 +172,7 @@ function InstitutionalCarousel() {
             transition={{ duration: 0.7, ease: 'easeOut' }}
           />
         </AnimatePresence>
-        <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-background/95 via-background/45 to-transparent p-4 pt-20 text-xs font-bold uppercase tracking-[0.14em] text-slate-100">
+        <figcaption className="absolute inset-x-0 bottom-0 bg-[linear-gradient(180deg,transparent_0%,rgba(6,16,28,0.46)_38%,rgba(6,16,28,0.92)_100%)] p-4 pt-20 text-xs font-extrabold uppercase tracking-[0.14em] text-white [text-shadow:0_1px_3px_rgba(0,0,0,0.75)]">
           {current.caption}
         </figcaption>
       </figure>

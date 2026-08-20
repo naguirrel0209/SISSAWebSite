@@ -143,7 +143,7 @@ function InstitutionalGallery() {
             <p className="text-xs font-bold uppercase tracking-[0.18em] text-primary-cyan-bright">
               {String(active + 1).padStart(2, '0')} / {String(featured.length).padStart(2, '0')}
             </p>
-            <h3 className="mt-2 text-3xl font-bold text-text">{current.category}</h3>
+            <h3 className="mt-2 text-3xl font-bold text-white [text-shadow:0_1px_3px_rgba(0,0,0,0.65)]">{current.category}</h3>
           </div>
         </div>
 
