@@ -114,7 +114,7 @@ function OpportunitiesHero() {
             formar parte de una institución guatemalteca dedicada a proteger personas, bienes y
             operaciones.
           </p>
-          <p className="mt-8 inline-flex rounded-full border border-white/18 bg-background/55 px-4 py-2 text-xs font-bold uppercase tracking-[0.16em] text-primary-cyan-bright backdrop-blur">
+          <p className="mt-8 flex max-w-sm items-center border-l-2 border-primary-cyan-bright/80 pl-4 text-xs font-bold uppercase tracking-[0.16em] text-slate-100">
             Equipo operativo Corporación SIS
           </p>
         </div>
@@ -215,44 +215,50 @@ export default function Oportunidades() {
           </p>
         </div>
 
-        <div className="grid gap-4 lg:grid-cols-[1.25fr_0.75fr]">
-          <article className="relative min-h-[25rem] overflow-hidden rounded-lg border border-border-cyber/55 bg-surface shadow-soft">
-            <img
-              src={opportunityImages[0].image.src}
-              alt={opportunityImages[0].image.alt}
-              className="absolute inset-0 h-full w-full object-cover"
-              style={{ objectPosition: opportunityImages[0].image.objectPosition }}
-              loading="lazy"
-            />
-            <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(11,18,32,0.12)_0%,rgba(11,18,32,0.72)_58%,rgba(11,18,32,0.96)_100%)]" />
-            <div className="absolute bottom-0 left-0 right-0 p-6">
+        <div className="grid gap-5 lg:grid-cols-[1.15fr_0.85fr]">
+          <figure className="overflow-hidden rounded-lg border border-border-cyber/55 bg-surface shadow-soft">
+            <div className="relative min-h-[25rem] overflow-hidden">
+              <img
+                src={opportunityImages[0].image.src}
+                alt={opportunityImages[0].image.alt}
+                className="absolute inset-0 h-full w-full object-cover"
+                style={{ objectPosition: opportunityImages[0].image.objectPosition }}
+                loading="lazy"
+              />
+            </div>
+            <figcaption className="border-t border-border-cyber/55 bg-surface p-6">
               <p className="text-xs font-bold uppercase tracking-[0.18em] text-primary-cyan-bright">
                 {opportunityImages[0].label}
               </p>
               <h3 className="mt-2 text-2xl font-bold text-text">Presencia, disciplina y servicio</h3>
-            </div>
-          </article>
+              <p className="mt-3 text-sm leading-7 text-muted-text">
+                Personal operativo preparado para representar a Corporación SIS en servicios de
+                seguridad, apoyo institucional y coordinación en campo.
+              </p>
+            </figcaption>
+          </figure>
 
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-1">
             {opportunityImages.slice(1).map(({ label, image }) => (
-              <article
+              <figure
                 key={label}
-                className="relative min-h-[12rem] overflow-hidden rounded-lg border border-border-cyber/55 bg-surface shadow-soft"
+                className="overflow-hidden rounded-lg border border-border-cyber/55 bg-surface shadow-soft"
               >
-                <img
-                  src={image.src}
-                  alt={image.alt}
-                  className="absolute inset-0 h-full w-full object-cover"
-                  style={{ objectPosition: image.objectPosition }}
-                  loading="lazy"
-                />
-                <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(11,18,32,0.10)_0%,rgba(11,18,32,0.86)_100%)]" />
-                <div className="absolute bottom-0 left-0 right-0 p-5">
+                <div className="relative min-h-[12rem] overflow-hidden">
+                  <img
+                    src={image.src}
+                    alt={image.alt}
+                    className="absolute inset-0 h-full w-full object-cover"
+                    style={{ objectPosition: image.objectPosition }}
+                    loading="lazy"
+                  />
+                </div>
+                <figcaption className="border-t border-border-cyber/55 bg-surface px-5 py-4">
                   <p className="text-xs font-bold uppercase tracking-[0.16em] text-primary-cyan-bright">
                     {label}
                   </p>
-                </div>
-              </article>
+                </figcaption>
+              </figure>
             ))}
           </div>
         </div>
@@ -271,15 +277,17 @@ export default function Oportunidades() {
             orientadas a la estabilidad, el cumplimiento y el crecimiento.
           </p>
         </div>
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-x-8 gap-y-7 sm:grid-cols-2 lg:grid-cols-4">
           {benefits.map(({ title, description, icon: Icon }, index) => (
-            <article key={title} className="glass-panel interactive-card relative overflow-hidden rounded-lg p-6">
-              <span className="absolute right-5 top-4 text-4xl font-extrabold text-primary-cyan/10">
-                {String(index + 1).padStart(2, '0')}
-              </span>
-              <span className="icon-frame" aria-hidden="true">
-                <Icon size={22} />
-              </span>
+            <article key={title} className="border-t border-border-cyber/70 pt-6">
+              <div className="flex items-start justify-between gap-4">
+                <span className="icon-frame" aria-hidden="true">
+                  <Icon size={22} />
+                </span>
+                <span className="text-3xl font-extrabold text-primary-cyan/15">
+                  {String(index + 1).padStart(2, '0')}
+                </span>
+              </div>
               <h3 className="mt-5 text-lg font-bold leading-6 text-text">{title}</h3>
               <p className="mt-3 text-sm leading-7 text-muted-text">{description}</p>
             </article>
@@ -299,9 +307,9 @@ export default function Oportunidades() {
               consultar por perfiles como:
             </p>
           </div>
-          <div className="glass-panel grid gap-3 rounded-lg p-5 sm:grid-cols-2">
+          <div className="grid gap-3 border-y border-border-cyber/55 py-5 sm:grid-cols-2">
             {profiles.map((profile) => (
-              <div key={profile} className="flex items-start gap-3 rounded-md border border-border-cyber/45 bg-background/45 p-4">
+              <div key={profile} className="flex items-start gap-3 border-l border-primary-cyan/45 py-3 pl-4">
                 <Check className="mt-0.5 shrink-0 text-primary-cyan-bright" size={17} />
                 <span className="text-sm font-bold leading-6 text-text">{profile}</span>
               </div>
@@ -351,7 +359,7 @@ export default function Oportunidades() {
             <input
               type="text"
               name="_gotcha"
-              value=""
+              defaultValue=""
               tabIndex="-1"
               autoComplete="off"
               aria-hidden="true"
@@ -498,7 +506,7 @@ export default function Oportunidades() {
                 aria-live="polite"
               >
                 <CheckCircle2 className="mt-0.5 shrink-0 text-success" size={18} />
-                Su postulación fue enviada al equipo de Corporación SIS Recibirá seguimiento por los datos
+                Su postulación fue enviada al equipo de Corporación SIS. Recibirá seguimiento por los datos
                 compartidos.
               </div>
             ) : null}
@@ -529,10 +537,10 @@ export default function Oportunidades() {
               de plazas, el perfil requerido y las necesidades operativas vigentes.
             </p>
           </div>
-          <ol className="space-y-4">
+          <ol className="route-line space-y-8 pl-7">
             {process.map(({ title, description }, index) => (
-              <li key={title} className="glass-panel flex gap-4 rounded-lg p-5">
-                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-primary-cyan/55 bg-primary-cyan/10 text-xs font-extrabold text-primary-cyan-bright">
+              <li key={title} className="relative">
+                <span className="absolute -left-[33px] top-1 flex h-7 w-7 items-center justify-center rounded-full border-4 border-background bg-primary-cyan text-xs font-extrabold text-white">
                   {index + 1}
                 </span>
                 <div>

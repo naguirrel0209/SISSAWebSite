@@ -237,16 +237,31 @@ export default function Nosotros() {
             operaciones de la DIGESSP el 20 de noviembre de 2018.
           </p>
         </div>
-        <div className="grid gap-5 pb-10 md:grid-cols-2">
-          {missionVision.map(({ title, description }) => (
-            <article key={title} className="glass-panel rounded-lg p-6">
-              <p className="text-xs font-bold uppercase tracking-[0.18em] text-primary-cyan-bright">
-                Identidad institucional
-              </p>
-              <h3 className="mt-3 text-2xl font-bold text-text">{title}</h3>
-              <p className="mt-4 text-sm leading-7 text-muted-text md:text-base">{description}</p>
-            </article>
-          ))}
+      </section>
+
+      <section className="paper-grain border-y border-border-cyber/45 bg-surface-high/60 py-14">
+        <div className="section-shell grid gap-10 lg:grid-cols-[0.35fr_1fr] lg:gap-16">
+          <div>
+            <p className="eyebrow">Propósito institucional</p>
+            <h2 className="mt-5 text-3xl font-bold leading-tight text-text">
+              Lo que guía cada servicio de seguridad.
+            </h2>
+            <p className="mt-5 text-sm leading-7 text-muted-text">
+              La misión y visión se mantienen como base institucional de Corporación SIS y se
+              presentan sin tarjetas para darles más aire y lectura.
+            </p>
+          </div>
+          <div className="grid gap-10 md:grid-cols-2">
+            {missionVision.map(({ title, description }) => (
+              <article
+                key={title}
+                className="border-l-2 border-primary-cyan px-6 py-2 md:min-h-56"
+              >
+                <h3 className="display text-4xl leading-none text-text">{title}</h3>
+                <p className="mt-6 max-w-md text-base leading-8 text-muted-text">{description}</p>
+              </article>
+            ))}
+          </div>
         </div>
       </section>
 
