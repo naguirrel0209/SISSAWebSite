@@ -2,7 +2,7 @@ import { SITE } from '../../../constants/site.js';
 
 export default function SurveyPortalShell({ children, compact = false }) {
   return (
-    <div className="min-h-screen bg-[#07111d] text-text">
+    <div className="survey-dark min-h-screen bg-[#07111d] text-text">
       <a href="#survey-content" className="skip-link">Saltar al contenido principal</a>
       <main
         id="survey-content"

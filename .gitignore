@@ -7,6 +7,7 @@ dist/
 # Carpetas temporales del proyecto
 outputs/
 work/
+Recursos/templates/
 
 # Variables de entorno
 .env

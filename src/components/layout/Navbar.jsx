@@ -44,7 +44,7 @@ function ServicesDropdown() {
                 'block rounded-md px-3 py-3 text-sm font-bold transition-colors duration-200',
                 isActive
                   ? 'bg-primary-cyan/14 text-text'
-                  : 'text-muted-text hover:bg-white/5 hover:text-text',
+                  : 'text-muted-text hover:bg-primary-cyan/10 hover:text-text',
               ].join(' ')
             }
           >
@@ -60,7 +60,7 @@ function ServicesDropdown() {
                   'grid grid-cols-[2rem_1fr] items-center gap-3 rounded-md px-3 py-2.5 transition-colors duration-200',
                   isActive
                     ? 'bg-primary-cyan/14 text-text'
-                    : 'text-muted-text hover:bg-white/5 hover:text-text',
+                    : 'text-muted-text hover:bg-primary-cyan/10 hover:text-text',
                 ].join(' ')
               }
             >
@@ -116,15 +116,15 @@ export default function Navbar() {
       <nav className={`mx-auto flex max-w-6xl items-center justify-between px-5 transition-all duration-300 sm:px-6 lg:px-8 ${isScrolled ? 'h-16' : 'h-20'}`}>
         <NavLink
           to="/"
-          className="nav-premium-brand group flex items-center gap-3 !text-white transition-colors duration-200"
+          className="nav-premium-brand group flex items-center gap-3 transition-colors duration-200"
           onClick={() => setIsOpen(false)}
           aria-label="Ir al inicio de Corporación SIS"
         >
-          <span className={`flex items-center justify-center overflow-hidden rounded-md border border-white/10 bg-white/95 p-0.5 shadow-cyan-soft transition-all duration-300 ${isScrolled ? 'h-11 w-11' : 'h-14 w-14 sm:h-16 sm:w-16'}`}>
+          <span className={`flex items-center justify-center overflow-hidden rounded-md border border-border-cyber bg-white/95 p-0.5 shadow-cyan-soft transition-all duration-300 ${isScrolled ? 'h-11 w-11' : 'h-14 w-14 sm:h-16 sm:w-16'}`}>
             <img src={brandLogo} alt="" className="h-full w-full object-contain" width="64" height="64" />
           </span>
           <span className="flex flex-col leading-none">
-            <span className="nav-premium-brand-title text-sm font-bold tracking-wide !text-white">Corporación SIS</span>
+            <span className="nav-premium-brand-title text-sm font-bold tracking-wide">Corporación SIS</span>
             <span className="nav-premium-brand-subtitle mt-1 hidden text-[10px] font-semibold uppercase tracking-[0.18em] sm:block">
               Sistema Integral de Seguridad
             </span>
@@ -154,7 +154,7 @@ export default function Navbar() {
         <button
           ref={menuButtonRef}
           type="button"
-          className="inline-flex h-11 w-11 items-center justify-center rounded-md border border-white/10 bg-white/5 text-slate-100 transition-colors duration-200 hover:border-primary-cyan-bright/40 hover:bg-primary-cyan/10 hover:text-white lg:hidden"
+          className="inline-flex h-11 w-11 items-center justify-center rounded-md border border-border-cyber bg-white/70 text-text transition-colors duration-200 hover:border-primary-cyan-bright/40 hover:bg-primary-cyan/10 lg:hidden"
           aria-label={isOpen ? 'Cerrar navegación' : 'Abrir navegación'}
           aria-expanded={isOpen}
           aria-controls={menuId}
@@ -168,7 +168,7 @@ export default function Navbar() {
         {isOpen ? (
           <motion.div
             id={menuId}
-            className="border-t border-white/8 bg-background/95 px-5 py-4 backdrop-blur-xl lg:hidden"
+            className="border-t border-border-cyber bg-background/95 px-5 py-4 backdrop-blur-xl lg:hidden"
             initial={reduceMotion ? { opacity: 0 } : { height: 0, opacity: 0 }}
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
@@ -197,7 +197,7 @@ export default function Navbar() {
                                 'rounded-md px-4 py-2 text-sm font-semibold transition-colors duration-200',
                                 isActive
                                   ? 'bg-primary-cyan/14 text-text'
-                                  : 'text-muted-text hover:bg-white/5 hover:text-text',
+                                  : 'text-muted-text hover:bg-primary-cyan/10 hover:text-text',
                               ].join(' ')
                             }
                             onClick={() => setIsOpen(false)}

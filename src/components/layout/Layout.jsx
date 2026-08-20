@@ -9,7 +9,7 @@ export default function Layout() {
       <a href="#main-content" className="skip-link">Saltar al contenido principal</a>
       <ScrollToTop />
       <Navbar />
-      <main id="main-content" className="w-full flex-1 pt-20" tabIndex="-1">
+      <main id="main-content" className="route-map w-full flex-1 pt-20" tabIndex="-1">
         <Outlet />
       </main>
       <Footer />

@@ -19,7 +19,7 @@ export default function SurveysAdminLayout() {
   };
 
   return (
-    <div className="min-h-screen bg-[#07111d] text-text">
+    <div className="survey-dark min-h-screen bg-[#07111d] text-text">
       <header className="border-b border-border-cyber bg-[#081422]/95">
         <div className="mx-auto flex w-full max-w-7xl flex-col gap-4 px-4 py-4 sm:px-6 lg:flex-row lg:items-center lg:justify-between">
           <div className="flex items-center gap-3">

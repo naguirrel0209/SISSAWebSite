@@ -99,10 +99,7 @@ function OpportunitiesHero() {
         fetchPriority="high"
       />
       <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(11,18,32,0.98)_0%,rgba(11,18,32,0.82)_48%,rgba(11,18,32,0.34)_100%)]" />
-      <div
-        className="absolute inset-0 bg-[radial-gradient(circle_at_18%_42%,rgba(59,130,246,0.20),transparent_24rem)]"
-        aria-hidden="true"
-      />
+      <div className="absolute inset-0 ink-grid opacity-20" aria-hidden="true" />
       <div className="section-shell relative z-10 py-20">
         <div className="max-w-3xl">
           <p className="eyebrow text-slate-50">Oportunidades laborales · Corporación SIS</p>

@@ -26,10 +26,7 @@ function ServicesHero() {
         fetchPriority="high"
       />
       <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(11,18,32,0.98)_0%,rgba(11,18,32,0.86)_48%,rgba(11,18,32,0.50)_100%)]" />
-      <div
-        className="absolute inset-0 bg-[radial-gradient(circle_at_18%_42%,rgba(59,130,246,0.18),transparent_24rem)]"
-        aria-hidden="true"
-      />
+      <div className="absolute inset-0 ink-grid opacity-20" aria-hidden="true" />
       <motion.div
         className="section-shell relative z-10 py-20"
         initial={reduceMotion ? false : { opacity: 0, x: -30 }}
@@ -115,7 +112,7 @@ function MeansIndex() {
               aria-hidden="true"
             />
             <span className="absolute inset-0 bg-[linear-gradient(180deg,rgba(11,18,32,0.12)_0%,rgba(11,18,32,0.72)_48%,rgba(11,18,32,0.96)_100%)]" />
-            <span className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(59,130,246,0.22),transparent_18rem)] opacity-75 transition-opacity duration-300 group-hover:opacity-100" />
+            <span className="absolute inset-0 ink-grid opacity-20 transition-opacity duration-300 group-hover:opacity-30" />
             <article className="relative flex h-full min-h-[22rem] flex-col justify-end p-5">
               <div className="mb-auto flex items-start justify-between gap-4">
                 <span className="rounded-full border border-white/18 bg-background/55 px-3 py-1 text-[10px] font-extrabold uppercase tracking-[0.14em] text-slate-100 backdrop-blur">

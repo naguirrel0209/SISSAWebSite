@@ -62,10 +62,7 @@ function HeroBanner() {
         className="absolute inset-0 bg-[linear-gradient(90deg,rgba(11,18,32,0.98)_0%,rgba(11,18,32,0.84)_46%,rgba(11,18,32,0.38)_100%)]"
         aria-hidden="true"
       />
-      <div
-        className="absolute inset-0 bg-[radial-gradient(circle_at_18%_42%,rgba(59,130,246,0.20),transparent_24rem)]"
-        aria-hidden="true"
-      />
+      <div className="absolute inset-0 ink-grid opacity-20" aria-hidden="true" />
       <div className="section-shell relative z-10 py-20">
         <motion.div
           className="max-w-2xl"
