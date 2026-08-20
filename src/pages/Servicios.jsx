@@ -231,10 +231,10 @@ function OperationalGallery() {
                   key={galleryItem.src}
                   type="button"
                   onClick={() => setActive(index)}
-                  className={`group flex min-h-16 items-center gap-3 rounded-md border px-3 py-2 text-left transition duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-gold ${
+                  className={`group flex min-h-16 items-center gap-3 rounded-md border px-3 py-2 text-left transition duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-cyan-bright ${
                     isSelected
-                      ? 'border-accent-gold bg-accent-gold/15 shadow-soft'
-                      : 'border-border-cyber/55 bg-white/20 hover:border-accent-gold/70 hover:bg-accent-gold/10'
+                      ? 'border-primary-cyan bg-primary-cyan/12 shadow-cyan-soft'
+                      : 'border-border-cyber/55 bg-white/20 hover:border-primary-cyan/70 hover:bg-primary-cyan/10'
                   }`}
                   aria-current={isSelected ? 'true' : undefined}
                   aria-label={`Ver fotografía ${index + 1}: ${galleryItem.category}`}
@@ -242,8 +242,8 @@ function OperationalGallery() {
                   <span
                     className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-full border text-xs font-extrabold ${
                       isSelected
-                        ? 'border-accent-gold bg-accent-gold text-background'
-                        : 'border-accent-gold/45 text-accent-gold'
+                        ? 'border-primary-cyan bg-primary-cyan text-white'
+                        : 'border-primary-cyan/45 text-primary-cyan'
                     }`}
                   >
                     {String(index + 1).padStart(2, '0')}
