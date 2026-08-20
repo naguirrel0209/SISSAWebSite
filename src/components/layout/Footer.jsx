@@ -42,7 +42,7 @@ export default function Footer() {
             const content = (
               <>
                 <Icon size={17} className="shrink-0 text-primary-cyan-bright" />
-                <span className="min-w-0 break-all">{label}</span>
+                <span className="min-w-0 break-words">{label}</span>
               </>
             );
 

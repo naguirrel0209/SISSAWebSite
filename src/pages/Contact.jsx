@@ -79,6 +79,7 @@ const fieldClass =
 
 function ContactCard({ method }) {
   const { label, value, description, href, icon: Icon } = method;
+  const isLongValue = ['Correo electrónico', 'Ubicación'].includes(label);
   const content = (
     <>
       <div className="flex items-start justify-between gap-4">
@@ -90,7 +91,9 @@ function ContactCard({ method }) {
         </span>
       </div>
       <p className="mt-5 text-xs font-bold uppercase tracking-[0.16em] text-muted-text">{label}</p>
-      <p className="mt-2 break-all text-base font-bold leading-6 text-text">{value}</p>
+      <p className={`mt-2 text-text ${isLongValue ? 'text-sm font-bold leading-6 break-words' : 'text-base font-bold leading-6'}`}>
+        {value}
+      </p>
       <p className="mt-3 text-sm leading-6 text-muted-text">{description}</p>
     </>
   );
@@ -206,7 +209,7 @@ export default function Contact() {
           </p>
         </div>
 
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-[0.85fr_0.85fr_1.15fr_1.25fr]">
           {contactMethods.map((method) => (
             <ContactCard key={method.label} method={method} />
           ))}
@@ -243,7 +246,7 @@ export default function Contact() {
             <input
               type="text"
               name="_gotcha"
-              value=""
+              defaultValue=""
               tabIndex="-1"
               autoComplete="off"
               aria-hidden="true"
