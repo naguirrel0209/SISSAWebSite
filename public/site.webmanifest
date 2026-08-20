@@ -1,10 +1,19 @@
 {
-  "name": "Corporación SIS",
-  "short_name": "Corporación SIS",
-  "description": "Sitio institucional de Corporación SIS",
-  "start_url": ".",
+  "name": "Corporacion SIS",
+  "short_name": "Corporacion SIS",
+  "description": "Sitio institucional de Corporacion SIS",
+  "id": "/SISSAWebSite/",
+  "start_url": "/SISSAWebSite/",
+  "scope": "/SISSAWebSite/",
   "display": "standalone",
-  "background_color": "#efe7da",
-  "theme_color": "#121614",
-  "icons": [{ "src": "images/brand/logo-sis.png", "sizes": "1024x1024", "type": "image/png" }]
+  "background_color": "#f4f3ee",
+  "theme_color": "#0d2338",
+  "icons": [
+    {
+      "src": "/SISSAWebSite/images/brand/logo-sis.png",
+      "sizes": "1024x1024",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
 }

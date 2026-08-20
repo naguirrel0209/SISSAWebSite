@@ -66,14 +66,20 @@ const profiles = [
 const opportunityImages = [
   {
     label: 'Equipo operativo',
+    description:
+      'Personal operativo preparado para representar a Corporación SIS en servicios de seguridad, apoyo institucional y coordinación en campo.',
     image: institutionalImages.guardiasCasual,
   },
   {
     label: 'Patrullaje institucional',
+    description:
+      'Supervisión, rutas y presencia preventiva con unidades y personal asignado según la necesidad del servicio.',
     image: institutionalImages.guardiaPatrulla,
   },
   {
     label: 'Formación y servicio',
+    description:
+      'Preparación operativa orientada a disciplina, atención, prevención y respuesta profesional.',
     image: institutionalImages.entrenamiento,
   },
 ];
@@ -232,30 +238,34 @@ export default function Oportunidades() {
               </p>
               <h3 className="mt-2 text-2xl font-bold text-text">Presencia, disciplina y servicio</h3>
               <p className="mt-3 text-sm leading-7 text-muted-text">
-                Personal operativo preparado para representar a Corporación SIS en servicios de
-                seguridad, apoyo institucional y coordinación en campo.
+                {opportunityImages[0].description}
               </p>
             </figcaption>
           </figure>
 
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-1">
-            {opportunityImages.slice(1).map(({ label, image }) => (
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-1">
+            {opportunityImages.slice(1).map(({ label, description, image }) => (
               <figure
                 key={label}
-                className="overflow-hidden rounded-lg border border-border-cyber/55 bg-surface shadow-soft"
+                className="relative min-h-[17.5rem] overflow-hidden rounded-lg border border-border-cyber/55 bg-surface shadow-soft"
               >
-                <div className="relative min-h-[12rem] overflow-hidden">
-                  <img
-                    src={image.src}
-                    alt={image.alt}
-                    className="absolute inset-0 h-full w-full object-cover"
-                    style={{ objectPosition: image.objectPosition }}
-                    loading="lazy"
-                  />
-                </div>
-                <figcaption className="border-t border-border-cyber/55 bg-surface px-5 py-4">
-                  <p className="text-xs font-bold uppercase tracking-[0.16em] text-primary-cyan-bright">
+                <img
+                  src={image.src}
+                  alt={image.alt}
+                  className="absolute inset-0 h-full w-full object-cover"
+                  style={{ objectPosition: image.objectPosition }}
+                  loading="lazy"
+                />
+                <div
+                  className="absolute inset-0 bg-[linear-gradient(180deg,rgba(6,16,28,0.10)_0%,rgba(6,16,28,0.36)_42%,rgba(6,16,28,0.92)_100%)]"
+                  aria-hidden="true"
+                />
+                <figcaption className="absolute inset-x-0 bottom-0 p-5">
+                  <p className="text-xs font-extrabold uppercase tracking-[0.16em] text-[#79d0c9]">
                     {label}
+                  </p>
+                  <p className="mt-3 max-w-md text-sm font-medium leading-6 text-slate-100">
+                    {description}
                   </p>
                 </figcaption>
               </figure>
